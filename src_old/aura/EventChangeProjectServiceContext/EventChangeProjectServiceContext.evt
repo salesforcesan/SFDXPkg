@@ -1,3 +1,0 @@
-<aura:event type="APPLICATION">
-	<aura:attribute name="projectServiceContext" type="String"/>
-</aura:event>

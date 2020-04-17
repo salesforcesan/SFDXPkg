@@ -1,3 +1,0 @@
-<apex:page showHeader="false" sidebar="false" standardcontroller="ProjectLocation__c" recordSetVar="locations" action="{!navigateToUploadLocations}" extensions="ManageJobLocationsBtnCtrl">
-    
-</apex:page>

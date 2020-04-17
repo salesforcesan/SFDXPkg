@@ -1,7 +1,0 @@
-<design:component>
-	<design:attribute name="usage" 
-        label="Photo Viewer Usage Context"
-        datasource="Project Builder, Community Viewer, Retailer, Internal User"
-        default="Project Builder"
-        />
-</design:component>
