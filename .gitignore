@@ -8,6 +8,10 @@ config/**
 debug/**
 resource-bundles/**
 
+# Salesforce cache
+.sfdx/
+.localdevserver/
+
 ### Sass Cache ###
 
 dev/.sass-cache/**
