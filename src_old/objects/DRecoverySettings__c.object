@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Disaster Recovery</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>DRMode__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Disaster Recovery Settings By Default it is false</description>
+        <externalId>false</externalId>
+        <label>DRMode</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Disaster Recovery Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

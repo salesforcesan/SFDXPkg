@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Project Type defines a collection of Services and sets configuration options for a Project. Project Type is related to Project, Project Type Execution Company, Project Type Service, and Location Assignment.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>AddLocationsLeadTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Add Locations Lead Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AllowBundlingOfServices__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>To allow bundling service for specific project type</description>
+        <externalId>false</externalId>
+        <label>Allow Bundling of Services</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AllowMultidays__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Allow Multi-days</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AllowReattempt__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Allow Reattempt</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AllowTeamManagement__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Allow Team Management in OneHub Mobile</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Allow Team Management in OneHub Mobile</inlineHelpText>
+        <label>Allow Team Management in OneHub Mobile</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CreateInvoice__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Create Invoice</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Default3PLAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Default 3PL Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Default3PLAccount</relationshipLabel>
+        <relationshipName>DefaultThridPartyAccounts</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DefaultRetailerAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Default Retailer Account</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Account.OneHubAccountType__c</field>
+                <operation>equals</operation>
+                <value>Retailer</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Project Types</relationshipLabel>
+        <relationshipName>Project_Types</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>GracePeriodDuration__c</fullName>
+        <externalId>false</externalId>
+        <label>Grace Period Duration</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InvoiceGracePeriod__c</fullName>
+        <externalId>false</externalId>
+        <label>Invoice Grace Period</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InvoiceStartDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Invoice Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IsOneHubMobile__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicated if the projects are executed by OHM.</description>
+        <externalId>false</externalId>
+        <label>Is OneHub Mobile</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsProjectAccountMandatory__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Project Account Mandatory</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>JobCancelLeadTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Job Cancel Lead Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LaunchLeadTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Launch Lead Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MaxServiceCount__c</fullName>
+        <externalId>false</externalId>
+        <label>Max Service Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MinServiceCount__c</fullName>
+        <externalId>false</externalId>
+        <label>Min Service Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectTypeDescription__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Type Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScheduleOption__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Schedule Option</label>
+        <referenceTo>ScheduleOption__c</referenceTo>
+        <relationshipLabel>Project Types</relationshipLabel>
+        <relationshipName>Project_Types</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ServiceModel__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Model</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Continuity</fullName>
+                    <default>false</default>
+                    <label>Continuity</label>
+                </value>
+                <value>
+                    <fullName>Retail On Demand(Merchandising)</fullName>
+                    <default>false</default>
+                    <label>Retail On Demand(Merchandising)</label>
+                </value>
+                <value>
+                    <fullName>Remodel</fullName>
+                    <default>false</default>
+                    <label>Remodel</label>
+                </value>
+                <value>
+                    <fullName>Reset</fullName>
+                    <default>false</default>
+                    <label>Reset</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SetScheduleDateLeadTime__c</fullName>
+        <defaultValue>3</defaultValue>
+        <externalId>false</externalId>
+        <label>Set Schedule Date Lead Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ShowProjectSummaryReport__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Show Project Summary Report</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>UseReservations__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Use Reservations</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Visible__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>determine the visibility of the project attribute segment</description>
+        <externalId>false</externalId>
+        <inlineHelpText>determine if the project attribute segment is visible or not</inlineHelpText>
+        <label>Visible</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Project Type</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>ProjectTypeDescription__c</columns>
+        <columns>MinServiceCount__c</columns>
+        <columns>MaxServiceCount__c</columns>
+        <columns>LaunchLeadTime__c</columns>
+        <columns>GracePeriodDuration__c</columns>
+        <columns>AllowTeamManagement__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Project Types</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>ProjectTypeDescription__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>MinServiceCount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>MaxServiceCount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LaunchLeadTime__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>GracePeriodDuration__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>Disallow_multi_day_and_bundled</fullName>
+        <active>true</active>
+        <description>Multi day projects not allowed when a project is bundled.</description>
+        <errorConditionFormula>AND ( AllowBundlingOfServices__c == true,  AllowMultidays__c == true)</errorConditionFormula>
+        <errorDisplayField>AllowMultidays__c</errorDisplayField>
+        <errorMessage>Multi Day projects are not allowed on a project that allows bundling of services.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

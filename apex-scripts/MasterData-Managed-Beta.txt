@@ -1,0 +1,534 @@
+delete [select id from OneHubTest__RetailerServiceEquipment__c];
+delete [select id from OneHubTest__ServiceQuestionDefinedResponse__c];
+delete [select id from OneHubTest__servicequestion__C];
+delete [select id from OneHubTest__serviceattribute__c];
+delete [select id from OneHubTest__RetailerServiceCertification__c];
+delete [select id from OneHubTest__ProjectTypeService__c];
+delete [select id from OneHubTest__retailerService__c];
+delete [select id from OneHubTest__service__c];
+delete [select id from OneHubTest__attribute__c];
+delete [SELECT Id FROM OneHubTest__LocationAssignment__c];
+delete [SELECT Id FROM OneHubTest__Location__c];
+delete [SELECT Id FROM OneHubTest__Target__c];
+delete [select Id from OneHubTest__question__c];
+delete [select Id from OneHubTest__FulfillmentCenter__c];
+delete [SELECT Id FROM OneHubTest__Certification__c];
+delete [SELECT Id FROM OneHubTest__ProjectType__c];
+delete [SELECT Id FROM OneHubTest__ProjectTypeCustomSettings__c];
+delete [SELECT Id FROM OneHubTest__Equipment__c];
+delete [SELECT Id FROM OneHubTest__Retailer__c];
+delete [SELECT Id FROM OneHubTest__language__c];
+delete [SELECT Id FROM Contact WHERE LastName IN ('Crossmark','Premium')];
+delete [SELECT Id FROM Account WHERE Name IN ('Crossmark EC','Premium EC', 'Crossmark Client','Premium Client')];
+delete [select id from OneHubTest__ScheduleOption__c];
+delete [select id from OneHubTest__cycle__c];
+
+delete [SELECT ID FROM OneHubTest__PostalCOde__c];
+List<OneHubTest__PostalCOde__c> posts = new List<OneHubTest__PostalCOde__c>();
+
+OneHubTest__PostalCOde__c post = new OneHubTest__PostalCOde__c();
+post.OneHubTest__DST__c = false;
+post.Name = '94127';
+post.OneHubTest__Timezoneoffset__c = -8;
+post.OneHubTest__GeoLocation__latitude__s = 37.7357008082887;
+post.OneHubTest__GeoLocation__longitude__s = -122.45947227415;
+posts.add(post);
+
+post = new OneHubTest__PostalCOde__c();
+post.OneHubTest__DST__c = false;
+post.Name = '75024';
+post.OneHubTest__Timezoneoffset__c = -6;
+post.OneHubTest__GeoLocation__latitude__s = 33.07737;
+post.OneHubTest__GeoLocation__longitude__s = -96.80700;
+posts.add(post);
+insert posts;
+
+integer cnt = [select count() from account where Name IN ('Crossmark EC')];
+if(cnt==0)
+{
+  Account acc1 = new Account();
+  acc1.Name = 'Crossmark EC';
+  acc1.recordtype = new recordtype(name='Execution Company');
+  acc1.type = 'Execution Company';
+  acc1.OneHubTest__IsApproved__c = true;
+  acc1.OneHubTest__CanRequestProjects__c = true;
+  insert acc1;
+}
+
+cnt = [select count() from account where Name IN ('Premium EC')];
+if(cnt==0)
+{
+  Account acc2 = new Account();
+  acc2.recordtype = new recordtype(name='Execution Company');
+  acc2.type = 'Execution Company';
+  acc2.Name = 'Premium EC';
+  acc2.OneHubTest__IsApproved__c = true;
+  acc2.OneHubTest__CanRequestProjects__c = true;
+  insert acc2;
+}
+
+cnt = [select count() from account where Name IN ('Crossmark Client')];
+if(cnt==0)
+{
+  Account acc1 = new Account();
+  acc1.Name = 'Crossmark Client';
+  acc1.recordtype = new recordtype(name='Client');
+  acc1.type = 'Client';
+  acc1.OneHubTest__IsApproved__c = true;
+  acc1.OneHubTest__CanRequestProjects__c = true;
+  insert acc1;
+}
+
+cnt = [select count() from account where Name IN ('Premium Client')];
+if(cnt==0)
+{
+  Account acc2 = new Account();
+  acc2.recordtype = new recordtype(name='Client');
+  acc2.type = 'Client';
+  acc2.Name = 'Premium Client';
+  acc2.OneHubTest__IsApproved__c = true;
+  acc2.OneHubTest__CanRequestProjects__c = true;
+  insert acc2;
+}
+
+OneHubTest__language__c lng = new OneHubTest__language__c();
+lng.Name = 'English';
+insert lng;
+
+OneHubTest__Retailer__c[] rts = new OneHubTest__Retailer__c[]{
+  new OneHubTest__Retailer__c(Name = 'Walgreens', OneHubTest__OneHubRetailerId__c = 'WALGREENS')
+  };
+insert rts;
+
+OneHubTest__Retailer__c retailer = [Select Id,OneHubTest__OneHubRetailerId__c FROM OneHubTest__Retailer__c LIMIT 1];
+
+OneHubTest__ProjectType__c md = new OneHubTest__ProjectType__c();
+md.Name = 'Merchandising';
+md.OneHubTest__minservicecount__c = 1;
+md.OneHubTest__maxservicecount__c = 5;
+md.OneHubTest__maxservicecount__c = 5;
+md.OneHubTest__GracePeriodDuration__c = 0;
+md.OneHubTest__LaunchLeadTime__c = 0;
+insert md;
+
+List<OneHubTest__cycle__c> cyclList = new List<OneHubTest__cycle__c>();
+for (Integer i = 1; i < 5; i++) {
+  OneHubTest__cycle__c cy = new OneHubTest__cycle__c();
+  cy.Name = 'Cycle ' + i;
+  cy.OneHubTest__CycleStartDate__c = date.today().addDays(i);
+  cy.OneHubTest__CycleEndDate__c = date.today().addDays(i+3);
+  cy.OneHubTest__Retailer__c = retailer.id;
+  cyclList.add(cy);
+}
+insert cyclList;
+
+OneHubTest__ScheduleOption__c so = new OneHubTest__ScheduleOption__c();
+so.Name = 'EC';
+so.OneHubTest__IsActive__c = true;
+insert so;
+
+OneHubTest__ScheduleOption__c so2 = new OneHubTest__ScheduleOption__c();
+so2.Name = 'SYSTEM';
+so2.OneHubTest__IsActive__c = true;
+insert so2;
+
+OneHubTest__ScheduleOption__c so3 = new OneHubTest__ScheduleOption__c();
+so3.Name = 'USER';
+so3.OneHubTest__IsActive__c = true;
+insert so3;
+
+OneHubTest__ProjectTypeCustomSettings__c basePTSetting = new OneHubTest__ProjectTypeCustomSettings__c ();
+basePTSetting.Name = 'Merchandising';
+basePTSetting.OneHubTest__SchedulingStrategyClass__c = 'BaseSchedulingStrategy';
+basePTSetting.OneHubTest__FieldSetName__c = 'BaseProjectFieldset';
+basePTSetting.OneHubTest__ProjectCompletionStrategyClass__c= 'BaseProjectCompletionStrategy';
+basePTSetting.OneHubTest__ReReserveTrackFieldList__c= 'BudgetedLocationsCount__c;StartDate__c;EndDate__c;ResponsibleForExecution__c';
+insert basePTSetting;
+
+List<OneHubTest__Equipment__c> eqpList = new List<OneHubTest__Equipment__c>();
+for (Integer i = 0; i < 5; i++) {
+  OneHubTest__Equipment__c eqp = new OneHubTest__Equipment__c();
+  eqp.Name = 'Equipment ' + i;
+  eqpList.add(eqp);
+
+}
+insert eqpList;
+
+List<OneHubTest__Location__c> locations = new List <OneHubTest__Location__c > ();
+
+for (Integer i = 1; i <= 1000; i++) {
+  OneHubTest__Location__c location = new OneHubTest__Location__c();
+  location.Name = 'Location ' + i;
+  location.OneHubTest__City__c = 'City ' + i;
+  location.OneHubTest__LocationNumber__c = string.valueOf(i);
+  location.OneHubTest__type__c='Location';
+  location.OneHubTest__isactive__c=true;
+  location.OneHubTest__Retailer__c= retailer.id;
+  location.OneHubTest__OneHubRetailerId__c = retailer.OneHubTest__OneHubRetailerId__c;
+  location.OneHubTest__Retailer__c = retailer.Id;
+  location.OneHubTest__PostalCode__c = posts[0].id;
+  locations.add(location);
+}
+insert locations;
+
+List<Account> execs = [SELECT Id,Name FROM Account WHERE type = 'Execution Company'];
+locations = [SELECT Id,Name FROM OneHubTest__Location__c];
+List<OneHubTest__LocationAssignment__c> locAssignments = new List <OneHubTest__LocationAssignment__c > ();
+OneHubTest__ProjectType__c pt = [Select Id,Name FROM OneHubTest__ProjectType__c LIMIT 1];
+for (Integer i = 0; i < 500; i++) {
+  OneHubTest__LocationAssignment__c locAssignment = new OneHubTest__LocationAssignment__c();
+  locAssignment.OneHubTest__Location__c = locations[i].Id;
+  locAssignment.OneHubTest__ProjectType__c = pt.Id;
+  locAssignment.OneHubTest__AccountableExecutionCompany__c = execs[0].Id;
+  locAssignments.add(locAssignment);
+}
+for (Integer i = 500; i < 1000; i++) {
+  OneHubTest__LocationAssignment__c locAssignment = new OneHubTest__LocationAssignment__c();
+  locAssignment.OneHubTest__Location__c = locations[i].Id;
+  locAssignment.OneHubTest__ProjectType__c = pt.Id;
+  locAssignment.OneHubTest__AccountableExecutionCompany__c = execs[1].Id;
+  locAssignments.add(locAssignment);
+}
+insert locAssignments;
+
+List<OneHubTest__Certification__c> certifications = new list<OneHubTest__Certification__c>();
+for (Integer i = 1; i <= 5; i++) {
+  OneHubTest__Certification__c cert = new OneHubTest__Certification__c();
+  cert.Name = 'Certification ' + i;
+  certifications.add(cert);
+}
+insert certifications;
+
+RecordType productRT = [SELECT Id,Name FROM RecordType WHERE SobjectType='OneHubTest__Target__c' AND NAME = 'Product'];
+
+String NAMESPACE = 'OneHubTest__';
+List<sObject> targets = new List<sObject>();
+for(Integer i=1; i <= 10; i++) {
+  OneHubTest__Target__c s = new OneHubTest__Target__c();
+  s.put('name','Product ' + i );
+  s.put(NAMESPACE + 'Retailer__c', retailer.Id);
+  s.put(NAMESPACE +'accountinfo__c', 'test');
+  s.put(NAMESPACE +'brandinfo__c','test');
+  s.put(NAMESPACE +'CategoryInfo__c','category');
+  s.put(NAMESPACE +'departmentname__c', 'dn');
+  s.put(NAMESPACE +'departmentnumber__c',123);
+  s.put(NAMESPACE +'description__c', 'desc');
+  s.put(NAMESPACE +'StockCode__c', ''+ Crypto.getRandomInteger());
+  s.put(NAMESPACE +'OneHubRetailerId__c', '1');
+  s.put(NAMESPACE +'PackageSizeQty__c', 12);
+  s.put(NAMESPACE + 'plu__c', 'plu');
+  s.put(NAMESPACE +'ShelfName__c','test');
+  s.put(NAMESPACE + 'Status__c','Active');
+  s.put(NAMESPACE + 'TargetName__c','cart');
+  s.put(NAMESPACE + 'TargetType__C','Product');
+  s.put(NAMESPACE + 'UPC__c','up1234567890');
+  s.put(NAMESPACE + 'VendorNumber__c',1231);
+  s.put(NAMESPACE + 'PackageSizeQty__c',123);
+  s.put('RecordTypeId', productRT.Id);
+  targets.add(s);
+}
+
+insert targets;
+//insert material
+//QUESTIONS and DEFINED RESPONSES
+List<OneHubTest__Question__c> qs = new List<OneHubTest__Question__c>();
+List<OneHubTest__QuestionDefinedResponse__c> qdrList = new List<OneHubTest__QuestionDefinedResponse__c>();
+OneHubTest__QuestionDefinedResponse__c qdr = new OneHubTest__QuestionDefinedResponse__c();
+
+//Text
+OneHubTest__Question__c q = new OneHubTest__Question__c();
+q.OneHubTest__QuestionType__c = 'Text';
+q.OneHubTest__QuestionText__c = 'What is the supervisor name?';
+q.OneHubTest__Active__c = true;
+q.OneHubTest__OneHubQuestionId__c = 'OHQ-001';
+qs.add(q);
+
+//Number
+q = new OneHubTest__Question__c();
+q.OneHubTest__QuestionType__c = 'Number';
+q.OneHubTest__QuestionText__c = 'How many products did you demo?';
+q.OneHubTest__Active__c = true;
+q.OneHubTest__OneHubQuestionId__c = 'OHQ-002';
+qs.add(q);
+
+//Photo
+q = new OneHubTest__Question__c();
+q.OneHubTest__QuestionType__c = 'Photo';
+q.OneHubTest__QuestionText__c = 'Picture of the display?';
+q.OneHubTest__Active__c = true;
+q.OneHubTest__OneHubQuestionId__c = 'OHQ-003';
+qs.add(q);
+
+//Item Question
+q = new OneHubTest__Question__c();
+q.OneHubTest__QuestionType__c = 'Number';
+q.OneHubTest__QuestionText__c = 'How many did you purchase?';
+q.OneHubTest__Active__c = true;
+q.OneHubTest__OneHubQuestionId__c = 'OHQ-004';
+q.OneHubTest__TargetType__c = 'Product';
+qs.add(q);
+
+insert qs;
+
+//Single-Select List
+OneHubTest__Question__c qss = new OneHubTest__Question__c();
+qss.OneHubTest__QuestionType__c = 'Single-Select List';
+qss.OneHubTest__QuestionText__c = 'Did you feel prepared for the event?';
+qss.OneHubTest__Active__c = true;
+qss.OneHubTest__OneHubQuestionId__c = 'OHQ-005';
+insert qss;
+
+qdrList = new List<OneHubTest__QuestionDefinedResponse__c>();
+qdr = new OneHubTest__QuestionDefinedResponse__c();
+qdr.OneHubTest__DefinedResponseOrder__c = 1;
+qdr.OneHubTest__DefinedResponseText__c = 'Very Prepared';
+qdr.OneHubTest__Question__c = qss.id;
+qdrList.add(qdr);
+
+qdr = new OneHubTest__QuestionDefinedResponse__c();
+qdr.OneHubTest__DefinedResponseOrder__c = 2;
+qdr.OneHubTest__DefinedResponseText__c = 'Prepared';
+qdr.OneHubTest__Question__c = qss.id;
+qdrList.add(qdr);
+
+qdr = new OneHubTest__QuestionDefinedResponse__c();
+qdr.OneHubTest__DefinedResponseOrder__c = 2;
+qdr.OneHubTest__DefinedResponseText__c = 'Somewhat Prepared';
+qdr.OneHubTest__Question__c = qss.id;
+qdrList.add(qdr);
+
+//Yes/No
+OneHubTest__Question__c qyn = new OneHubTest__Question__c();
+qyn.OneHubTest__QuestionType__c = 'Yes/No';
+qyn.OneHubTest__QuestionText__c = 'Did you start on time?';
+qyn.OneHubTest__Active__c = true;
+qyn.OneHubTest__OneHubQuestionId__c = 'OHQ-006';
+insert qyn;
+
+qdr = new OneHubTest__QuestionDefinedResponse__c();
+qdr.OneHubTest__DefinedResponseOrder__c = 1;
+qdr.OneHubTest__DefinedResponseText__c = 'Yes';
+qdr.OneHubTest__Question__c = qyn.id;
+qdrList.add(qdr);
+
+qdr = new OneHubTest__QuestionDefinedResponse__c();
+qdr.OneHubTest__DefinedResponseOrder__c = 2;
+qdr.OneHubTest__DefinedResponseText__c = 'No';
+qdr.OneHubTest__Question__c = qyn.id;
+qdrList.add(qdr);
+
+insert qdrList;
+
+//FULFILLMENT CENTERS && MATERIALS
+List<OneHubTest__FulfillmentCenter__c> fcs= new List<OneHubTest__FulfillmentCenter__c>();
+OneHubTest__FulfillmentCenter__c fc = new OneHubTest__FulfillmentCenter__c();
+fc.OneHubTest__Retailer__c = retailer.Id;
+fc.OneHubTest__OneHubRetailerId__c = 'OHFC-001';
+fc.Name = 'Premium';
+fcs.add(fc);
+
+fc = new OneHubTest__FulfillmentCenter__c();
+fc.Name = 'CTL';
+fc.OneHubTest__Retailer__c = retailer.Id;
+fc.OneHubTest__OneHubRetailerId__c = 'OHFC-002';
+fcs.add(fc);
+
+insert fcs;
+
+List<OneHubTest__FulfillmentCenter__c> fcslist = [Select id, name from OneHubTest__FulfillmentCenter__c];
+OneHubTest__FulfillmentCenter__c fulfillmentCenter = fcslist[0];
+
+List<OneHubTest__Material__c> materials = new List<OneHubTest__Material__c>();
+
+OneHubTest__Material__c material = new OneHubTest__Material__c();
+material.name = 'Spoon';
+material.OneHubTest__IsActive__c = true;
+material.OneHubTest__Kit__c = false;
+material.OneHubTest__Retailer__c = retailer.Id;
+material.OneHubTest__FulfillmentCenter__c = fulfillmentCenter.Id;
+insert material;
+
+material = new OneHubTest__Material__c();
+material.name = 'Sample Kit';
+material.OneHubTest__Kit__c = true;
+material.OneHubTest__Retailer__c = retailer.Id;
+material.OneHubTest__IsActive__c = true;
+material.OneHubTest__FulfillmentCenter__c = fulfillmentCenter.Id;
+insert material;
+
+Id MerchProjTypeID = [Select Id from OneHubTest__ProjectType__c where Name ='Merchandising' LIMIT 1].Id;
+List<OneHubTest__Service__c> svcs= new List<OneHubTest__Service__c>();
+
+//Add service__c
+List<String> ServNames = new List<String> {'AB Dry','Merchandising','Standard'};
+
+OneHubTest__Service__c svc = new OneHubTest__Service__c();
+for(string str : ServNames)
+{
+  svc = new OneHubTest__Service__c();
+  svc.Name = str;
+  svc.OneHubTest__ServiceDescription__c = '';
+  svc.OneHubTest__TargetType__c = 'Category;Product;None';
+  svc.OneHubTest__Duration__c = '6 Hr';
+  svcs.add(svc);
+}
+
+List<Database.Saveresult> insertResults=Database.insert(svcs, false);
+
+List<OneHubTest__ProjectTypeService__c> ptss= new List<OneHubTest__ProjectTypeService__c>();
+OneHubTest__ProjectTypeService__c pts = new OneHubTest__ProjectTypeService__c();
+
+id walgrn = [select id from OneHubTest__retailer__c where OneHubTest__OneHubRetailerId__C = 'WALGREENS' limit 1 ].id;
+
+List<OneHubTest__retailerService__c> rsLst= new List<OneHubTest__retailerService__c>();
+OneHubTest__retailerService__c rs = new OneHubTest__retailerService__c();
+
+for (Database.SaveResult sr : insertResults) {
+  if (sr.isSuccess()) {
+  pts = new OneHubTest__ProjectTypeService__c();
+  pts.OneHubTest__ProjectType__c = MerchProjTypeID ;
+  pts.OneHubTest__Service__c = sr.getId();
+  ptss.add(pts);
+
+  rs = new OneHubTest__retailerService__c();
+  rs.OneHubTest__retailer__c = walgrn;
+  rs.OneHubTest__service__c = sr.getId();
+  rs.OneHubTest__jobManualTemplate__c = 'Standard';
+  rsLst.add(rs);
+  }
+}
+
+insert ptss;
+insert rsLst;
+
+//add attribute
+list<OneHubTest__attribute__c> AttrList = new list<OneHubTest__attribute__c>();
+OneHubTest__attribute__c obj = new OneHubTest__attribute__c();
+
+List<String> textAttr = new List<String> {'Overview','Instructions'};
+
+for(string str : textAttr)
+{
+  obj = new OneHubTest__attribute__c();
+  obj.OneHubTest__description__c = str;
+  obj.OneHubTest__AttributeType__c = 'Text';
+  obj.OneHubTest__Active__c = true;
+  obj.OneHubTest__AttributeMaxLength__c=5000;
+  obj.OneHubTest__Repeatable__c=false;
+  obj.OneHubTest__Required__c=false;
+  AttrList.add(obj);
+}
+
+List<String> photoAttr = new List<String> {'Supporting Attachment 1','Job Manual'};
+
+for(string str : photoAttr)
+{
+  obj = new OneHubTest__attribute__c();
+  obj.OneHubTest__description__c = str;
+  obj.OneHubTest__AttributeType__c = 'Photo';
+  obj.OneHubTest__Active__c = true;
+  obj.OneHubTest__Repeatable__c=false;
+  obj.OneHubTest__Required__c=false;
+  AttrList.add(obj);
+}
+
+insert AttrList;
+
+list<OneHubTest__serviceAttribute__c> lstSA = new list<OneHubTest__serviceAttribute__c>();
+OneHubTest__serviceAttribute__c saobj= new OneHubTest__serviceAttribute__c();
+
+integer i=0;
+integer j=0;
+
+List<String> AttrVal = new List<String> {'Overview','Instructions','Supporting Attachment 1','Job Manual'};
+list<OneHubTest__servicequestion__C> sqList = new list<OneHubTest__servicequestion__C> ();
+OneHubTest__servicequestion__C sq;
+
+for(OneHubTest__ProjectTypeService__c ProjSvc : [Select Id,OneHubTest__service__c from OneHubTest__ProjectTypeService__c where OneHubTest__ProjectType__c =: MerchProjTypeID ])
+{
+  for(string attr : AttrVal)
+  {
+  i=i+10;
+  id attrID = [select id from OneHubTest__attribute__c where OneHubTest__description__c=:attr limit 1].id;
+  saobj = new OneHubTest__serviceAttribute__c();
+  saobj.OneHubTest__Attribute__c = attrID;
+  saobj.OneHubTest__AttributeOrder__c = i;
+  saobj.OneHubTest__Service__c = ProjSvc.OneHubTest__service__c;
+  if(attr!='Job Manual')
+  saobj.OneHubTest__IsVisible__c = true;
+  else
+  saobj.OneHubTest__IsVisible__c = false;
+
+  lstSA.add(saobj);
+  }
+  i=0;
+
+  for(OneHubTest__question__c qns : [select id from OneHubTest__question__c LIMIT 3])
+  {
+  j+=1;
+  sq= new OneHubTest__servicequestion__C();
+  sq.OneHubTest__question__C = qns.id;
+  sq.OneHubTest__QuestionNumber__c = j;
+  sq.OneHubTest__Service__c = ProjSvc.OneHubTest__service__c;
+  sqList.add(sq);
+  }
+  j=0;
+}
+insert lstSA;
+insert sqList;
+
+OneHubTest__ServiceQuestionDefinedResponse__c sqd;
+list<OneHubTest__ServiceQuestionDefinedResponse__c> sqdList = new list<OneHubTest__ServiceQuestionDefinedResponse__c>();
+
+sqd = new OneHubTest__ServiceQuestionDefinedResponse__c();
+for(OneHubTest__ProjectTypeService__c ProjSvc : [Select Id,OneHubTest__ProjectTypeService__c.OneHubTest__Service__r.id from OneHubTest__ProjectTypeService__c where OneHubTest__ProjectType__c =: MerchProjTypeID ])
+{
+  for(OneHubTest__question__c qn : [SELECT OneHubTest__questiontext__c, OneHubTest__questiontype__c ,(select id,OneHubTest__question__c ,OneHubTest__service__r.name from OneHubTest__questions__r where OneHubTest__service__c =: ProjSvc.OneHubTest__service__r.id) ,(select OneHubTest__definedresponsetext__c from OneHubTest__Question_Defined_Response1__r)FROM OneHubTest__question__c where OneHubTest__questiontype__c in ('Single-Select','Single-Select List','Multi-Select List','Yes/No') and id in (select OneHubTest__question__c from OneHubTest__servicequestion__c where OneHubTest__service__c =:ProjSvc.OneHubTest__service__r.id)])
+  {
+
+  for(OneHubTest__QuestionDefinedResponse__c qdr2: qn.OneHubTest__Question_Defined_Response1__r){
+  sqd = new OneHubTest__ServiceQuestionDefinedResponse__c();
+  sqd.OneHubTest__servicequestion__c = qn.OneHubTest__questions__r[0].id;
+  sqd.OneHubTest__QuestionDefinedResponse__c = qdr2.id;
+  sqdList.add(sqd);
+  }
+  }
+}
+
+insert sqdList;
+
+//AddRetailerCertfications
+
+OneHubTest__RetailerServiceCertification__c rsc;
+list<OneHubTest__RetailerServiceCertification__c> rscList = new list<OneHubTest__RetailerServiceCertification__c>();
+
+OneHubTest__RetailerServiceEquipment__c rseq;
+list<OneHubTest__RetailerServiceEquipment__c> rseqList = new list<OneHubTest__RetailerServiceEquipment__c>();
+
+for(OneHubTest__ProjectTypeService__c ProjSvc : [Select Id,OneHubTest__service__c,OneHubTest__service__r.id,OneHubTest__service__r.name from OneHubTest__ProjectTypeService__c where OneHubTest__ProjectType__c=: MerchProjTypeID])
+{
+  for(OneHubTest__Certification__c cert : [select id from OneHubTest__certification__c LIMIT 2])
+  {
+  rsc = new OneHubTest__RetailerServiceCertification__c();
+  rsc.OneHubTest__Service__c = ProjSvc.OneHubTest__service__r.id;
+  rsc.OneHubTest__Retailer__c = walgrn;
+  rsc.OneHubTest__certification__c = cert.id;
+  rscList.add(rsc);
+  }
+
+  for(OneHubTest__Equipment__c eq2 : [select id from OneHubTest__Equipment__c limit 2])
+  {
+  rseq = new OneHubTest__RetailerServiceEquipment__c();
+  rseq.OneHubTest__Service__c = ProjSvc.OneHubTest__service__r.id;
+  rseq.OneHubTest__Retailer__c = walgrn;
+  rseq.OneHubTest__Equipment__c = eq2.id;
+
+  rseq.OneHubTest__IsLocked__c = true;
+  rseq.OneHubTest__Quantity__c = 1;
+
+  rseqList.add(rseq);
+  }
+}
+
+insert rscList;
+insert rseqList;

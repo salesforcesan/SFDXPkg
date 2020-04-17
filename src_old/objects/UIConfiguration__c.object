@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>This will store record type settings for OH screens.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>DefaultProjectRecordType__c</fullName>
+        <externalId>false</externalId>
+        <label>Default Project Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectLockedRecordType__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Locked RecordType</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectRecordtypePattern__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Recordtype Pattern</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectServiceLockedRecordType__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Service Locked RecordType</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectServiceRecordtypePattern__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Service Recordtype Pattern</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>UI Configuration</label>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,535 @@
+delete [select id from RetailerServiceEquipment__c];
+delete [select id from ServiceQuestionDefinedResponse__c];
+delete [select id from Servicequestion__C];
+delete [select id from Serviceattribute__c];
+delete [select id from RetailerServiceCertification__c];
+delete [select id from ProjectTypeService__c];
+delete [select id from RetailerService__c];
+delete [select id from Service__c];
+delete [select id from Attribute__c];
+delete [SELECT Id FROM LocationAssignment__c];
+delete [SELECT Id FROM Location__c];
+delete [SELECT Id FROM Target__c];
+delete [select Id from Question__c];
+delete [select Id from FulfillmentCenter__c];
+delete [SELECT Id FROM Certification__c];
+delete [SELECT Id FROM ProjectType__c];
+delete [SELECT Id FROM ExecutionCompany__c];
+delete [SELECT Id FROM ProjectTypeCustomSettings__c];
+delete [SELECT Id FROM Equipment__c];
+delete [SELECT Id FROM Retailer__c];
+delete [SELECT Id FROM Language__c];
+delete [SELECT Id FROM Contact WHERE LastName IN ('Crossmark','Premium','Crossmak')];
+delete [select id from ScheduleOption__c];
+delete [select id from Cycle__c];
+
+delete [SELECT ID FROM PostalCOde__c];
+List<PostalCode__c> posts = new List<PostalCode__c>();
+
+PostalCode__c post = new PostalCode__c();
+post.DST__c = false;
+post.Name = '94127';
+post.Timezoneoffset__c = -8;
+post.GeoLocation__latitude__s = 37.7357008082887;
+post.GeoLocation__longitude__s = -122.45947227415;
+posts.add(post);
+
+post = new PostalCode__c();
+post.DST__c = false;
+post.Name = '75024';
+post.Timezoneoffset__c = -6;
+post.GeoLocation__latitude__s = 33.07737;
+post.GeoLocation__longitude__s = -96.80700;
+posts.add(post);
+insert posts;
+
+
+
+integer cnt = [select count() from account where Name IN ('Crossmark')];
+Account acc1 = new Account();
+if(cnt==0)
+{
+    acc1.Name = 'Crossmark';
+    insert acc1;
+}
+
+cnt = [select count() from account where Name IN ('Premium')];
+Account acc2 = new Account();
+if(cnt==0)
+{
+    acc2.Name = 'Premium';
+    insert acc2;
+}
+
+
+List<Account> accs = [SELECT Id FROM Account];
+Contact c1 = new Contact();
+c1.FirstName = 'John Doe';
+c1.LastName = 'Crossmark';
+c1.Account = acc1;
+insert c1;
+
+Contact c2 = new Contact();
+c2.FirstName = 'Jane Doe';
+c2.LastName = 'Premium';
+c2.Account = acc2;
+insert c2;
+
+language__c lng  = new language__c();
+lng.Name = 'English';
+insert lng;
+
+Retailer__c[] rts = new Retailer__c[]{
+   new Retailer__c(Name = 'Walgreens', OneHubRetailerId__c = 'WALGREENS')
+       };
+insert rts;
+
+Retailer__c retailer = [Select Id,OneHubRetailerId__c FROM Retailer__c LIMIT 1];
+
+ProjectType__c md = new ProjectType__c();
+md.Name = 'Merchandising';
+md.MaxReserveDays__c = 5;
+md.InstantReserveThreshold__c = 2000;
+md.minservicecount__c = 1;
+md.maxservicecount__c = 5;
+insert md;
+
+
+List<cycle__c> cyclList = new List<cycle__c>();
+for (Integer i = 1; i < 5; i++) {
+    cycle__c cy = new cycle__c();
+    cy.Name = 'Cycle ' + i;
+    cy.CycleStartDate__c = date.today().addDays(i);
+    cy.CycleEndDate__c = date.today().addDays(i+3);
+    cy.Retailer__c  = retailer.id;
+    cyclList.add(cy);
+}
+insert cyclList;
+
+
+ScheduleOption__c so = new ScheduleOption__c();
+so.Name = 'Merchandising';
+insert so;
+
+List<ExecutionCompany__c> ecs = new List<ExecutionCompany__c>();
+ExecutionCompany__c ec = new ExecutionCompany__c();
+ec.Name = 'Crossmark';
+ecs.add(ec);
+ec = new ExecutionCompany__c();
+ec.Name = 'Premium';
+ecs.add(ec);
+insert ecs;
+
+ProjectTypeCustomSettings__c basePTSetting = new ProjectTypeCustomSettings__c ();
+basePTSetting.Name = 'Merchandising';
+basePTSetting.SchedulingStrategyClass__c = 'BaseSchedulingStrategy';
+basePTSetting.FieldSetName__c = 'BaseProjectFieldset';
+basePTSetting.ProjectCompletionStrategyClass__c= 'BaseProjectCompletionStrategy';
+basePTSetting.ReReserveTrackFieldList__c= 'BudgetedLocationsCount__c;StartDate__c;EndDate__c;ResponsibleForExecution__c';
+insert basePTSetting;
+
+
+List<Equipment__c> eqpList = new List<Equipment__c>();
+for (Integer i = 0; i < 5; i++) {
+    Equipment__c eqp = new Equipment__c();
+    eqp.Name = 'Equipment ' + i;
+    eqp.IsCapacityImpact__c = true;
+    eqpList.add(eqp);
+    
+}
+insert eqpList;
+
+List<Location__c> locations = new List <Location__c > ();
+   
+for (Integer i = 1; i <= 1000; i++) {
+    Location__c location = new Location__c();
+    location.Name = 'Location ' + i;
+    location.City__c = 'City ' + i;
+    location.LocationNumber__c = string.valueOf(i);
+    location.type__c='Location';
+    location.isactive__c=true;
+    location.Retailer__c= retailer.id;
+    location.OneHubRetailerId__c = retailer.OneHubRetailerId__c;
+    location.Retailer__c = retailer.Id;
+    location.PostalCode__c = post.id;
+    locations.add(location);
+}
+insert locations;
+
+List<ExecutionCompany__c> execs = [SELECT Id,Name FROM ExecutionCompany__c];
+locations = [SELECT Id,Name FROM Location__c];
+List<LocationAssignment__c> locAssignments = new List <LocationAssignment__c > ();
+ProjectType__c pt = [Select Id,Name FROM ProjectType__c LIMIT 1];   
+for (Integer i = 0; i < 500; i++) {
+    LocationAssignment__c locAssignment = new LocationAssignment__c();
+    locAssignment.Location__c = locations[i].Id;
+    locAssignment.ProjectType__c = pt.Id;
+    locAssignment.ExecutionCompany__c = execs[0].Id;
+    locAssignments.add(locAssignment);
+}
+for (Integer i = 500; i < 1000; i++) {
+    LocationAssignment__c locAssignment = new LocationAssignment__c();
+    locAssignment.Location__c = locations[i].Id;
+    locAssignment.ProjectType__c = pt.Id;
+    locAssignment.ExecutionCompany__c = execs[1].Id;
+    locAssignments.add(locAssignment);
+}
+insert locAssignments;
+
+List<Certification__c> certifications = new list<Certification__c>();
+for (Integer i = 1; i <= 5; i++) {
+    Certification__c cert = new Certification__c();
+    cert.Name = 'Certification ' + i;
+    certifications.add(cert);  
+}
+insert certifications;
+
+
+
+String NAMESPACE = '';
+List<sObject> targets = new List<sObject>();
+for(Integer i=1; i <= 10; i++) {
+    Target__c s = new Target__c();
+    s.put('name','Product ' + i  );
+    s.put(NAMESPACE + 'Retailer__c', retailer.Id);
+    s.put(NAMESPACE +'accountinfo__c', 'test');
+    s.put(NAMESPACE +'brandinfo__c','test');
+    s.put(NAMESPACE +'CategoryInfo__c','category');
+    s.put(NAMESPACE +'departmentname__c', 'dn');
+    s.put(NAMESPACE +'departmentnumber__c',123);
+    s.put(NAMESPACE +'description__c', 'desc');
+    s.put(NAMESPACE +'StockCode__c', ''+ Crypto.getRandomInteger());
+    s.put(NAMESPACE +'OneHubRetailerId__c', '1');
+    s.put(NAMESPACE +'PackageSizeQty__c', 12);
+    s.put(NAMESPACE + 'plu__c', 'plu');
+    s.put(NAMESPACE +'ShelfName__c','test');
+    s.put(NAMESPACE + 'Status__c','Active');
+    s.put(NAMESPACE + 'TargetName__c','cart');
+    s.put(NAMESPACE + 'TargetType__C','Product');
+    s.put(NAMESPACE + 'UPC__c','up123');
+    s.put(NAMESPACE + 'VendorNumber__c',1231);
+    s.put(NAMESPACE + 'PackageSizeQty__c',123);
+    targets.add(s);
+}
+
+insert targets;
+//insert material
+//QUESTIONS and DEFINED RESPONSES
+List<Question__c> qs = new List<Question__c>();
+List<QuestionDefinedResponse__c> qdrList = new List<QuestionDefinedResponse__c>();
+QuestionDefinedResponse__c qdr = new QuestionDefinedResponse__c();
+
+//Text
+Question__c q = new Question__c();
+q.QuestionType__c = 'Text';
+q.QuestionText__c = 'What is the supervisor name?';
+q.Active__c = true;
+q.OneHubQuestionId__c = 'OHQ-001';
+qs.add(q);
+
+//Number
+q = new Question__c();
+q.QuestionType__c = 'Number';
+q.QuestionText__c = 'How many products did you demo?';
+q.Active__c = true;
+q.OneHubQuestionId__c = 'OHQ-002';
+qs.add(q);
+
+//Photo
+q = new Question__c();
+q.QuestionType__c = 'Photo';
+q.QuestionText__c = 'Picture of the display?';
+q.Active__c = true;
+q.OneHubQuestionId__c = 'OHQ-003';
+qs.add(q);
+
+//Item Question
+q = new Question__c();
+q.QuestionType__c = 'Number';
+q.QuestionText__c = 'How many did you purchase?';
+q.Active__c = true;
+q.OneHubQuestionId__c = 'OHQ-004';
+q.TargetType__c = 'Product';
+qs.add(q);
+
+insert qs;
+
+
+//Single-Select List
+Question__c qss = new Question__c();
+qss.QuestionType__c = 'Single-Select List';
+qss.QuestionText__c = 'Did you feel prepared for the event?';
+qss.Active__c = true;
+qss.OneHubQuestionId__c = 'OHQ-005';
+insert qss;
+
+qdrList = new List<QuestionDefinedResponse__c>();
+qdr = new QuestionDefinedResponse__c();
+qdr.DefinedResponseOrder__c = 1;
+qdr.DefinedResponseText__c = 'Very Prepared';            
+qdr.Question__c = qss.id;        
+qdrList.add(qdr);
+
+
+qdr = new QuestionDefinedResponse__c();
+qdr.DefinedResponseOrder__c = 2;
+qdr.DefinedResponseText__c = 'Prepared';            
+qdr.Question__c = qss.id;        
+qdrList.add(qdr);
+
+
+qdr = new QuestionDefinedResponse__c();
+qdr.DefinedResponseOrder__c = 2;
+qdr.DefinedResponseText__c = 'Somewhat Prepared';            
+qdr.Question__c = qss.id;        
+qdrList.add(qdr);
+
+//Yes/No
+Question__c qyn = new Question__c();
+qyn.QuestionType__c = 'Yes/No';
+qyn.QuestionText__c = 'Did you start on time?';
+qyn.Active__c = true;
+qyn.OneHubQuestionId__c = 'OHQ-006';
+insert qyn;
+
+
+qdr = new QuestionDefinedResponse__c();
+qdr.DefinedResponseOrder__c = 1;
+qdr.DefinedResponseText__c = 'Yes';            
+qdr.Question__c = qyn.id;        
+qdrList.add(qdr);
+
+qdr = new QuestionDefinedResponse__c();
+qdr.DefinedResponseOrder__c = 2;
+qdr.DefinedResponseText__c = 'No';            
+qdr.Question__c = qyn.id;        
+qdrList.add(qdr);
+
+insert qdrList;
+
+
+//FULFILLMENT CENTERS && MATERIALS
+List<FulfillmentCenter__c> fcs= new List<FulfillmentCenter__c>();
+FulfillmentCenter__c fc = new FulfillmentCenter__c();
+fc.Retailer__c = retailer.Id;
+fc.OneHubRetailerId__c = 'OHFC-001';
+fc.Name = 'Premium';
+fcs.add(fc);
+        
+fc = new FulfillmentCenter__c();
+fc.Name = 'CTL';
+fc.Retailer__c = retailer.Id;
+fc.OneHubRetailerId__c = 'OHFC-002';
+fcs.add(fc);
+
+insert fcs;
+
+
+List<FulfillmentCenter__c> fcslist = [Select id, name from FulfillmentCenter__c];
+FulfillmentCenter__c fulfillmentCenter = fcslist[0];
+
+List<Material__c> materials = new List<Material__c>();
+
+Material__c material = new Material__c();
+material.name = 'Spoon';
+material.IsActive__c = true;
+material.Kit__c = false;
+material.Retailer__c = retailer.Id;
+material.FulfillmentCenter__c = fulfillmentCenter.Id;
+insert material;
+
+material = new Material__c();
+material.name = 'Sample Kit';
+material.Kit__c = true;
+material.Retailer__c = retailer.Id;
+material.IsActive__c = true;
+material.FulfillmentCenter__c = fulfillmentCenter.Id;
+insert material;
+
+
+Id MerchProjTypeID = [Select Id from ProjectType__c where Name ='Merchandising' LIMIT 1].Id;
+List<Service__c> svcs= new List<Service__c>();
+
+//Add  service__c
+List<String> ServNames = new List<String> {'AB Dry','Merchandising','Standard'};
+
+Service__c svc = new Service__c();
+for(string str : ServNames)
+{
+                svc = new Service__c();
+                svc.Name = str;
+                svc.ServiceDescription__c = '';
+                svc.TargetType__c = 'Category;Product;None';
+                svc.Duration__c = '6 Hr';        
+                svcs.add(svc);
+} 
+
+
+List<Database.Saveresult> insertResults=Database.insert(svcs, false);
+
+List<ProjectTypeService__c> ptss= new List<ProjectTypeService__c>();
+ProjectTypeService__c pts = new ProjectTypeService__c();
+
+id walgrn = [select id from retailer__c where OneHubRetailerId__C = 'WALGREENS' limit 1 ].id;
+
+List<retailerService__c> rsLst= new List<retailerService__c>();
+retailerService__c rs = new retailerService__c();
+
+                                
+for (Database.SaveResult sr : insertResults) {
+                if (sr.isSuccess()) {                    
+                                pts = new ProjectTypeService__c();
+                                pts.ProjectType__c = MerchProjTypeID ;
+                                pts.Service__c = sr.getId();
+                                ptss.add(pts); 
+                                
+                                rs = new retailerService__c();
+                                rs.retailer__c = walgrn;
+                                rs.service__c = sr.getId();
+                                rs.jobManualTemplate__c = 'Standard';
+                                rsLst.add(rs);                            
+                }
+}
+
+insert ptss;        
+insert rsLst;
+
+
+//add attribute
+list<attribute__c> AttrList = new list<attribute__c>();
+attribute__c obj = new attribute__c();
+
+List<String> textAttr = new List<String> {'Overview','Instructions'};
+
+for(string str : textAttr)
+{
+                obj = new attribute__c();
+                obj.description__c = str;
+                obj.AttributeType__c = 'Text';
+                obj.Active__c = true;
+                obj.AttributeMaxLength__c=5000;
+                obj.Repeatable__c=false;
+                obj.Required__c=false;
+                AttrList.add(obj);
+}
+
+List<String> photoAttr = new List<String> {'Supporting Attachment 1','Job Manual'};
+
+for(string str : photoAttr)
+{
+                obj = new attribute__c();
+                obj.description__c = str;
+                obj.AttributeType__c = 'Photo';
+                obj.Active__c = true;
+                obj.Repeatable__c=false;
+                obj.Required__c=false;
+                AttrList.add(obj);
+}
+
+insert  AttrList;
+
+
+list<serviceAttribute__c> lstSA = new  list<serviceAttribute__c>();   
+serviceAttribute__c saobj= new serviceAttribute__c();
+                
+integer i=0;
+integer j=0;
+
+List<String> AttrVal = new List<String> {'Overview','Instructions','Supporting Attachment 1','Job Manual'};
+list<servicequestion__C> sqList = new list<servicequestion__C> ();
+servicequestion__C sq;
+
+                for(ProjectTypeService__c ProjSvc : [Select Id,service__c from ProjectTypeService__c where ProjectType__c =: MerchProjTypeID ])
+                {              
+                                for(string attr : AttrVal)
+                                {
+                                                i=i+10;
+                                                id attrID = [select id from attribute__c where description__c=:attr limit 1].id;
+                                                saobj = new serviceAttribute__c(); 
+                                                saobj.Attribute__c = attrID;
+                                                saobj.AttributeOrder__c = i;
+                                                saobj.Service__c =  ProjSvc.service__c;
+                                                if(attr!='Job Manual')
+                                                saobj.IsVisible__c = true;            
+                                                                else
+                                                saobj.IsVisible__c = false;            
+                                                
+                                                lstSA.add(saobj);
+                                } 
+                                i=0;
+
+                                for(question__c qns : [select id from question__c  LIMIT 3])
+                                {
+                                                    j+=1;
+                                                                sq= new servicequestion__C();
+                                                                sq.question__C = qns.id;
+                                                                sq.QuestionNumber__c = j;
+                                                                sq.Service__c = ProjSvc.service__c;
+                                                                sqList.add(sq);
+                                }              
+                                j=0;                        
+                }
+insert lstSA; 
+insert sqList;
+
+
+ServiceQuestionDefinedResponse__c  sqd;
+list<ServiceQuestionDefinedResponse__c> sqdList = new list<ServiceQuestionDefinedResponse__c>();
+
+sqd = new ServiceQuestionDefinedResponse__c();
+for(ProjectTypeService__c ProjSvc : [Select Id,ProjectTypeService__c.Service__r.id from ProjectTypeService__c where ProjectType__c =: MerchProjTypeID ])
+{              
+                for(question__c   qn : [SELECT questiontext__c, questiontype__c ,(select id,question__c ,service__r.name from questions__r where service__c =: ProjSvc.service__r.id) ,(select definedresponsetext__c from Question_Defined_Response1__r)FROM question__c where questiontype__c in ('Single-Select','Single-Select List','Multi-Select List','Yes/No') and id in (select question__c from servicequestion__c where service__c =:ProjSvc.service__r.id)])
+                {
+                                
+                                for(QuestionDefinedResponse__c qdr2: qn.Question_Defined_Response1__r){
+                                                sqd = new ServiceQuestionDefinedResponse__c();
+                                                sqd.servicequestion__c = qn.questions__r[0].id;
+                                                sqd.QuestionDefinedResponse__c = qdr2.id;
+                                                sqdList.add(sqd);
+                                }
+                }  
+}
+         
+insert sqdList;
+
+
+
+//AddRetailerCertfications
+
+                
+
+                
+RetailerServiceCertification__c rsc;
+list<RetailerServiceCertification__c> rscList = new list<RetailerServiceCertification__c>();
+
+RetailerServiceEquipment__c rseq;
+list<RetailerServiceEquipment__c> rseqList = new list<RetailerServiceEquipment__c>();
+
+for(ProjectTypeService__c ProjSvc : [Select Id,service__c,service__r.id,service__r.name from ProjectTypeService__c where ProjectType__c=: MerchProjTypeID])        
+{
+                for(Certification__c cert : [select id from certification__c LIMIT 2])
+                {
+                                rsc = new RetailerServiceCertification__c();
+                                rsc.Service__c = ProjSvc.service__r.id;
+                                rsc.Retailer__c = walgrn;
+                                rsc.certification__c = cert.id;
+                                rscList.add(rsc);
+                }
+                
+                for(Equipment__c eq2 : [select id from Equipment__c limit 2])
+                {
+                                rseq = new RetailerServiceEquipment__c();
+                                rseq.Service__c = ProjSvc.service__r.id;
+                                rseq.Retailer__c = walgrn;
+                                rseq.Equipment__c = eq2.id;
+                                
+                                rseq.IsLocked__c = true;
+                                rseq.Quantity__c = 1;
+                                
+                                rseqList.add(rseq);
+                }
+}  
+
+insert rscList;
+insert rseqList;

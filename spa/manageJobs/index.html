@@ -1,0 +1,358 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="SLDS2.0.2/assets/styles/salesforce-lightning-design-system.min.css">
+        <link rel="stylesheet" href="vendor.min.css">
+
+    </head>
+    <body>
+
+        <div class="slds">
+
+    			<div class="slds-page-header" role="banner">
+    				<div class="slds-grid">
+    					<div class="slds-col slds-has-flexi-truncate">
+    						<div class="slds-media slds-media--center slds-no-space slds-grow">
+    							<div class="slds-media__figure">
+    								<svg aria-hidden="true" class="slds-icon slds-icon-standard-user">
+    									<use href="/assets/icons/standard-sprite/svg/symbols.svg#user"></use>
+    								</svg>
+    							</div>
+    							<div class="slds-media__body">
+    								<p class="slds-text-heading--label">Project</p>
+    								<h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle" title="AST-TAB-WalmartPay-LKD-6.11">AST-TAB-WalmartPay-LKD-6.11</h1>
+    							</div>
+    						</div>
+    					</div>
+    					<div class="slds-col slds-no-flex slds-grid slds-align-bottom">
+    						<div class="slds-button-group" role="group">
+    							<button class="slds-button slds-button--neutral">Reattempt</button>
+    							<button class="slds-button slds-button--neutral">Schedule</button>
+    							<button class="slds-button slds-button--neutral">Cancel</button>
+    							<button class="slds-button slds-button--neutral">Delete</button>
+    						</div>
+    					</div>
+    				</div>
+    				<ul class="slds-grid slds-page-header__detail-row">
+    					<li class="slds-page-header__detail-block">
+    						<p class="slds-text-heading--label-normal slds-truncate slds-m-bottom--xx-small" title="Field 1">Project Number</p>
+    						<p class="slds-text-body--regular slds-truncate" title="160617011984">160617011984</p>
+    					</li>
+    					<li class="slds-page-header__detail-block">
+    						<p class="slds-text-heading--label-normal slds-truncate slds-m-bottom--xx-small" title="Field2 (3)">Start Date</p>
+    						4/28/2017
+    					</li>
+    					<li class="slds-page-header__detail-block">
+    						<p class="slds-text-heading--label-normal slds-truncate slds-m-bottom--xx-small" title="Field 3">End Date</p>
+    						5/28/2017
+    					</li>
+    					<li class="slds-page-header__detail-block">
+    						<p class="slds-text-heading--label-normal slds-truncate slds-m-bottom--xx-small" title="Field 4">Status</p>
+    						<p>
+    							<span title="In progress">In Progress</span>
+    						</p>
+    					</li>
+    					<li class="text-right">
+    						<span class="slds-text-heading--small slds-m-right--small">312 Jobs Found</span>
+    						<button class="slds-button slds-button--neutral apply-filter">Apply</button>
+    					</li>
+    				</ul>
+    			</div>
+
+    			<table border="0" cellpadding="0" cellspacing="0" class="slds-table slds-table--bordered slds-table--cell-buffer" id="searchResults" style="display: table;">
+    				<thead>
+    					<tr class="slds-text-heading--label">
+    						<th>
+    							<input id="chkAll" type="checkbox"/>
+    						</th>
+    						<th scope="col" id="TableHeader">Job Name</th>
+    						<th scope="col">Service</th>
+    						<th scope="col">Location</th>
+    						<th scope="col">Execution Company</th>
+    						<th scope="col">Status</th>
+    						<th scope="col" colspan="2" class="cmx-centered">Scheduled Date</th>
+    						<th scope="col">Exception Reason
+    						</th>
+    						<th scope="col">Executed</th>
+    						<th scope="col">Completed</th>
+    						<th scope="col">Failed QC?</th>
+    						<th scope="col">&nbsp;</th>
+    					</tr>
+    				</thead>
+    				<tbody id="jobs-body">
+    					<tr class="">
+    						<th></th>
+    						<th id="TableHeader">
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="filter-job-name">Input Label</label>
+    								<div class="slds-form-element__control">
+    									<input id="filter-job-name" class="slds-input" type="text" placeholder=""/>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="filter-service">Select Label</label>
+    								<div class="slds-form-element__control">
+    									<div class="slds-select_container">
+    										<select id="filter-service" class="slds-select multiselect">
+    											<option>Service One</option>
+    											<option>Service Two</option>
+    											<option>Service Three</option>
+    										</select>
+    									</div>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="text-input-01">Input Label</label>
+    								<div class="slds-form-element__control">
+    									<input id="text-input-01" class="slds-input" type="text" placeholder=""/>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="select-01">Select Label</label>
+    								<div class="slds-form-element__control">
+    									<div class="slds-select_container">
+    										<select id="select-01" class="slds-select">
+    											<option>Picklist</option>
+    											<option>Null Value (blanks)</option>
+    											<option>Option Three</option>
+    										</select>
+    									</div>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="filter-status">Select Label</label>
+    								<div class="slds-form-element__control">
+    									<div class="slds-select_container">
+    										<select id="filter-status" class="slds-select">
+    											<option>Picklist</option>
+    											<option>Null Value (blanks)</option>
+    											<option>Option Three</option>
+    										</select>
+    									</div>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="filter-scheduled-date-start">Input Label</label>
+    								<div class="slds-form-element__control">
+    									<input id="filter-scheduled-date-start" class="slds-input datepicker" type="text" placeholder="range start"/>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="filter-scheduled-date-end">Input Label</label>
+    								<div class="slds-form-element__control">
+    									<input id="filter-scheduled-date-end" class="slds-input datepicker" type="text" placeholder="range end"/>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="select-01">Select Label</label>
+    								<div class="slds-form-element__control">
+    									<div class="slds-select_container">
+    										<select id="select-01" class="slds-select">
+    											<option>Picklist</option>
+    											<option>Null Value (blanks)</option>
+    											<option>Option Three</option>
+    										</select>
+    									</div>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="select-01">Select Label</label>
+    								<div class="slds-form-element__control">
+    									<div class="slds-select_container">
+    										<select id="select-01" class="slds-select">
+    											<option>yes</option>
+    											<option>no</option>
+    										</select>
+    									</div>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="select-01">Select Label</label>
+    								<div class="slds-form-element__control">
+    									<div class="slds-select_container">
+    										<select id="select-01" class="slds-select">
+    											<option>Picklist</option>
+    											<option>Null Value (blanks)</option>
+    											<option>Option Three</option>
+    										</select>
+    									</div>
+    								</div>
+    							</div>
+    						</th>
+    						<th>
+    							<div class="slds-form-element">
+    								<label class="slds-form-element__label slds-assistive-text" for="select-01">Select Label</label>
+    								<div class="slds-form-element__control">
+    									<div class="slds-select_container">
+    										<select id="select-01" class="slds-select">
+    											<option>yes</option>
+    											<option>no</option>
+    										</select>
+    									</div>
+    								</div>
+    							</div>
+    						</th>
+    						<th></th>
+    					</tr>
+
+
+    				</tbody>
+    			</table>
+
+    		</div>
+
+    <script type="text/javascript" src="faker.min.js"></script>
+    <script type="text/javascript">
+    window.configSettings = {
+        mocks : {
+            '{!$RemoteAction.JobManagementController.greeting}' : {
+                method : function(args){
+                    console.log(args);
+                    return faker.lorem.sentence();
+                },
+                timeout : 25, //half second
+                error : false,
+            },
+            '{!$RemoteAction.JobManagementController.filterJobs}' : {
+                method : function(args){
+                    var $mock = this;
+                    console.log(args);
+                    var jobs = [];
+                    var numJobs = faker.random.number(100);
+                    for(var i=0; i<numJobs; i++){
+                        jobs.push({
+                            name : 'JOB-' + faker.random.uuid().substring(0,8),
+                            service : faker.helpers.shuffle(["Service One", "Service Two", "Service Three", ""])[0],
+                            status : faker.helpers.shuffle(["Cancelled", "In Progress", "Other", ""])[0],
+                        })
+                    }
+                    return jobs;
+                },
+                timeout : 250, //half second
+                error : false
+            }
+        }
+    };
+    </script>
+    <script type="text/javascript" src="vendor.min.js"></script>
+
+    <!-- <script type="text/javascript" src="handlebars.min.js"></script> -->
+    <!-- <script type="text/javascript" src="jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="jsr-mocks-jquery.js"></script>
+    <script type="text/javascript" src="jquery-ui.min.js"></script>
+    <script type="text/javascript" src="jquery.multiselect.min.js"></script>
+    <script type="text/javascript" src="toastr.min.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script> -->
+
+
+    <script id="template-job-row" type="text/x-handlebars-template">
+	{{#each jobs}}
+	<tr class="cmx-job">
+		<td>
+			<input class="include" data-id="a0F21000000DUaWEAW" type="checkbox"/>
+		</td>
+		<td>{{name}}</td>
+		<td>{{service}}</td>
+		<td>3424 Neighborhood Market</td>
+		<td>&nbsp;</td>
+		<td>{{status}}</td>
+		<td colspan="2" style="text-align:center">5/18/2017</td>
+		<td>3424</td>
+		<td>
+			<div class="slds-form-element">
+				<div class="slds-form-element__control">
+					<label class="slds-checkbox">
+						<input type="checkbox" name="options" id="checkbox-01"/>
+						<span class="slds-checkbox--faux"></span>
+						<span class="slds-form-element__label slds-assistive-text">Checkbox Label</span>
+					</label>
+				</div>
+			</div>
+		</td>
+		<td>&nbsp;</td>
+		<td>
+			<div class="slds-form-element">
+				<div class="slds-form-element__control">
+					<label class="slds-checkbox">
+						<input type="checkbox" name="options" id="checkbox-01"/>
+						<span class="slds-checkbox--faux"></span>
+						<span class="slds-form-element__label slds-assistive-text">Checkbox Label</span>
+					</label>
+				</div>
+			</div>
+		</td>
+
+	</tr>
+	{{/each}}
+	</script>
+
+    <script type="text/javascript">
+	$(document).ready(function () {
+
+		$("select.multiselect").multiselect();
+
+		$("input.datepicker").datepicker({
+			numberOfMonths: 1
+		});
+
+		var source   = $("#template-job-row").html();
+		var template = Handlebars.compile(source);
+
+		greeting().then(function(greeting){
+			console.log(greeting);
+		});
+
+	    $('.apply-filter').click(function(){
+
+			//hide existing rows
+			$('tr.cmx-job').remove();
+
+			var filter = {};
+
+			$.jsr({
+				method: '{!$RemoteAction.JobManagementController.filterJobs}',
+				args:[filter],
+				options: {timeout: 30000}
+			}).then(function (jobs) {
+				$('#total-jobs').text(jobs.length);
+				var context = {jobs: jobs};
+				var row = template(context);
+				$('#jobs-body').append(row);
+				//toastr.success(greeting);
+			}).catch(function (error) {
+				toastr.error(error.message);
+			});
+
+	    });
+	});
+
+	function greeting(){
+		return $.jsr({
+			method: '{!$RemoteAction.JobManagementController.greeting}'
+		}).then(function (greeting) {
+			toastr.success(greeting);
+			return greeting;
+		}).catch(function (error) {
+			toastr.error(error.message);
+		});
+	}
+	</script>
+    </body>
+</html>

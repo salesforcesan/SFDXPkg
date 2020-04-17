@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AutoApprovalComment__c</fullName>
+        <description>Auto Approval Comment</description>
+        <externalId>false</externalId>
+        <label>Auto Approval Comment</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CancelReasonComment__c</fullName>
+        <description>Cancel Reason Comment</description>
+        <externalId>false</externalId>
+        <label>CancelReasonComment</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CancelReason__c</fullName>
+        <description>Reservation Cancel reasons</description>
+        <externalId>false</externalId>
+        <label>CancelReason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Reduced Budget</fullName>
+                    <default>false</default>
+                    <label>Reduced Budget</label>
+                </value>
+                <value>
+                    <fullName>Insufficient Funds</fullName>
+                    <default>false</default>
+                    <label>Insufficient Funds</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>DateRequestSubmitted__c</fullName>
+        <externalId>false</externalId>
+        <label>Request Submit Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ExpirationDate__c</fullName>
+        <description>Expiration date defines a date where the Reservation will be moved to the Expired status if it has not move to the reserved state.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This date defines when the reservation will automatically expire if the reservation doesn&apos;t get approved/reserved.</inlineHelpText>
+        <label>Expiration Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IsAutoApproved__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Auto-Approved</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsCapacityOverridden__c</fullName>
+        <externalId>false</externalId>
+        <formula>NumberofOverriddenReservedLocations__c &gt; 0</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Capacity Overridden</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Isexpirable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Auto-expire will only happen when flag is checked</description>
+        <externalId>false</externalId>
+        <label>Is expirable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NumberofOverriddenReservedLocations__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Overridden Reserved Locations</label>
+        <summaryFilterItems>
+            <field>ReservationLocation__c.CapacityOverride__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>ReservationLocation__c.Reservation__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>NumberofReservedLocations__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Reserved Locations</label>
+        <summaryFilterItems>
+            <field>ReservationLocation__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Reserved</value>
+        </summaryFilterItems>
+        <summaryForeignKey>ReservationLocation__c.Reservation__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>PendingExpirationNotified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Pending Expiration Notified</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PrimaryAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The primary account that is responsible for the reservation.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The primary account that is responsible for the reservation.</inlineHelpText>
+        <label>Primary Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Reservations</relationshipLabel>
+        <relationshipName>Reservations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PrimaryOpportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Primary Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Reservations</relationshipLabel>
+        <relationshipName>Reservations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Reservations</relationshipLabel>
+        <relationshipName>Reservations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RequestPending__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Request Pending</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>RequestStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Request Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending Reservation</fullName>
+                    <default>false</default>
+                    <label>Pending Reservation</label>
+                </value>
+                <value>
+                    <fullName>Pending Cancellation</fullName>
+                    <default>false</default>
+                    <label>Pending Cancellation</label>
+                </value>
+                <value>
+                    <fullName>Pending Expiration</fullName>
+                    <default>false</default>
+                    <label>Pending Expiration</label>
+                </value>
+                <value>
+                    <fullName>Pending UnReserve</fullName>
+                    <default>false</default>
+                    <label>Pending UnReserve</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>RequestedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Requested Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>RequestedLocations__c</fullName>
+        <description>The quantity of locations at which that the client has requested to do the event</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The quantity of locations at which that the client has requested to do the event</inlineHelpText>
+        <label>Requested Locations</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RetailerAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Retailer Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Reservations (Retailer Account)</relationshipLabel>
+        <relationshipName>Reservations1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Service__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The service that is being reserved.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The service that is being reserved.</inlineHelpText>
+        <label>Service</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Choose a product that has a valid OH Service template mapped.</errorMessage>
+            <filterItems>
+                <field>Product2.Service__c</field>
+                <operation>notEqual</operation>
+                <value></value>
+            </filterItems>
+            <filterItems>
+                <field>Product2.IsActive</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Product2</referenceTo>
+        <relationshipLabel>Reservations</relationshipLabel>
+        <relationshipName>Reservations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <defaultValue>&apos;Draft&apos;</defaultValue>
+        <description>Status of the reservation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Status of the Reservation.</inlineHelpText>
+        <label>Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Draft</fullName>
+                    <default>true</default>
+                    <label>Draft</label>
+                </value>
+                <value>
+                    <fullName>Pending Approval</fullName>
+                    <default>false</default>
+                    <label>Pending Approval</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Reserved</fullName>
+                    <default>false</default>
+                    <label>Booked</label>
+                </value>
+                <value>
+                    <fullName>Expired</fullName>
+                    <default>false</default>
+                    <label>Expired</label>
+                </value>
+                <value>
+                    <fullName>Canceled</fullName>
+                    <default>false</default>
+                    <label>Canceled</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Reservation</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Reservation Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Reservations</pluralLabel>
+    <recordTypes>
+        <fullName>PendingApproval</fullName>
+        <active>true</active>
+        <description>Pending Approval</description>
+        <label>Pending Approval</label>
+        <picklistValues>
+            <picklist>CancelReason__c</picklist>
+            <values>
+                <fullName>Insufficient Funds</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reduced Budget</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>RequestStatus__c</picklist>
+            <values>
+                <fullName>Pending Cancellation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Expiration</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Reservation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending UnReserve</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Canceled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Expired</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reserved</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Disallow_Product_change_after_locations</fullName>
+        <active>true</active>
+        <description>Do not allow a product to be changed after adding reservation locations</description>
+        <errorConditionFormula>AND (ISCHANGED( Service__c ), NumberofReservedLocations__c &gt; 0)</errorConditionFormula>
+        <errorMessage>Cannot change service (product), after adding reservation locations. Remove all locations and retry.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_booked_with_0locations</fullName>
+        <active>true</active>
+        <description>At least one location must be reserved before a reservation can be approved/booked.</description>
+        <errorConditionFormula>AND(ISCHANGED(Status__c), OR(TEXT(Status__c) == &apos;Pending Approval&apos;,TEXT(Status__c) == &apos;Approved&apos;, TEXT(Status__c) == &apos;Reserved&apos; ), NumberofReservedLocations__c == 0)</errorConditionFormula>
+        <errorMessage>At least one location should be reserved before a reservation can be submitted for approval or booked.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Export_Reservation_Locations</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Export Reservation Locations</masterLabel>
+        <openType>newWindow</openType>
+        <page>ReservationLocationsExport</page>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+    </webLinks>
+</CustomObject>

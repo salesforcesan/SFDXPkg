@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Relates Material to a Project Service. Material is added manually when building a Project. Project Service Material is related to Project Service and Material.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>CostPerUnit__c</fullName>
+        <externalId>false</externalId>
+        <formula>Material__r.EstimatedCostPerUnit__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Cost Per Unit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomDescription__c</fullName>
+        <externalId>false</externalId>
+        <label>Custom Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InvoiceType__c</fullName>
+        <externalId>false</externalId>
+        <label>Invoice Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Standard</fullName>
+                    <default>false</default>
+                    <label>Standard</label>
+                </value>
+                <value>
+                    <fullName>Additional Cost</fullName>
+                    <default>false</default>
+                    <label>Additional Cost</label>
+                </value>
+                <value>
+                    <fullName>Partner 1</fullName>
+                    <default>false</default>
+                    <label>Partner 1</label>
+                </value>
+                <value>
+                    <fullName>Partner 2</fullName>
+                    <default>false</default>
+                    <label>Partner 2</label>
+                </value>
+                <value>
+                    <fullName>Partner 3</fullName>
+                    <default>false</default>
+                    <label>Partner 3</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Kit__c</fullName>
+        <externalId>false</externalId>
+        <formula>Material__r.Kit__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Kit</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MaterialDescription__c</fullName>
+        <externalId>false</externalId>
+        <label>Material Description</label>
+        <length>2500</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>MaterialExternalId__c</fullName>
+        <externalId>false</externalId>
+        <formula>Material__r.ExternalId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Material External ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MaterialName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Material__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Material Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Material__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Material</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Material__c.IsActive__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Material__c</referenceTo>
+        <relationshipLabel>Project Service Material</relationshipLabel>
+        <relationshipName>ProjectServiceMaterial</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProjectService__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Service</label>
+        <referenceTo>ProjectService__c</referenceTo>
+        <relationshipLabel>Project Service Materials</relationshipLabel>
+        <relationshipName>ProjectServiceMaterials</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <externalId>false</externalId>
+        <label>Quantity</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ShipTo__c</fullName>
+        <externalId>false</externalId>
+        <label>ShipTo</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Rep</fullName>
+                    <default>true</default>
+                    <label>Rep</label>
+                </value>
+                <value>
+                    <fullName>Location</fullName>
+                    <default>false</default>
+                    <label>Location</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TotalPrice__c</fullName>
+        <externalId>false</externalId>
+        <formula>CostPerUnit__c * Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UniqueKey__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <label>Unique Key</label>
+        <length>250</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>UseType__c</fullName>
+        <externalId>false</externalId>
+        <label>UseType</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>By Location</fullName>
+                    <default>true</default>
+                    <label>By Location</label>
+                </value>
+                <value>
+                    <fullName>By Rep</fullName>
+                    <default>false</default>
+                    <label>By Rep</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Project Service Material</label>
+    <nameField>
+        <displayFormat>PSM-{00000000}</displayFormat>
+        <label>Project Service Material Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Project Service Material</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Disallow_materials_for_MultiDay_Projects</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(ISNEW() ,ProjectService__r.Project__r.ProjectType__r.AllowMultidays__c == True)</errorConditionFormula>
+        <errorMessage>Materials cannot be added to a multi day project.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Invalid_Material</fullName>
+        <active>true</active>
+        <errorConditionFormula>Material__c = null || Material__c = &apos;&apos;</errorConditionFormula>
+        <errorMessage>Invalid Material. Please select a valid material.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Invalid_Quantity</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(
+ISNULL(Quantity__c),
+Quantity__c&lt;=0 || Quantity__c&gt;99999)</errorConditionFormula>
+        <errorDisplayField>Quantity__c</errorDisplayField>
+        <errorMessage>Please enter a valid quantity between 1 and 99999</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

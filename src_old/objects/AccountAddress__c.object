@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Account Address holds billing and shipping addresses for an Account. When building a Project a billing address must be specified for an Account that is added to a Project. Account Address is related to Account and Project Account.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Account__c</fullName>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipName>AccountAddresses</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>A checkbox that indicates if this account address is active.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this box if this account address is active.</inlineHelpText>
+        <label>Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AddressLine1__c</fullName>
+        <description>An entry field for the account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the account address.</inlineHelpText>
+        <label>Address Line 1</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AddressLine2__c</fullName>
+        <description>An additional entry field for the account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter additional address information for this account address.</inlineHelpText>
+        <label>Address Line 2</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Approved__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>A checkbox that indicates all necessary fields have been inserted for an account.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this box if this account has all necessary data.</inlineHelpText>
+        <label>Approved</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Attention__c</fullName>
+        <description>An entry field for the name of the person that receives the shipping or billing mail.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the name of the person to receive mail for billing or shipping.</inlineHelpText>
+        <label>Attention</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <description>An entry field that indicates the city for this account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the city for this account address.</inlineHelpText>
+        <label>City</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>A search field that indicates the contact for this account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the contact for this account address.</inlineHelpText>
+        <label>Contact</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Contact.Account.Id</field>
+                <operation>equals</operation>
+                <valueField>$Source.Account__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Account Addresses</relationshipLabel>
+        <relationshipName>Account_Addresses</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Country__c</fullName>
+        <description>An entry field that indicates the country.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the country for this account address..</inlineHelpText>
+        <label>Country</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Description</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Description</inlineHelpText>
+        <label>Description</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Email__c</fullName>
+        <description>An entry field that indicates the email that relates to this account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the email for this account address.</inlineHelpText>
+        <label>Email</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Latitude__c</fullName>
+        <description>An entry field that indicates the latitude for this account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the latitude for this account address.</inlineHelpText>
+        <label>Latitude</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Longitude__c</fullName>
+        <description>An entry field that indicates the longitude for this account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the longitude for this account address.</inlineHelpText>
+        <label>Longitude</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Name__c</fullName>
+        <description>An entry field that indicates the name for this account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the name for this account address.</inlineHelpText>
+        <label>Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phone__c</fullName>
+        <description>An entry field that indicates the phone number for this account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the phone number for this account address.</inlineHelpText>
+        <label>Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>PostalCode__c</fullName>
+        <description>An entry field that indicates the postal code for this account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the postal code for this account address.</inlineHelpText>
+        <label>Postal Code</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StateProvince__c</fullName>
+        <description>An entry field that indicates the state or province for this account address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the state or province for this account address.</inlineHelpText>
+        <label>State/Province</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Verified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>A checkbox that indicates whether this account address is verified.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this box if this account address is verified.</inlineHelpText>
+        <label>Verified</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Account Address</label>
+    <nameField>
+        <displayFormat>AA-{00000}</displayFormat>
+        <label>Address Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Account Addresses</pluralLabel>
+    <recordTypes>
+        <fullName>BillingAddress</fullName>
+        <active>true</active>
+        <description>Billing Address</description>
+        <label>Billing Address</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ShippingAddress</fullName>
+        <active>true</active>
+        <description>Shipping Address</description>
+        <label>Shipping Address</label>
+    </recordTypes>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>AddressLine1__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>AddressLine2__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>City__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>StateProvince__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>PostalCode__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Country__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

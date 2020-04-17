@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Service Question Defined Response relates a Question Defined Response to a Service Question. Service Question Defined Response is related to Service Question and Project Service Question Defined Response.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>CanRemove__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Can Remove</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DefinedResponseText__c</fullName>
+        <description>The text that will be shown for this response</description>
+        <externalId>false</externalId>
+        <formula>QuestionDefinedResponse__r.DefinedResponseText__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The text that will be shown for this response</inlineHelpText>
+        <label>Defined Response Text</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndofQuestions__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>End of Questions</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>JumpToAction__c</fullName>
+        <externalId>false</externalId>
+        <label>JumpTo Action</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>QUESTION</fullName>
+                    <default>false</default>
+                    <label>QUESTION</label>
+                </value>
+                <value>
+                    <fullName>CONTINUE</fullName>
+                    <default>false</default>
+                    <label>CONTINUE</label>
+                </value>
+                <value>
+                    <fullName>RETURN</fullName>
+                    <default>false</default>
+                    <label>RETURN</label>
+                </value>
+                <value>
+                    <fullName>ENDOFSURVEY</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>ENDOFSURVEY</label>
+                </value>
+                <value>
+                    <fullName>NEXTTARGET</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>NEXTTARGET</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>JumpToQuestion__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Jump To Question</label>
+        <referenceTo>Question__c</referenceTo>
+        <relationshipLabel>Service Question Defined Responses</relationshipLabel>
+        <relationshipName>Service_Question_Defined_Responses</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Optional__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Optional</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>QuestionDefinedResponse__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Question Defined Response</label>
+        <referenceTo>QuestionDefinedResponse__c</referenceTo>
+        <relationshipLabel>Service Question Defined Responses</relationshipLabel>
+        <relationshipName>Service_Questions_Jump</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ServiceQuestion__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Question</label>
+        <referenceTo>ServiceQuestion__c</referenceTo>
+        <relationshipLabel>Service Question Defined Responses</relationshipLabel>
+        <relationshipName>Service_Questions_Jump</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>isActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>is Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Service Question Defined Response</label>
+    <nameField>
+        <displayFormat>SQDR-{00000000}</displayFormat>
+        <label>Service Question Defined Response Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Service Question Defined Responses</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

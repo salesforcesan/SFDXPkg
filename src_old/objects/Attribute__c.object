@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Attribute defines an attribute and includes a type definition (e.g. Picklist, Yes/No, Text, Multiple Choice, etc.), description, and other default values. Attributes are related to a Service Attribute and a Project Service Attribute.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>A checkbox that indicates whether this Attribute is active (this field must not be selected if the attribute is to be deleted or turned off).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this box if the attribute active.</inlineHelpText>
+        <label>Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AttributeMaxLength__c</fullName>
+        <description>A value that indicates the maximum length of the Attribute.</description>
+        <externalId>false</externalId>
+        <label>Attribute Max Length</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttributeTitle__c</fullName>
+        <description>An entry field for the title of the Attribute.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the title of the attribute.</inlineHelpText>
+        <label>Attribute Title</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttributeType__c</fullName>
+        <description>A picklist with that determines the type of Attribute.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Choose the type of attribute.</inlineHelpText>
+        <label>AttributeType</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Text</fullName>
+                    <default>false</default>
+                    <label>Text</label>
+                </value>
+                <value>
+                    <fullName>Date</fullName>
+                    <default>false</default>
+                    <label>Date</label>
+                </value>
+                <value>
+                    <fullName>Yes/No</fullName>
+                    <default>false</default>
+                    <label>Yes/No</label>
+                </value>
+                <value>
+                    <fullName>Number</fullName>
+                    <default>false</default>
+                    <label>Number</label>
+                </value>
+                <value>
+                    <fullName>Single-Select List</fullName>
+                    <default>false</default>
+                    <label>Single-Select List</label>
+                </value>
+                <value>
+                    <fullName>Multi-Select List</fullName>
+                    <default>false</default>
+                    <label>Multi-Select List</label>
+                </value>
+                <value>
+                    <fullName>Photo</fullName>
+                    <default>false</default>
+                    <label>Photo</label>
+                </value>
+                <value>
+                    <fullName>File</fullName>
+                    <default>false</default>
+                    <label>File</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>An entry field for the description of this Attribute.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter a description of this attribute.</inlineHelpText>
+        <label>Description</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RepeatCount__c</fullName>
+        <description>A field with a value that determines whether or not the Attribute is a repeatable. 0 indicates that it is a non-repeatable Attribute. A number higher than 0 determines the recurring number.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the number of times that this attribute can be repeated.</inlineHelpText>
+        <label>Repeat Count</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Repeatable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>A checkbox that indicates whether or not this Attribute can be repeated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this box if the attribute can be repeated.</inlineHelpText>
+        <label>Repeatable</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>A checkbox that indicates whether or not this Attribute is required.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select this box if the attribute is required.</inlineHelpText>
+        <label>Required</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Attribute</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Active__c</columns>
+        <columns>AttributeMaxLength__c</columns>
+        <columns>AttributeType__c</columns>
+        <columns>Description__c</columns>
+        <columns>RepeatCount__c</columns>
+        <columns>Repeatable__c</columns>
+        <columns>Required__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>A-{0000}</displayFormat>
+        <label>Attribute Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Attributes</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Description__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

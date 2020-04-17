@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This will keep track of all the batch jobs.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AppClassName__c</fullName>
+        <description>Application Class Name</description>
+        <externalId>false</externalId>
+        <label>App Class Name</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BatchProcessId__c</fullName>
+        <externalId>false</externalId>
+        <label>Batch Process Id</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndDateTime__c</fullName>
+        <externalId>false</externalId>
+        <label>End Date Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Id1__c</fullName>
+        <externalId>false</externalId>
+        <label>Id1</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Id2__c</fullName>
+        <externalId>false</externalId>
+        <label>Id2</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Id3__c</fullName>
+        <externalId>false</externalId>
+        <label>Id3</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IsFailureNotified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if batch retry failure notification alert is sent</description>
+        <externalId>false</externalId>
+        <label>Is Failure Notified?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsLongRunning__c</fullName>
+        <externalId>false</externalId>
+        <formula>AND((Now()- StartDateTime__c)*24*60 &gt; 0, TEXT(Status__c) &lt;&gt; &apos;Success&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>IsLongRunning</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NumberofTries__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Tries</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Object__c</fullName>
+        <externalId>false</externalId>
+        <label>Object</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Project</fullName>
+                    <default>false</default>
+                    <label>Project</label>
+                </value>
+                <value>
+                    <fullName>ProjectService</fullName>
+                    <default>false</default>
+                    <label>ProjectService</label>
+                </value>
+                <value>
+                    <fullName>ProjectLocation</fullName>
+                    <default>false</default>
+                    <label>ProjectLocation</label>
+                </value>
+                <value>
+                    <fullName>Job</fullName>
+                    <default>false</default>
+                    <label>Job</label>
+                </value>
+                <value>
+                    <fullName>JobAttemptWorker</fullName>
+                    <default>false</default>
+                    <label>JobAttemptWorker</label>
+                </value>
+                <value>
+                    <fullName>ProjectInvoice</fullName>
+                    <default>false</default>
+                    <label>ProjectInvoice</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Operation__c</fullName>
+        <externalId>false</externalId>
+        <label>Operation</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Apply PB Credit</fullName>
+                    <default>false</default>
+                    <label>Apply PB Credit</label>
+                </value>
+                <value>
+                    <fullName>Cancel Job</fullName>
+                    <default>false</default>
+                    <label>Cancel Job</label>
+                </value>
+                <value>
+                    <fullName>Cancel Project</fullName>
+                    <default>false</default>
+                    <label>Cancel Project</label>
+                </value>
+                <value>
+                    <fullName>Cancel ProjectLocation</fullName>
+                    <default>false</default>
+                    <label>Cancel ProjectLocation</label>
+                </value>
+                <value>
+                    <fullName>Cancel ProjectService</fullName>
+                    <default>false</default>
+                    <label>Cancel ProjectService</label>
+                </value>
+                <value>
+                    <fullName>Close Project</fullName>
+                    <default>false</default>
+                    <label>Close Project</label>
+                </value>
+                <value>
+                    <fullName>Create Attempt</fullName>
+                    <default>false</default>
+                    <label>Create Attempt</label>
+                </value>
+                <value>
+                    <fullName>Create Job Materials</fullName>
+                    <default>false</default>
+                    <label>Create Job Materials</label>
+                </value>
+                <value>
+                    <fullName>Create Jobs</fullName>
+                    <default>false</default>
+                    <label>Create Jobs</label>
+                </value>
+                <value>
+                    <fullName>Create Labor Invoice</fullName>
+                    <default>false</default>
+                    <label>Create Labor Invoice</label>
+                </value>
+                <value>
+                    <fullName>Create Product Invoice</fullName>
+                    <default>false</default>
+                    <label>Create Product Invoice</label>
+                </value>
+                <value>
+                    <fullName>Create SalesTax Invoice</fullName>
+                    <default>false</default>
+                    <label>Create SalesTax Invoice</label>
+                </value>
+                <value>
+                    <fullName>Delete AllProjectJobs</fullName>
+                    <default>false</default>
+                    <label>Delete AllProjectJobs</label>
+                </value>
+                <value>
+                    <fullName>Delete Job</fullName>
+                    <default>false</default>
+                    <label>Delete Job</label>
+                </value>
+                <value>
+                    <fullName>Delete Project</fullName>
+                    <default>false</default>
+                    <label>Delete Project</label>
+                </value>
+                <value>
+                    <fullName>Delete ProjectLocation</fullName>
+                    <default>false</default>
+                    <label>Delete ProjectLocation</label>
+                </value>
+                <value>
+                    <fullName>Delete ProjectService</fullName>
+                    <default>false</default>
+                    <label>Delete ProjectService</label>
+                </value>
+                <value>
+                    <fullName>Import JobAttemptWorkers</fullName>
+                    <default>false</default>
+                    <label>Import JobAttemptWorkers</label>
+                </value>
+                <value>
+                    <fullName>Import Jobs</fullName>
+                    <default>false</default>
+                    <label>Import Jobs</label>
+                </value>
+                <value>
+                    <fullName>Import ProjectLocations</fullName>
+                    <default>false</default>
+                    <label>Import ProjectLocations</label>
+                </value>
+                <value>
+                    <fullName>Launch Project</fullName>
+                    <default>false</default>
+                    <label>Launch Project</label>
+                </value>
+                <value>
+                    <fullName>Schedule ProjectLocation</fullName>
+                    <default>false</default>
+                    <label>Schedule ProjectLocation</label>
+                </value>
+                <value>
+                    <fullName>Schedule ProjectService</fullName>
+                    <default>false</default>
+                    <label>Schedule ProjectService</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Parameters__c</fullName>
+        <description>This will hold the job specific parameters for the apex job execution.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This will hold the job specific parameters for the apex job execution.</inlineHelpText>
+        <label>Parameters</label>
+        <length>2000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ParentId__c</fullName>
+        <description>Attachment Parent ID</description>
+        <externalId>false</externalId>
+        <label>Parent Id</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Apex Jobs Tracker</relationshipLabel>
+        <relationshipName>Apex_Jobs_Tracker</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Response__c</fullName>
+        <description>tracker execution response</description>
+        <externalId>false</externalId>
+        <label>Response</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>StartDateTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Date Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failure</fullName>
+                    <default>false</default>
+                    <label>Failure</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Apex Job Tracker</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>AJT-{000000000}</displayFormat>
+        <label>Apex Job Tracker Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Apex Jobs Tracker</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Object__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Operation__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ParentId__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Response__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AppClassName__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>StartDateTime__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>EndDateTime__c</customTabListAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchFilterFields>Operation__c</searchFilterFields>
+        <searchFilterFields>Object__c</searchFilterFields>
+        <searchFilterFields>StartDateTime__c</searchFilterFields>
+        <searchFilterFields>EndDateTime__c</searchFilterFields>
+        <searchFilterFields>AppClassName__c</searchFilterFields>
+        <searchFilterFields>ParentId__c</searchFilterFields>
+        <searchResultsAdditionalFields>Object__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>AppClassName__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Operation__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ParentId__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Response__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>StartDateTime__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>EndDateTime__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

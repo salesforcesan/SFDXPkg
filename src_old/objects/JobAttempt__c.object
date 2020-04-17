@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Job Attempt is an attempt of a Job performed at a location. Job Attempt is related to an Exception.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AllowTeamManagement__c</fullName>
+        <externalId>false</externalId>
+        <formula>Job__r.AllowTeamManagement__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Allow Team Management</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AssignedContactFirstName__c</fullName>
+        <externalId>false</externalId>
+        <formula>AssignedContact__r.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned Contact First Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactHomeLatitude__c</fullName>
+        <externalId>false</externalId>
+        <formula>AssignedContact__r.HomeGeoLocation__Latitude__s</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned Contact Home Latitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactHomeLongitude__c</fullName>
+        <externalId>false</externalId>
+        <formula>AssignedContact__r.HomeGeoLocation__Longitude__s</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned Contact Home Longitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactId__c</fullName>
+        <externalId>false</externalId>
+        <label>Assigned Contact ID</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactLastName__c</fullName>
+        <externalId>false</externalId>
+        <formula>AssignedContact__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned Contact Last Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactPhone__c</fullName>
+        <externalId>false</externalId>
+        <formula>AssignedContact__r.Phone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned Contact Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactTitle__c</fullName>
+        <externalId>false</externalId>
+        <formula>AssignedContact__r.Title</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned Contact Title</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Assigned Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Job Attempts</relationshipLabel>
+        <relationshipName>Job_Attempts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AssignedEmployeeId__c</fullName>
+        <externalId>false</externalId>
+        <formula>AssignedContact__r.EmployeeId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned Employee ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttemptReason__c</fullName>
+        <externalId>false</externalId>
+        <label>Attempt Reason</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttemptResponsibleExecutionCompanyLogo__c</fullName>
+        <externalId>false</externalId>
+        <label>AttemptResponsibleExecutionCompanyLogo</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>AttemptResponsibleExecutionCompany__c</fullName>
+        <externalId>false</externalId>
+        <label>Attempt Responsible Execution Company</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttemptScheduleDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Attempt Scheduled Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>AttemptScheduledDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Scheduled</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AttemptSequencePadded__c</fullName>
+        <externalId>false</externalId>
+        <formula>LPAD(TEXT(AttemptSequence__c), 3, &apos;0&apos; )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Attempt Sequence Padded</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttemptSequence__c</fullName>
+        <externalId>false</externalId>
+        <label>Attempt Sequence</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttemptStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>Attempt Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Open</fullName>
+                    <default>false</default>
+                    <label>Open</label>
+                </value>
+                <value>
+                    <fullName>Assigned</fullName>
+                    <default>false</default>
+                    <label>Assigned</label>
+                </value>
+                <value>
+                    <fullName>Started</fullName>
+                    <default>false</default>
+                    <label>Started</label>
+                </value>
+                <value>
+                    <fullName>Reported</fullName>
+                    <default>false</default>
+                    <label>Reported</label>
+                </value>
+                <value>
+                    <fullName>Canceled</fullName>
+                    <default>false</default>
+                    <label>Canceled</label>
+                </value>
+                <value>
+                    <fullName>Closed</fullName>
+                    <default>false</default>
+                    <label>Closed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>AttemptType__c</fullName>
+        <externalId>false</externalId>
+        <label>Attempt Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ORIGINAL</fullName>
+                    <default>false</default>
+                    <label>ORIGINAL</label>
+                </value>
+                <value>
+                    <fullName>RE-ATTEMPT</fullName>
+                    <default>false</default>
+                    <label>RE-ATTEMPT</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>AttemptedDate__c</fullName>
+        <description>Date that the Rep actually attempted to execute the work.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date that the Rep actually attempted to execute the work.</inlineHelpText>
+        <label>Attempted Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DateAssigned__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Assigned</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateAttempted__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Attempted</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateCanceled__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Canceled</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateClosed__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Closed</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateOriginallyReported__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Originally Reported</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateReported__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Reported</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DateStarted__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Started</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ECAttemptId__c</fullName>
+        <externalId>false</externalId>
+        <label>EC Attempt ID</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ECAttemptStatus__c</fullName>
+        <externalId>false</externalId>
+        <label>EC Attempt Status</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ECProjectId__c</fullName>
+        <externalId>false</externalId>
+        <label>EC Project Id</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndTime__c</fullName>
+        <externalId>false</externalId>
+        <label>End Time</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExceptionCode__c</fullName>
+        <externalId>false</externalId>
+        <label>Exception Code</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExceptionCommentsLong__c</fullName>
+        <externalId>false</externalId>
+        <label>Exception Comments Long</label>
+        <length>1024</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>6</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ExceptionComments__c</fullName>
+        <externalId>false</externalId>
+        <label>Exception Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExceptionName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Exception__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Exception Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExceptionReason__c</fullName>
+        <externalId>false</externalId>
+        <label>Exception Reason</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExceptionReportedGeoLocation__c</fullName>
+        <description>Exception reported Geo location</description>
+        <displayLocationInDecimal>true</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <inlineHelpText>Exception reported Geo location</inlineHelpText>
+        <label>ExceptionReportedGeoLocation</label>
+        <required>false</required>
+        <scale>10</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>Exception__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Exception</label>
+        <referenceTo>Exception__c</referenceTo>
+        <relationshipLabel>Job Attempts</relationshipLabel>
+        <relationshipName>Job_Attempts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ExpectedNumberofWorkers__c</fullName>
+        <externalId>false</externalId>
+        <label>Expected Number of Workers</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FailedQC__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Failed QC</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Active</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsExecuted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Executed</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsShift__c</fullName>
+        <externalId>false</externalId>
+        <formula>Job__r.IsShift__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Shift</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsStartedOnTime__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF($Setup.OneHubCustomSetting__c.StoreStartTimeGrace__c &gt;= StartTimeDelay__c , True, False)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Started On Time</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsTask__c</fullName>
+        <externalId>false</externalId>
+        <formula>Job__r.IsTask__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Task</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Job__c</fullName>
+        <externalId>false</externalId>
+        <label>Job</label>
+        <referenceTo>Job__c</referenceTo>
+        <relationshipLabel>Job Attempts</relationshipLabel>
+        <relationshipName>Job_Attempts</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>LastModifiedDate__c</fullName>
+        <description>This custom field will be populated with standard Last Modified Date value. Created this field for Indexing purposes</description>
+        <externalId>false</externalId>
+        <label>Last Modified Date - OneHub</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LocationTimeReported__c</fullName>
+        <externalId>false</externalId>
+        <label>Location Time Reported</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ManagerComment__c</fullName>
+        <externalId>false</externalId>
+        <label>Manager Comment</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ManagerName__c</fullName>
+        <externalId>false</externalId>
+        <label>Manager Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ManagerSignatureAttachmentId__c</fullName>
+        <externalId>false</externalId>
+        <label>Manager Signature Attachment Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ManagerSignatureContentType__c</fullName>
+        <externalId>false</externalId>
+        <label>Manager Signature Content Type</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumberOfReschedules__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Reschedules</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumberofImages__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Images</label>
+        <summaryForeignKey>JobImage__c.JobAttempt__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>PercentComplete__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Percent Complete</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>PrimaryJobAttemptWorker__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Primary Job Attempt Worker</label>
+        <referenceTo>JobAttemptWorker__c</referenceTo>
+        <relationshipLabel>Job Attempts</relationshipLabel>
+        <relationshipName>Job_Attempts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PrimarySupervisorEmail__c</fullName>
+        <externalId>false</externalId>
+        <formula>PrimaryJobAttemptWorker__r.SupervisorEmail__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PrimarySupervisorEmail</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PrimaryWorkerEmail__c</fullName>
+        <externalId>false</externalId>
+        <formula>PrimaryJobAttemptWorker__r.Email__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PrimarytWorkerEmail</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectLocation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Project Location</label>
+        <referenceTo>ProjectLocation__c</referenceTo>
+        <relationshipLabel>Job Attempts</relationshipLabel>
+        <relationshipName>Job_Attempts_del</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>QCFailureComments__c</fullName>
+        <externalId>false</externalId>
+        <label>QC Failure Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QCFailureReasonCode__c</fullName>
+        <externalId>false</externalId>
+        <label>QC Failure Reason Code</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>NEED A CODE</fullName>
+                    <default>false</default>
+                    <label>NEED A CODE</label>
+                </value>
+                <value>
+                    <fullName>Inconclusive Reporting</fullName>
+                    <default>false</default>
+                    <label>Inconclusive Reporting</label>
+                </value>
+                <value>
+                    <fullName>Job Incomplete</fullName>
+                    <default>false</default>
+                    <label>Job Incomplete</label>
+                </value>
+                <value>
+                    <fullName>Incorrect Photo Uploaded</fullName>
+                    <default>false</default>
+                    <label>Incorrect Photo Uploaded</label>
+                </value>
+                <value>
+                    <fullName>Store Manager Complaint</fullName>
+                    <default>false</default>
+                    <label>Store Manager Complaint</label>
+                </value>
+                <value>
+                    <fullName>Client Complaint</fullName>
+                    <default>false</default>
+                    <label>Client Complaint</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReportedContactFirstName__c</fullName>
+        <externalId>false</externalId>
+        <formula>ReportedContact__r.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reported Contact First Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactHomeLatitude__c</fullName>
+        <externalId>false</externalId>
+        <formula>ReportedContact__r.HomeGeoLocation__Latitude__s</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reported Contact Home Latitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactHomeLongitude__c</fullName>
+        <externalId>false</externalId>
+        <formula>ReportedContact__r.HomeGeoLocation__Longitude__s</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reported Contact Home Longitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactId__c</fullName>
+        <externalId>false</externalId>
+        <label>Reported Contact Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactLastName__c</fullName>
+        <externalId>false</externalId>
+        <formula>ReportedContact__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reported Contact Last Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactPhone__c</fullName>
+        <externalId>false</externalId>
+        <formula>ReportedContact__r.Phone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reported Contact Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactTitle__c</fullName>
+        <externalId>false</externalId>
+        <formula>ReportedContact__r.Title</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reported  Contact Title</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Reported Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Job Attempts (Reported Contact)</relationshipLabel>
+        <relationshipName>Job_Attempts2</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ReportedEmployeeId__c</fullName>
+        <externalId>false</externalId>
+        <formula>ReportedContact__r.EmployeeId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reported Employee Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScheduledDateTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Scheduled Date Time (UTC)</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ServiceId__c</fullName>
+        <externalId>false</externalId>
+        <formula>Job__r.Service__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Service Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StartTimeDelay__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(ISNULL( DateStarted__c), (NOW() -ScheduledDateTime__c) * 24 * 60,
+(DateStarted__c - ScheduledDateTime__c) * 24 * 60)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start time Delay(Mins)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StartTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Time</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TeamLeadContactId__c</fullName>
+        <externalId>false</externalId>
+        <formula>PrimaryJobAttemptWorker__r.Contact__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Team Lead Contact Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TeamLeadUserId__c</fullName>
+        <externalId>false</externalId>
+        <formula>PrimaryJobAttemptWorker__r.UserId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>TeamLeadUserId</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TimeReportedCalculated__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISBLANK(TimeReported__c),ISNULL(TimeReported__c)),TotalInStoreBillableTime__c,TimeReported__c  )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Time Reported Calculated</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TimeReported__c</fullName>
+        <externalId>false</externalId>
+        <label>Time Reported</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalInStoreBillableTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Total In-Store Billable Time</label>
+        <summarizedField>JobAttemptWorker__c.TotalInStoreBillableTime__c</summarizedField>
+        <summaryForeignKey>JobAttemptWorker__c.JobAttempt__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalInStoreNonBillableTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Total In-Store Non Billable Time</label>
+        <summarizedField>JobAttemptWorker__c.TotalInStoreNonBillableTime__c</summarizedField>
+        <summaryForeignKey>JobAttemptWorker__c.JobAttempt__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalInStoreTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Total In-Store Time</label>
+        <summarizedField>JobAttemptWorker__c.TotalInStoreTime__c</summarizedField>
+        <summaryForeignKey>JobAttemptWorker__c.JobAttempt__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>UniqueKey__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>UniqueKey</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>Job Attempt</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>StartTime__c</columns>
+        <columns>EndTime__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>JA-{000000000}</displayFormat>
+        <label>Job Attempt Name</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Job Attempts</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Cannot_Report_Attempt_if_Job_is_Closed</fullName>
+        <active>true</active>
+        <description>A job attempt can be reported many times until the job is closed.</description>
+        <errorConditionFormula>AND(
+(ISPICKVAL( Job__r.JobStatus__c , &apos;Closed&apos;)),
+(ISPICKVAL( AttemptStatus__c, &apos;Reported&apos;))
+)</errorConditionFormula>
+        <errorMessage>A job attempt can be reported many times until the job is closed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_ENW_after_InProgress</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( 
+ISCHANGED(ExpectedNumberofWorkers__c), 
+OR(
+AND 
+( 
+IsShift__c = false,
+UPPER(TEXT(Job__r.Project__r.Status__c)) != &apos;PLANNING&apos;, 
+UPPER(TEXT(Job__r.Project__r.Status__c)) != &apos;BOOKED&apos;, 
+UPPER(TEXT(Job__r.Project__r.Status__c)) != &apos;LAUNCHED&apos; 
+)
+,
+AND 
+( 
+IsShift__c = true,
+UPPER(TEXT(Job__r.Project__r.Status__c)) != &apos;PLANNING&apos;, 
+UPPER(TEXT(Job__r.Project__r.Status__c)) != &apos;BOOKED&apos;, 
+UPPER(TEXT(Job__r.Project__r.Status__c)) != &apos;LAUNCHED&apos;,
+UPPER(TEXT(Job__r.Project__r.Status__c)) != &apos;IN PROGRESS&apos;
+)
+)
+)</errorConditionFormula>
+        <errorMessage>Number of Workers cannot be changed after a project is In progress unless it&apos;s a Shift.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_past_schedule_dates</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(ISCHANGED(AttemptScheduleDate__c), AttemptScheduleDate__c &lt; TODAY())</errorConditionFormula>
+        <errorMessage>Cannot schedule an attempt to a date that is in the past.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>PreventScheduleDateUpdateIfNotByEC</fullName>
+        <active>true</active>
+        <description>To prevent  scheduledate if the user does not belong to an Execution Company</description>
+        <errorConditionFormula>AND(Job__r.Project__r.ProjectScheduleOption__r.Code__c != &apos;EC&apos;,ISCHANGED(AttemptScheduledDate__c),CONTAINS($User.Username,&quot;salesforce.integration&quot;))</errorConditionFormula>
+        <errorMessage>Schedule Date update is not allowed for this Scheduling option</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Prevent_Updates_to_Inactive_Attempts</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(PRIORVALUE(IsActive__c) == false, ISCHANGED(LastModifiedDate))</errorConditionFormula>
+        <errorMessage>Inactive Attempts cannot be modified.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ReportedScheduledDateLaterThanNow</fullName>
+        <active>true</active>
+        <description>A Job with a Scheduling Option of User or System cannot be Reported if the Attempt Schedule Date is in the future.</description>
+        <errorConditionFormula>AND(ISPICKVAL(AttemptStatus__c,&apos;Reported&apos;), OR( (Job__r.ProjectScheduleOptionName__c == &apos;USER&apos;), (Job__r.ProjectScheduleOptionName__c == &apos;SYSTEM&apos;))
+,AttemptScheduleDate__c &gt; TODAY())</errorConditionFormula>
+        <errorMessage>A Job with a Scheduling Option of User or System cannot be Reported if the Attempt Schedule Date is in the future.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Reported_DateAttempted_And_time_Required</fullName>
+        <active>true</active>
+        <description>A Job cannot be reported without the Time Reported and Attempted Date.</description>
+        <errorConditionFormula>AND(ISPICKVAL(AttemptStatus__c,&apos;Reported&apos;),
+OR((TimeReported__c == null),
+(AttemptedDate__c == null)) 
+)</errorConditionFormula>
+        <errorMessage>A Job cannot be reported without the Time Reported and Attempted Date.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>attempted_date_not_before_scheduled_date</fullName>
+        <active>true</active>
+        <description>A Job with a Scheduling Option of User or System cannot have a Date Attempted that occurs before the Attempt Schedule Date where a job attempt is reported.</description>
+        <errorConditionFormula>AND(ISPICKVAL(AttemptStatus__c,&apos;Reported&apos;), OR( (Job__r.ProjectScheduleOptionName__c == &apos;USER&apos;), (Job__r.ProjectScheduleOptionName__c == &apos;SYSTEM&apos;))
+,AttemptedDate__c &lt; AttemptScheduleDate__c)</errorConditionFormula>
+        <errorDisplayField>AssignedContact__c</errorDisplayField>
+        <errorMessage>A Job with a Scheduling Option of User or System cannot have a Date Attempted that occurs before the Attempt Schedule Date.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

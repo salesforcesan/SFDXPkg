@@ -1,0 +1,2345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Job defines the body of work to be performed at a Location and all of the dates related to the Job performance. A Job is related to a Project, Project Service, Project Location, Job Material, Contact, Exception, and Job Attempt.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AccountableExecutionCompany__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The field that indicates the Execution Company accountable for this Job.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The execution company accountable for the job</inlineHelpText>
+        <label>Accountable Execution Company</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Jobs (Accountable For Execution Company)</relationshipLabel>
+        <relationshipName>Jobs_AccountableForExecutionCompany</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ActiveJobAttemptTimeReported__c</fullName>
+        <description>The field that indicates the minutes reported for the Job.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.TimeReported__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Time Reported (Minutes)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ActiveJobAttempt__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The field that displays Job Attempts</description>
+        <externalId>false</externalId>
+        <label>Active Job Attempt</label>
+        <referenceTo>JobAttempt__c</referenceTo>
+        <relationshipLabel>Jobs</relationshipLabel>
+        <relationshipName>Jobs</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AllowTeamManagement__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Allow Team Management in OneHub Mobile</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ArchiveStatus__c</fullName>
+        <description>The field that indicates the Archive Status of the Job.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The archive status of the job</inlineHelpText>
+        <label>Archive Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Archived</fullName>
+                    <default>false</default>
+                    <label>Not Archived</label>
+                </value>
+                <value>
+                    <fullName>Queued</fullName>
+                    <default>false</default>
+                    <label>Queued</label>
+                </value>
+                <value>
+                    <fullName>Archived</fullName>
+                    <default>false</default>
+                    <label>Archived</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>AssignedContactFirstName__c</fullName>
+        <description>The field that indicates the first name of the Assigned Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AssignedContactFirstName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned Contact First Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactHomeLatitude__c</fullName>
+        <description>The field that indicates the home latitude of the Assigned Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AssignedContactHomeLatitude__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The home latitude of the assigned contact</inlineHelpText>
+        <label>Assigned Contact Home Latitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactHomeLongitude__c</fullName>
+        <description>The field that indicates the home longitude of the Assigned Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AssignedContactHomeLongitude__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The home longitude of the assigned contact</inlineHelpText>
+        <label>Assigned Contact Home Longitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactId__c</fullName>
+        <description>The field that indicates the ID number of the Assigned Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AssignedContactId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The ID number of the assigned contact</inlineHelpText>
+        <label>Assigned Contact ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactLastName__c</fullName>
+        <description>The field that indicates the Last name of the Assigned Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AssignedContactLastName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned Contact Last Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactPhone__c</fullName>
+        <description>The field for the phone number of the Assigned Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AssignedContactPhone__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The phone number of the assigned contact</inlineHelpText>
+        <label>Assigned Contact Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedContactTitle__c</fullName>
+        <description>The field that indicates the Title of the Assigned Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AssignedContactTitle__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The title of the assigned contact</inlineHelpText>
+        <label>Assigned Contact Title</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AssignedEmployeeId__c</fullName>
+        <description>The field that indicates the ID of the employee assigned to the Job.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AssignedEmployeeId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The ID number of the employee assigned to the job</inlineHelpText>
+        <label>Assigned Employee Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AttemptMaxLastModifiedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Attempt Max Last Modified Date</label>
+        <summarizedField>JobAttempt__c.LastModifiedDate</summarizedField>
+        <summaryFilterItems>
+            <field>JobAttempt__c.IsActive__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>JobAttempt__c.Job__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>CompletionStatus__c</fullName>
+        <description>A picklist that indicates if a Job was completed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not the job was completed</inlineHelpText>
+        <label>Completion Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+                <value>
+                    <fullName>Not Completed</fullName>
+                    <default>true</default>
+                    <label>Not Completed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Consignment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Consignment</label>
+        <referenceTo>Job__c</referenceTo>
+        <relationshipLabel>Jobs (Consignment)</relationshipLabel>
+        <relationshipName>Jobs1</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CreateAttemptException__c</fullName>
+        <externalId>false</externalId>
+        <label>Create Attempt Exception</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CreateAttempt__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Create Attempt</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DayNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Day Number</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EndDateCalculated__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (UPPER(ProjectScheduleOptionCode__c) == &apos;EC&apos;,ProjectEndDate__c,IF (ISBLANK(JobScheduledDate__c),ProjectEndDate__c,JobScheduledDate__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>End Date (Job)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EndTime__c</fullName>
+        <externalId>false</externalId>
+        <formula>JobEndTime__c</formula>
+        <label>End Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EstimatedMinutesOverride__c</fullName>
+        <externalId>false</externalId>
+        <label>Estimated Minutes Override</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EstimatedMinutes__c</fullName>
+        <description>The field that indicates the estimated minutes for the Job.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK(EstimatedMinutesOverride__c), ProjectService__r.EstimatedMinutes__c, EstimatedMinutesOverride__c)</formula>
+        <label>Time Estimate (Minutes)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExceptionCode__c</fullName>
+        <description>The field that indicates the code of the exception.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ExceptionCode__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The code of the exception</inlineHelpText>
+        <label>Exception Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExceptionComments__c</fullName>
+        <externalId>false</externalId>
+        <label>Exception Comments</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ExceptionName__c</fullName>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ExceptionName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Exception Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FailedQC__c</fullName>
+        <description>The checkbox that indicates that the Job failed QC.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.FailedQC__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If selected, the job failed QC.</inlineHelpText>
+        <label>Failed QC</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>FulfillmentCenter__c</fullName>
+        <description>The field that indicates the name of the Fulfillment Center that will provide materials for the Job.</description>
+        <externalId>false</externalId>
+        <formula>ProjectService__r.FulfillmentCenterName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The fulfillment center that will provide materials for the Job.</inlineHelpText>
+        <label>Fulfillment Center</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GPSVerified__c</fullName>
+        <description>To verify if Job the is reported at the requested location as per compliance</description>
+        <externalId>false</externalId>
+        <formula>DISTANCE(Location__r.GeoLocation__c, ActiveJobAttempt__r.ExceptionReportedGeoLocation__c, &apos;mi&apos;)&lt;$Setup.ExceptionQuestionGPSSettings__c.RadiusThreshold__c</formula>
+        <inlineHelpText>Job Reported Location</inlineHelpText>
+        <label>GPSVerified</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HasException__c</fullName>
+        <description>The checkbox that indicates if a Job has an exception.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ExceptionCode__c != null</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If selected, the job has an exception.</inlineHelpText>
+        <label>Exception</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HasFulfillment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>The checkbox that indicates whether or not a Job has fulfillment.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If selected, the job has fulfillment.</inlineHelpText>
+        <label>Fulfillment</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HelpTimeMinutesCalculated__c</fullName>
+        <externalId>false</externalId>
+        <label>HelpTime Minutes Calculated</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HelpTimeMinutesOverride__c</fullName>
+        <externalId>false</externalId>
+        <label>HelpTime Minutes Override</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HelpTimeMinutes__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (ISBLANK(HelpTimeMinutesOverride__c),HelpTimeMinutesCalculated__c,HelpTimeMinutesOverride__c)</formula>
+        <label>HelpTime Minutes</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsAttemptable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field will be set as TRUE if &apos;create attempts&apos; is allowed</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field will be set as TRUE if &apos;create attempts&apos; is allowed</inlineHelpText>
+        <label>Is Attemptable</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsCancellable__c</fullName>
+        <description>The checkbox that indicates if this Job can be canceled.</description>
+        <externalId>false</externalId>
+        <formula>OR 
+(
+
+JobCancelOverride__c == true, 
+
+AND(
+
+	AND(LOWER(ProjectStatus__c) != &apos;planning&apos;, LOWER(ProjectStatus__c) != &apos;closed&apos;, LOWER(ProjectStatus__c) != &apos;pending&apos;), 
+	LOWER(TEXT(JobStatus__c)) != &apos;canceled&apos;, 
+	LOWER(TEXT(JobStatus__c)) != &apos;closed&apos;, 
+
+(DATETIMEVALUE(NULLVALUE(JobScheduledDate__c, JobStartDate__c)) - NOW() - 
+													((NULLVALUE(JobCancelLeadTime__c,0) - 5)/24)) &gt; 0
+
+))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Job can be canceled if Project Status = Booked, Launched or In Progress and Job is within Cancel Lead Time.</inlineHelpText>
+        <label>Cancelable</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsCompletedinWindow__c</fullName>
+        <description>The checkbox that indicates if the job was completed between Project Start Date and Project End Date.</description>
+        <externalId>false</externalId>
+        <formula>AND(( JobCompletedDate__c &gt;=OriginalProjectStartDate__c),( JobCompletedDate__c &lt;=Project__r.LaunchedProjectEndDate__c))&amp;&amp; Text(CompletionStatus__c)=&quot;Completed&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If selected, the job was completed between Project Start Date and Project End Date.</inlineHelpText>
+        <label>Completed in Window</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsCompletedonDate__c</fullName>
+        <description>The checkbox that indicates if the Job was completed on date.</description>
+        <externalId>false</externalId>
+        <formula>Text(CompletionStatus__c) = &quot;Completed&quot; &amp;&amp; JobCompletedDate__c== JobCommittedDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If selected, the job was completed on date.</inlineHelpText>
+        <label>Completed on Date</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsExecutedOnDate__c</fullName>
+        <description>The checkbox that indicates whether or not the Job was executed on date.</description>
+        <externalId>false</externalId>
+        <formula>IsExecuted__c = True &amp;&amp; JobExecutedDate__c== JobCommittedDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If selected,the job was executed on date.</inlineHelpText>
+        <label>Executed On Date</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsExecuted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>The checkbox that indicates if a Job has been executed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If selected, the job has been executed.</inlineHelpText>
+        <label>Executed</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsExecutedinWindow__c</fullName>
+        <description>The checkbox that indicates if the job was executed between Project Start Date and Project End Date.</description>
+        <externalId>false</externalId>
+        <formula>AND((JobExecutedDate__c&gt;=OriginalProjectStartDate__c),(JobExecutedDate__c&lt;=Project__r.LaunchedProjectEndDate__c))&amp;&amp; IsExecuted__c=True</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If selected, the job was executed between Project Start Date and Project End Date.</inlineHelpText>
+        <label>Executed in Window</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRescheduled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>The checkbox that indicates that the Job is rescheduled.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If selected, the job is rescheduled.</inlineHelpText>
+        <label>Rescheduled</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsScheduled__c</fullName>
+        <description>The checkbox that indicates if the Job is scheduled.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISNULL(ActiveJobAttempt__r.AttemptScheduleDate__c), false, true)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>If selected, the job is scheduled.</inlineHelpText>
+        <label>Scheduled</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsShift__c</fullName>
+        <externalId>false</externalId>
+        <formula>UPPER(TEXT(Service__r.Specialization__c)) == &apos;SHIFT&apos;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Shift</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsTask__c</fullName>
+        <externalId>false</externalId>
+        <formula>UPPER(TEXT(Service__r.Specialization__c)) == &apos;TASK&apos;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Task</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsVisibleToClient__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>The checkbox that indicates whether or not information is visible to the client.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If selected, this information is visible to the client.</inlineHelpText>
+        <label>Visible To Client</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>JobAttemptedDate__c</fullName>
+        <description>The field that indicates the last attempt date of the Job.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AttemptedDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Attempt Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobCancelLeadTime__c</fullName>
+        <description>This field indicates the lead time required to cancel a Job.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.JobCancelLeadTime__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The lead time for a canceled job</inlineHelpText>
+        <label>Cancel Lead Time (hrs)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JobCancelOverride__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>The checkbox that indicates whether the cancellation of a Job is overridden.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If selected, the cancellation of this job is overridden.</inlineHelpText>
+        <label>Cancel Override</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>JobCanceledComments__c</fullName>
+        <description>The entry field for comments if a job is canceled.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Explains why the job was canceled.</inlineHelpText>
+        <label>Canceled Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JobCanceledReason__c</fullName>
+        <description>A picklist that indicates reasons why a job was canceled.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The reason that the job was canceled.</inlineHelpText>
+        <label>Canceled Reason</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Supplier Requested</fullName>
+                    <default>false</default>
+                    <label>Supplier Requested</label>
+                </value>
+                <value>
+                    <fullName>Retailer Requested</fullName>
+                    <default>false</default>
+                    <label>Retailer Requested</label>
+                </value>
+                <value>
+                    <fullName>No Product</fullName>
+                    <default>false</default>
+                    <label>No Product</label>
+                </value>
+                <value>
+                    <fullName>Item not approved</fullName>
+                    <default>false</default>
+                    <label>Item not approved</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>JobCloseDate__c</fullName>
+        <description>The field that indicates the date that the Job closed.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.EndDate__c +  JobGracePeriod__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Close Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobCommittedDate__c</fullName>
+        <description>The field that indicates the date that a Job committed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date the job was committed</inlineHelpText>
+        <label>Committed Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobCompletedDate__c</fullName>
+        <description>The field that indicates the date the Job was completed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date the job was completed</inlineHelpText>
+        <label>Completed Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobDateAssigned__c</fullName>
+        <description>The field that indicates the date and time a Job was last assigned.	.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the job was last assigned</inlineHelpText>
+        <label>Date Assigned</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>JobDateCanceled__c</fullName>
+        <description>The field that indicates the date and time a Job was canceled.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the job was canceled</inlineHelpText>
+        <label>Date Canceled</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>JobDateClosed__c</fullName>
+        <description>The field that indicates the date and time a Job was closed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the job was closed</inlineHelpText>
+        <label>Date Closed</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>JobDateOpened__c</fullName>
+        <description>The field that Indicates the date and time a Job was opened.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the job was opened</inlineHelpText>
+        <label>Date Opened</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>JobDateOriginallyAssigned__c</fullName>
+        <description>The field that indicates the date and time a Job was originally assigned.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the job was originally assigned</inlineHelpText>
+        <label>Date Originally Assigned</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>JobDateOriginallyReported__c</fullName>
+        <description>The field that indicates the date and time a Job was originally reported.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the job was originally reported</inlineHelpText>
+        <label>Date Originally Reported</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>JobDateReported__c</fullName>
+        <description>The field that indicates the date and time a Job was last reported.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.DateReported__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The date and time the job was last reported</inlineHelpText>
+        <label>Job Date Reported</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>JobDateStarted__c</fullName>
+        <description>The field that indicates the date and time a Job started.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the job started</inlineHelpText>
+        <label>Date Started</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>JobEndDate__c</fullName>
+        <description>The field that indicates the end date of the Job.</description>
+        <externalId>false</externalId>
+        <label>End Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobEndTime__c</fullName>
+        <description>The field that indicates the local end time of the Job.</description>
+        <externalId>false</externalId>
+        <label>End Time (Local)</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JobExecutedDate__c</fullName>
+        <description>The field that indicates the date a Job was executed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date the job was executed</inlineHelpText>
+        <label>Executed Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobFirstAttemptDate__c</fullName>
+        <description>The field that indicates the first attempt date of the Job.</description>
+        <externalId>false</externalId>
+        <label>First Attempt Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobGracePeriod__c</fullName>
+        <description>The field that indicates the Grace Period of a Job in days.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.ProjectGracePeriodDuration__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The grace period of the job</inlineHelpText>
+        <label>Grace Period (Days)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JobLaunchDate__c</fullName>
+        <description>The field that indicates the date when jobs are made available to the Execution Company.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.ProjectLaunchDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The date when jobs are made available to the Execution Company.</inlineHelpText>
+        <label>Launch Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobManualLink__c</fullName>
+        <description>View Job Manual</description>
+        <externalId>false</externalId>
+        <formula>IF(JobManualUrl__c!=&apos;&apos;, HYPERLINK(JobManualUrl__c , &apos;View Job Manual&apos;), &apos;No Manual&apos;)</formula>
+        <label>Job Manual Link</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JobManualUrl__c</fullName>
+        <description>The field that displays the link to the Job manual.</description>
+        <externalId>false</externalId>
+        <formula>ProjectService__r.JobManualURL__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Job Manual Url</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JobScheduledDate__c</fullName>
+        <description>The field that indicates the date a Job is scheduled.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date the job was scheduled</inlineHelpText>
+        <label>Scheduled Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobStartDate__c</fullName>
+        <description>The field that indicates the start date for the Job.</description>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>JobStartTime__c</fullName>
+        <description>The field that indicates the local start time for the Job.</description>
+        <externalId>false</externalId>
+        <label>Start Time (Local)</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JobStatusPrevious__c</fullName>
+        <description>This keeps track of the previous status of the job.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This keeps track of the previous status of the job.</inlineHelpText>
+        <label>Previous Job Status</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>JobStatus__c</fullName>
+        <description>A picklist that indicates the status of the Job.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The status of the job</inlineHelpText>
+        <label>Job Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Open</fullName>
+                    <default>false</default>
+                    <label>Open</label>
+                </value>
+                <value>
+                    <fullName>Assigned</fullName>
+                    <default>false</default>
+                    <label>Assigned</label>
+                </value>
+                <value>
+                    <fullName>Started</fullName>
+                    <default>false</default>
+                    <label>Started</label>
+                </value>
+                <value>
+                    <fullName>Reported</fullName>
+                    <default>false</default>
+                    <label>Reported</label>
+                </value>
+                <value>
+                    <fullName>Closed</fullName>
+                    <default>false</default>
+                    <label>Closed</label>
+                </value>
+                <value>
+                    <fullName>Canceled</fullName>
+                    <default>false</default>
+                    <label>Canceled</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>JobUTCEndTime__c</fullName>
+        <description>The field that indicates the UTC end time of the Job.</description>
+        <externalId>false</externalId>
+        <label>End Time (UTC)</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>JobUTCStartTime__c</fullName>
+        <description>The field that indicates the UTC start time of the Job.</description>
+        <externalId>false</externalId>
+        <label>Start Time (UTC)</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>KeepAssignmentOverride__c</fullName>
+        <externalId>false</externalId>
+        <label>Keep Assignment Override</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>No Override</fullName>
+                    <default>false</default>
+                    <label>No Override</label>
+                </value>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>KeepAssignment__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (OR(ISPICKVAL( KeepAssignmentOverride__c, &apos;No Override&apos;),ISBLANK(TEXT(KeepAssignmentOverride__c))), ProjectLocation__r.KeepAssignment__c, IF (ISPICKVAL(KeepAssignmentOverride__c, &apos;Yes&apos;),TRUE,FALSE) )</formula>
+        <label>Keep Assignment</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LastModifiedDate__c</fullName>
+        <description>This custom field will be populated with standard Last Modified Date value. Created this field for Indexing purposes</description>
+        <externalId>false</externalId>
+        <label>Last Modified Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LastPBScheduledDateChangeDateTime__c</fullName>
+        <externalId>false</externalId>
+        <label>Last PB Scheduled Date Change Date Time</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LocationNumber__c</fullName>
+        <description>The field that indicates the location number of the Job.</description>
+        <externalId>false</externalId>
+        <formula>Location__r.LocationNumber__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The location number of the job</inlineHelpText>
+        <label>Location #</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LocationState__c</fullName>
+        <description>The field that indicates the state where the Job is located.</description>
+        <externalId>false</externalId>
+        <formula>TEXT(Location__r.State__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The state where the job is located</inlineHelpText>
+        <label>Location State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LocationTimezoneOffset__c</fullName>
+        <description>UTC time zone offset for location that is used in start and end time UTC conversions.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The UTC time zone offset for job location that is used to determine the start time and end time in UTC time zone.</inlineHelpText>
+        <label>LocationTimezoneOffset</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The field that indicates the location of the Job.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The location of the job</inlineHelpText>
+        <label>Location</label>
+        <referenceTo>Location__c</referenceTo>
+        <relationshipLabel>Jobs</relationshipLabel>
+        <relationshipName>Jobs</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LogInEntityChange__c</fullName>
+        <externalId>false</externalId>
+        <formula>AND(IsCancellable__c  ,ProjectStatus__c ==&apos;In Progress&apos;)</formula>
+        <label>LogInEntityChange</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MaterialCount__c</fullName>
+        <externalId>false</externalId>
+        <label>Material Count</label>
+        <summaryFilterItems>
+            <field>JobMaterial__c.Status__c</field>
+            <operation>notEqual</operation>
+            <value>Canceled</value>
+        </summaryFilterItems>
+        <summaryForeignKey>JobMaterial__c.Job__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>NumberOfDays__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Days</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumberOfWorkers__c</fullName>
+        <defaultValue>1</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of workers required on this job</inlineHelpText>
+        <label>Number of Workers</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumberofImages__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Images</label>
+        <summaryForeignKey>JobAttempt__c.Job__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>OneHubLocationId__c</fullName>
+        <externalId>false</externalId>
+        <formula>Location__r.OneHubLocationID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Location ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OneHubRetailerId__c</fullName>
+        <description>The field that indicates the OneHub Retailer ID number.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The OneHub retailer ID of the job.</inlineHelpText>
+        <label>OneHub Retailer ID</label>
+        <length>25</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OriginalProjectEndDate__c</fullName>
+        <description>The field that indicates the original end date for a Project.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.BookedProjectEndDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project End Date (Original)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>OriginalProjectStartDate__c</fullName>
+        <description>The field that indicates the original start date of the Project.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.BookedProjectStartDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Start Date (Original)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>OutOfProcessReportingReason__c</fullName>
+        <externalId>false</externalId>
+        <label>Out of Process Reporting Reason</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ProjLocationName__c</fullName>
+        <description>The field that indicates the name of the Project Location.</description>
+        <externalId>false</externalId>
+        <formula>ProjectLocation__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The name of the project location</inlineHelpText>
+        <label>Project Location Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjSLUniqueKey__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>ProjSLUnique Key</label>
+        <length>200</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ProjServiceName__c</fullName>
+        <description>The field that indicates the name of the Project Service.</description>
+        <externalId>false</externalId>
+        <formula>ProjectService__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The name of the project service</inlineHelpText>
+        <label>Project Service Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectCancelLeadTime__c</fullName>
+        <description>The field that indicates the lead time for a Project to be canceled</description>
+        <externalId>false</externalId>
+        <formula>Project__r.ProjectCancelLeadTime__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The lead name for a project to be canceled</inlineHelpText>
+        <label>Project Cancel Lead Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectEndDate__c</fullName>
+        <description>The field that indicates the current end date for a Project.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.EndDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project End Date (Current)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ProjectLocation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The field that indicates the Location of a Project.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The location of the project</inlineHelpText>
+        <label>Project Location</label>
+        <referenceTo>ProjectLocation__c</referenceTo>
+        <relationshipLabel>Jobs</relationshipLabel>
+        <relationshipName>Jobs</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProjectName__c</fullName>
+        <description>The field that indicates the title of the Project.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The title of the Project.</inlineHelpText>
+        <label>Project Title</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectNumber__c</fullName>
+        <description>The field that indicates the Project Number.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.ProjectNumber__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectOriginId__c</fullName>
+        <description>The field that indicates the ID number of the Project Origin.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.OriginID__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The project origin ID number</inlineHelpText>
+        <label>Project Origin ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectOrigin__c</fullName>
+        <description>The field that indicates the Project Origin.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.ProjectOrigin__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The project origin</inlineHelpText>
+        <label>Project Origin</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectScheduleOptionCode__c</fullName>
+        <description>The field that indicates the code of the Project Schedule Option.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.ProjectScheduleOptionCode__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Schedule Option Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectScheduleOptionName__c</fullName>
+        <description>The field that indicates who is able to update the Schedule date, the EC or the Project Builder.  In the future, there will also be a System Generated option.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines who (the Execution Company or the Project Builder) is able to update the Schedule date.</inlineHelpText>
+        <label>Project Schedule Option</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectService__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The field that indicates the Project Service.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The project service number</inlineHelpText>
+        <label>Project Service</label>
+        <referenceTo>ProjectService__c</referenceTo>
+        <relationshipLabel>Jobs</relationshipLabel>
+        <relationshipName>Jobs</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProjectStartDate__c</fullName>
+        <description>The field that indicates the current start date of the Project.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.StartDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Start Date (Current)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ProjectStatus__c</fullName>
+        <description>The field that indicates the status of the Project.</description>
+        <externalId>false</externalId>
+        <formula>TEXT(Project__r.Status__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The status of the project</inlineHelpText>
+        <label>Project Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectVersion__c</fullName>
+        <description>The field that indicates the version of the Project.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.UpdateSequence__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Version</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The field that indicates the name of the Project to which a Job belongs.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The name of the project for this job</inlineHelpText>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Jobs</relationshipLabel>
+        <relationshipName>Jobs</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PurchaseAmount__c</fullName>
+        <description>The field that indicates the Purchase Amount for the Job.</description>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK( PurchaseOverRideAmount__c), ProjectService__r.PurchaseAmount__c,PurchaseOverRideAmount__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The purchase amount for the job</inlineHelpText>
+        <label>Purchase Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PurchaseOverRideAmount__c</fullName>
+        <externalId>false</externalId>
+        <label>Purchase OverRide Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>QCFailureReason__c</fullName>
+        <description>The field that indicates the reason for the failure of QC.</description>
+        <externalId>false</externalId>
+        <formula>Text(ActiveJobAttempt__r.QCFailureReasonCode__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Why the QC test failed</inlineHelpText>
+        <label>QC Failure Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReferralJob__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The search field for the Referral Job.</description>
+        <externalId>false</externalId>
+        <label>Referral Job</label>
+        <referenceTo>Job__c</referenceTo>
+        <relationshipLabel>Jobs</relationshipLabel>
+        <relationshipName>Jobs</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ReportedContactFirstName__c</fullName>
+        <description>The field that indicates the first name of the Reported Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ReportedContactFirstName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reported Contact First Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactHomeLatitude__c</fullName>
+        <description>The field that indicates the home latitude of the Reported Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ReportedContactHomeLatitude__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The home latitude of the reported contact</inlineHelpText>
+        <label>Reported Contact Home Latitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactHomeLongitude__c</fullName>
+        <description>The field that indicates the home longitude of the Reported Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.AssignedContactHomeLongitude__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The home longitude of the reported contact</inlineHelpText>
+        <label>Reported Contact Home Longitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactId__c</fullName>
+        <description>The field that indicates the ID number of the Reported Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ReportedContactId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The ID number of the reported contact</inlineHelpText>
+        <label>Reported  Contact ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactLastName__c</fullName>
+        <description>The field that indicates the last name of the Reported Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ReportedContactLastName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Reported Contact Last Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactPhone__c</fullName>
+        <description>The field that indicates the phone number of the Reported Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ReportedContactPhone__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The phone number of the reported contact</inlineHelpText>
+        <label>Reported Contact Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedContactTitle__c</fullName>
+        <description>The field that indicates the title of the Reported Contact.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ReportedContactTitle__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The title of the reported contact</inlineHelpText>
+        <label>Reported Contact Title</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReportedEmployeeId__c</fullName>
+        <description>The field that indicates the ID number of the Reported Employee.</description>
+        <externalId>false</externalId>
+        <formula>ActiveJobAttempt__r.ReportedEmployeeId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The ID number of the reported employee</inlineHelpText>
+        <label>Reported Employee ID</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ResponsibleExecutionCompany__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The field that indicates the Execution Company responsible for the Job.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The name of the execution company responsible for this job</inlineHelpText>
+        <label>Responsible Execution Company</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Jobs</relationshipLabel>
+        <relationshipName>Jobs</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ResponsibleForExecution__c</fullName>
+        <description>The entity that is responsible for execution. Can be Execution Company, Supplier, or Retailer.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The entity that is responsible for execution.</inlineHelpText>
+        <label>Responsible For Execution</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RetailerName__c</fullName>
+        <description>The field that indicates the name of the Retailer.</description>
+        <externalId>false</externalId>
+        <formula>Project__r.Retailer__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Retailer Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Retailer__c</fullName>
+        <description>The field that indicates the Retailer ID.</description>
+        <externalId>false</externalId>
+        <formula>CASESAFEID(Project__r.Retailer__r.Id)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The Retailer ID from the project</inlineHelpText>
+        <label>Retailer</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RquiresFulfilment__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(MaterialCount__c&gt;0,TRUE,FALSE)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Requires Fulfilment</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ServiceName__c</fullName>
+        <description>The field that indicates the name of the Service for the Job.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The name for the service</inlineHelpText>
+        <label>ServiceName</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ServiceSpecialization__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT( Service__r.Specialization__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Service Specialization</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Service__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The field that indicates the Service for the Job.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The service for the job</inlineHelpText>
+        <label>Service</label>
+        <referenceTo>Service__c</referenceTo>
+        <relationshipLabel>Jobs</relationshipLabel>
+        <relationshipName>Jobs</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ShiftClosureOverride__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Shift Closure Override</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SplitType__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Project__r.SplitType__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Split Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StartDateCalculated__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (UPPER(ProjectScheduleOptionCode__c) == &apos;EC&apos;,ProjectStartDate__c,IF (ISBLANK(JobScheduledDate__c),ProjectStartDate__c,JobScheduledDate__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start Date (Job)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>StartTime__c</fullName>
+        <externalId>false</externalId>
+        <formula>JobStartTime__c</formula>
+        <label>Start Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SurveyPhotoViewerEncodedId__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Photo Viewer Encoded Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SurveyPhotoViewerUrl__c</fullName>
+        <externalId>false</externalId>
+        <formula>$Setup.SurveyPhotoViewerSetting__c.Url__c + &apos;?recid=&apos; +  SurveyPhotoViewerEncodedId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Survey Photo Viewer Url</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TimeReported__c</fullName>
+        <description>The field that displays a summary of total minutes reported.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total minutes reported</inlineHelpText>
+        <label>Total Time Reported (Minutes)</label>
+        <summarizedField>JobAttempt__c.TimeReported__c</summarizedField>
+        <summaryForeignKey>JobAttempt__c.Job__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalJobAttempts__c</fullName>
+        <description>The field that displays a summary of total job attempts.</description>
+        <externalId>false</externalId>
+        <label>Total Job Attempts</label>
+        <summaryForeignKey>JobAttempt__c.Job__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>UniqueKey__c</fullName>
+        <externalId>true</externalId>
+        <label>Unique Key</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Job</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Project__c</columns>
+        <columns>Location__c</columns>
+        <columns>LocationNumber__c</columns>
+        <columns>EstimatedMinutes__c</columns>
+        <columns>CompletionStatus__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>jobsListView</fullName>
+        <columns>NAME</columns>
+        <filterScope>Mine</filterScope>
+        <label>jobsListView</label>
+    </listViews>
+    <nameField>
+        <displayFormat>JOB-{000000000}</displayFormat>
+        <label>Job ID</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Jobs</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Project__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Location__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>LocationNumber__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>EstimatedMinutes__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Project__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Location__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>LocationNumber__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>EstimatedMinutes__c</lookupDialogsAdditionalFields>
+        <lookupFilterFields>NAME</lookupFilterFields>
+        <lookupFilterFields>Location__c</lookupFilterFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Location__c</searchFilterFields>
+        <searchResultsAdditionalFields>Project__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Location__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LocationNumber__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>EstimatedMinutes__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <sharingReasons>
+        <fullName>EC_Edit_Access__c</fullName>
+        <label>EC Edit Access</label>
+    </sharingReasons>
+    <sharingReasons>
+        <fullName>Store_Manager_Read_Access__c</fullName>
+        <label>Store Manager Read Access</label>
+    </sharingReasons>
+    <validationRules>
+        <fullName>CanNotChangeJobIfClosed</fullName>
+        <active>true</active>
+        <description>A Job in a CLOSED status cannot have further actions performed.</description>
+        <errorConditionFormula>LOWER(PRIORVALUE(JobStatus__c)) == &apos;closed&apos;</errorConditionFormula>
+        <errorMessage>A Job in a CLOSED status cannot have further actions performed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Cancel_Invalid_Project_Status</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(LOWER(TEXT(PRIORVALUE(JobStatus__c))) == &apos;canceled&apos;, LOWER(TEXT(Project__r.Status__c)) != &apos;booked&apos;, LOWER(TEXT(Project__r.Status__c)) != &apos;launched&apos;, LOWER(TEXT(Project__r.Status__c)) != &apos;in progress&apos;)</errorConditionFormula>
+        <errorMessage>Cannot cancel job, invalid Job / Project status. Job cannot be canceled if it is already canceled or the project is not in one these statuses (Booked, Launched, In Progress).</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Canceled_Reason_Other_Requires_Comments</fullName>
+        <active>true</active>
+        <errorConditionFormula>LOWER(TEXT(JobStatus__c)) == &apos;canceled&apos; &amp;&amp; LOWER(TEXT(JobCanceledReason__c)) == &apos;other&apos; &amp;&amp; TRIM(JobCanceledComments__c) == &apos;&apos;</errorConditionFormula>
+        <errorMessage>Please provide cancel comments when cancel reason is Other.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>CannotCancelReportedJob4EndedProject</fullName>
+        <active>true</active>
+        <description>CSM can&apos;t cancel a reported job if the project is ended.</description>
+        <errorConditionFormula>AND(
+LOWER(TEXT(JobStatus__c)) == &apos;canceled&apos;,
+LOWER(TEXT(PRIORVALUE(JobStatus__c))) == &apos;reported&apos;,
+LOWER(ProjectStatus__c) == &apos;ended&apos;
+)</errorConditionFormula>
+        <errorMessage>CSM can&apos;t cancel a reported job if the project is ended.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_JobSchedDateChange_byPB_ForEC</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(NOT CONTAINS($User.Username,&quot;salesforce.integration&quot;), ISCHANGED(JobScheduledDate__c),  LOWER(ProjectScheduleOptionCode__c) = &apos;ec&apos;)</errorConditionFormula>
+        <errorMessage>Project Builder cannot change the scheduled date for a &apos;Execution Company&apos; job / project.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_canceled_job_status_change</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(TEXT(PRIORVALUE(JobStatus__c)) = &apos;Canceled&apos;, TEXT(JobStatus__c) != &apos;Canceled&apos;)</errorConditionFormula>
+        <errorMessage>Cannot update the status of a canceled job.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_keep_asng_for_bundled_projects</fullName>
+        <active>true</active>
+        <description>Keep Assignment cannot be different from location in case of bundled projects.</description>
+        <errorConditionFormula>AND( Project__r.BundleServices__c, UPPER(TEXT(KeepAssignmentOverride__c)) !=  &apos;NO OVERRIDE&apos;, NOT ISBLANK(TEXT(KeepAssignmentOverride__c)))</errorConditionFormula>
+        <errorMessage>Keep Assignment cannot be overridden for bundled projects.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_multi_days_for_bundled_projects</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( NumberOfDays__c &gt; 1,   Project__r.BundleServices__c )</errorConditionFormula>
+        <errorDisplayField>NumberOfDays__c</errorDisplayField>
+        <errorMessage>Number of days cannot be more than 1 for bundled projects.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_multi_workers_for_AMW_False</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(NumberOfWorkers__c &gt; 1,  ProjectService__r.Service__r.IsNumberOfWorkersRequired__c == false)</errorConditionFormula>
+        <errorDisplayField>NumberOfWorkers__c</errorDisplayField>
+        <errorMessage>Number Of Workers cannot be more than 1 if the service&apos;s AllowMultipleWorkers is set to false.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_multi_workers_for_bundled_proje</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(NumberOfWorkers__c &gt; 1,   Project__r.BundleServices__c )</errorConditionFormula>
+        <errorDisplayField>NumberOfWorkers__c</errorDisplayField>
+        <errorMessage>Number of workers cannot be more than 1 for bundled projects.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_past_schedule_dates</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(ISCHANGED( JobScheduledDate__c),JobScheduledDate__c &lt; TODAY())</errorConditionFormula>
+        <errorMessage>Cannot schedule a job to a date that is in the past.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_schdate_change_diff_from_PLdate</fullName>
+        <active>true</active>
+        <description>Do not allow a scheduled date that is different from a project location scheduled date in case of a bundled project</description>
+        <errorConditionFormula>AND(Project__r.BundleServices__c,ISCHANGED(JobScheduledDate__c), JobScheduledDate__c !=  ProjectLocation__r.LocationScheduledDate__c)</errorConditionFormula>
+        <errorMessage>Job Scheduled date has to match the location scheduled date in case of bundled work.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_starttime_for_bundled_projects</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(Project__r.BundleServices__c,NOT(ISBLANK(StartTime__c)))</errorConditionFormula>
+        <errorDisplayField>JobStartTime__c</errorDisplayField>
+        <errorMessage>Start Time cannot be set for Bundled project.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ECNoReStartReportedJob4InprogressProject</fullName>
+        <active>true</active>
+        <description>An execution company can&apos;t restart a reported job if the project is in progress.</description>
+        <errorConditionFormula>AND(
+Lower(ProjectScheduleOptionCode__c) == &apos;ec&apos;,
+Lower(Text(JobStatus__c)) == &apos;started&apos;,
+Lower(Text(PRIORVALUE(JobStatus__c))) == &apos;reported&apos;,
+Lower(ProjectStatus__c) == &apos;in progress&apos;
+)</errorConditionFormula>
+        <errorMessage>An execution company can&apos;t restart a reported job if the project is in progress.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>JobDates_outside_project_window</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(StartDateCalculated__c &lt;  ProjectStartDate__c, StartDateCalculated__c &gt;  ProjectEndDate__c, EndDateCalculated__c  &lt; ProjectStartDate__c, EndDateCalculated__c  &gt; ProjectEndDate__c, JobScheduledDate__c &lt;  ProjectStartDate__c, JobScheduledDate__c &gt;  ProjectEndDate__c)</errorConditionFormula>
+        <errorMessage>One or more job dates (Start/End/Scheduled) are outside project window.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>JobStartDateNotLaterThanEndDate</fullName>
+        <active>true</active>
+        <description>Job Start Date can not be later than Job End Date</description>
+        <errorConditionFormula>JobStartDate__c &gt; JobEndDate__c</errorConditionFormula>
+        <errorMessage>Job Start Date can not be later than Job End Date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>NoCancelReportedJob4EndedProject</fullName>
+        <active>true</active>
+        <description>CSM can&apos;t cancel a reported job if the project is ended.</description>
+        <errorConditionFormula>AND(
+LOWER(TEXT(PRIORVALUE(JobStatus__c))) == &apos;reported&apos;,
+LOWER(TEXT(JobStatus__c)) == &apos;canceled&apos;,
+LOWER(ProjectStatus__c) == &apos;ended&apos;
+)</errorConditionFormula>
+        <errorMessage>CSM can&apos;t cancel a reported job if the project is ended.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>NoReschedule4ReportedJobWithEndedProject</fullName>
+        <active>true</active>
+        <description>CSM can&apos;t reschedule a reported job if the project is ended.</description>
+        <errorConditionFormula>AND(
+ISCHANGED(JobScheduledDate__c),
+LOWER(TEXT(PRIORVALUE(JobStatus__c))) == &apos;reported&apos;,
+LOWER(ProjectStatus__c) == &apos;ended&apos;
+)</errorConditionFormula>
+        <errorMessage>CSM can&apos;t reschedule a reported job if the project is ended.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>NoUpdateOnReportedJob4CanclClsProject</fullName>
+        <active>true</active>
+        <description>A reported job cannot be updated when the project is either closed or canceled.</description>
+        <errorConditionFormula>AND(
+Lower(TEXT(PRIORVALUE(JobStatus__c))) == &apos;reported&apos;,
+OR(
+Lower(ProjectStatus__c) == &apos;closed&apos;,
+Lower(ProjectStatus__c) == &apos;canceled&apos;
+)
+)</errorConditionFormula>
+        <errorMessage>A reported job cannot be updated when the project is either closed or canceled.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>NotReschduleReportedJobWithEndedProject</fullName>
+        <active>true</active>
+        <description>CSM can&apos;t reschedule a &apos;Reported&apos; job if the Project status is &apos;Ended&apos;</description>
+        <errorConditionFormula>AND ( 
+LOWER(ProjectStatus__c) == &apos;ended&apos;,
+ISPICKVAL(JobStatus__c, &apos;Reported&apos;),
+PRIORVALUE(JobScheduledDate__c) &lt;&gt; null,
+PRIORVALUE(JobScheduledDate__c) &lt;&gt; JobScheduledDate__c 
+)</errorConditionFormula>
+        <errorMessage>A reported job can not be rescheduled if the project is ended.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>NotRestartReportedJobForInProgressProjec</fullName>
+        <active>true</active>
+        <description>EC can not restart a reported job if the project is in progress.</description>
+        <errorConditionFormula>AND(
+ISPICKVAL(JobStatus__c, &apos;Started&apos;),
+ISPICKVAL(JobStatus__c, &apos;Reported&apos;),
+LOWER(ProjectStatus__c) == &apos;in progress&apos;,
+LOWER(ProjectScheduleOptionCode__c) == &apos;ec&apos;
+)</errorConditionFormula>
+        <errorMessage>EC can not restart a reported job if the project is in progress.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validate_Allowed_Reschedule_Dates</fullName>
+        <active>true</active>
+        <description>Check if the new reschedule date is in the list of allowed reschedule dates.</description>
+        <errorConditionFormula>AND(CONTAINS($User.Username,&quot;salesforce.integration&quot;), ISCHANGED(JobScheduledDate__c),!ISBLANK(Project__r.AllowedRescheduleDates__c), !ISNULL(Project__r.AllowedRescheduleDates__c), !CONTAINS(Project__r.AllowedRescheduleDates__c, TEXT(JobScheduledDate__c)))</errorConditionFormula>
+        <errorMessage>New reschedule date not in the list of allowed schedule dates.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Validate_Start_Time</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT(
+OR(
+ISBLANK(JobStartTime__c),
+REGEX(JobStartTime__c, &quot;^(1[0-2]|0?[1-9]):[0-5][0-9] ([AaPp][Mm])$&quot;)
+)
+)</errorConditionFormula>
+        <errorDisplayField>JobStartTime__c</errorDisplayField>
+        <errorMessage>Invalid Start Time. Please follow this format HH:MM AMPM</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>prevent_negative_values_Number_of_Worker</fullName>
+        <active>true</active>
+        <errorConditionFormula>NumberOfWorkers__c &lt;0</errorConditionFormula>
+        <errorMessage>Number Of Workers Field  not accept  zero and negative numbers.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>prevent_negative_values_purchase_amount</fullName>
+        <active>true</active>
+        <errorConditionFormula>PurchaseAmount__c &lt;0</errorConditionFormula>
+        <errorMessage>Purchase Amount  Field not accept zero and negative numbers</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>prevent_negative_valuesestimated_minutes</fullName>
+        <active>true</active>
+        <errorConditionFormula>EstimatedMinutesOverride__c &lt;0</errorConditionFormula>
+        <errorMessage>Estimated Minutes  Field not accept zero and negative numbers</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Cancel_Job</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Cancel Job</masterLabel>
+        <openType>replace</openType>
+        <page>CancelJobView</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>EventManualUrl</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Click To Download</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>https://api.crossmark.com/ImageService/f5ca9f3d-588a-4b45-b676-d68b86f6e630</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Google_Com</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Google.Com</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>www.google.com</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Job_Management</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Manage Job(s)</masterLabel>
+        <openType>replace</openType>
+        <page>JobManagementBtn</page>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>ManageJobs</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Manage Job Location(s)</masterLabel>
+        <openType>replace</openType>
+        <page>ManageJobsLocationsFromJobBtn</page>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+    </webLinks>
+</CustomObject>

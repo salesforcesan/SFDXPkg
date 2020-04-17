@@ -1,0 +1,14 @@
+{
+  "name": "cmx-job-management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "faker.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "bash ./build.sh",
+    "serve" : "python -m SimpleHTTPServer 4444",
+    "server": "webpack-dev-server"
+  },
+  "author": "Dan Shahin <dan@danshahin.com> (http://www.danshahin.com/)",
+  "license": "MIT"
+}

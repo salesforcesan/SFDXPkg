@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Bakery</fullName>
+        <default>false</default>
+        <label>Bakery</label>
+    </customValue>
+    <customValue>
+        <fullName>Deli</fullName>
+        <default>false</default>
+        <label>Deli</label>
+    </customValue>
+    <customValue>
+        <fullName>Grocery</fullName>
+        <default>false</default>
+        <label>Grocery</label>
+    </customValue>
+    <customValue>
+        <fullName>Meat</fullName>
+        <default>false</default>
+        <label>Meat</label>
+    </customValue>
+    <customValue>
+        <fullName>Pharmacy</fullName>
+        <default>false</default>
+        <label>Pharmacy</label>
+    </customValue>
+    <customValue>
+        <fullName>Produce</fullName>
+        <default>false</default>
+        <label>Produce</label>
+    </customValue>
+    <customValue>
+        <fullName>Seafood</fullName>
+        <default>false</default>
+        <label>Seafood</label>
+    </customValue>
+    <masterLabel>Execution Department</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

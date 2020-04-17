@@ -1,0 +1,1288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:sf="antlib:com.salesforce" default="Build" basedir=".">
+
+	<include file="cumulusci.xml" />
+
+	<target name="Build">
+		<echo>Continuous Integration Build</echo>
+		<taskdef resource="net/sf/antcontrib/antlib.xml" />
+		<property environment="env" />
+		<echo>Branch: ${env.CIRCLE_BRANCH}</echo>
+
+		<if>
+			<available file="build.${env.CIRCLE_BRANCH}.properties"/>
+			<then>
+				<property file="build.${env.CIRCLE_BRANCH}.properties" />
+			</then>
+			<else>
+				<property file="build.properties" />
+
+				<!-- remove "." and "-" from the branch name.
+				Env.Properties cannot have these chars -->
+				<propertyregex property="branch_clean"
+						  input="${env.CIRCLE_BRANCH}"
+						  regexp="[\.\-]"
+						  replace="_"
+						  defaultValue="${env.CIRCLE_BRANCH}"
+						  global="true"
+						  casesensitive="false" />
+				<echo>Branch Clean: ${branch_clean}</echo>
+
+				<upper to="branch_clean" string="${branch_clean}"/>
+
+				<echo>Branch Clean: ${branch_clean}</echo>
+				<var name="sf.username" value="$${env.${branch_clean}_USERNAME}"/>
+				<var name="sf.password" value="$${env.${branch_clean}_PASSWD}"/>
+				<var name="sf.serverurl" value="$${env.${branch_clean}_URL}"/>
+                <var name="sf.tstusername" value="$${env.${branch_clean}_TST_USERNAME}"/>
+                <var name="sf.tstpassword" value="$${env.${branch_clean}_TST_PASSWD}"/>
+                <var name="sf.tstserverurl" value="$${env.${branch_clean}_TST_URL}"/>
+            </else>
+		</if>
+		<echo>SF User: ${sf.username}</echo>
+		<echo>Build Cmd: ${build.cmd}</echo>
+		<echo>Server URL: ${sf.serverurl}</echo>
+        	<echo>SF Test User: ${sf.tstusername}</echo>
+        	<echo>Server Test URL: ${sf.tstserverurl}</echo>
+        
+		<antcall target="cleanProfilesPermSets" />
+		<antcall target="DeleteMetaData" />
+		<antcall target="UpdateMetaData" />
+		<antcall target="${build.cmd}" />
+        <if>
+            <not>
+                <equals arg1="${sf.tstusername}" arg2="$${env.${branch_clean}_TST_USERNAME}"/>
+            </not>
+            <then>
+                <antcall target="buildTestPackageXmlAndDeployWithTests" />
+            </then>
+            <else>
+                <echo message="Test Org Environment Variables not Set, skipping." />
+            </else>
+        </if>
+	</target>
+
+	<scriptdef language="javascript" name="upper">
+		<attribute name="string" />
+    	<attribute name="to" />
+	    project.setProperty( attributes.get( "to" ),
+	                         attributes.get( "string" ).toUpperCase() );
+	</scriptdef>
+
+	<target name="UpdateMetaData">
+		<propertyselector property="src.configs"
+						delimiter=","
+						match="(src\..*)"
+						select="\1"
+						casesensitive="false" />
+		<if>
+			<isset property="${src.configs}" />
+			<then>
+				<echo>Updating MetaData: ${src.configs}</echo>
+				<for list="${src.configs}" param="metadata.propertyName" delimiter=",">
+					<sequential>
+						<propertycopy property="metadata.propertyValue" from="@{metadata.propertyName}" silent="true" override="true" />
+						<echo>@{metadata.propertyName} == ${metadata.propertyValue}</echo>
+
+						<propertyregex property="metadata.folder"
+						  input="@{metadata.propertyName}"
+						  regexp="src\.([^\.]+)\..+"
+						  select="\1"
+						  casesensitive="false"
+						  override="true" />
+						<echo>metadata.folder == ${metadata.folder}</echo>
+
+						<propertyregex property="metadata.file"
+						  input="@{metadata.propertyName}"
+						  regexp="src\.${metadata.folder}\.([^\.]+)\..+"
+						  select="\1"
+						  casesensitive="false"
+						  override="true" />
+						<echo>metadata.file == ${metadata.file}</echo>
+
+						<propertyregex property="metadata.type"
+						  input="@{metadata.propertyName}"
+						  regexp="src\.${metadata.folder}\.${metadata.file}\.([^\.]+)\..+"
+						  select="\1"
+						  casesensitive="false"
+						  override="true" />
+						<echo>metadata.type == ${metadata.type}</echo>
+
+						<propertyregex property="metadata.element"
+						  input="@{metadata.propertyName}"
+						  regexp="src\.${metadata.folder}\.${metadata.file}\.${metadata.type}\.([^\.]+)"
+						  select="\1"
+						  casesensitive="false"
+						  override="true" />
+						<echo>metadata.element == ${metadata.element}</echo>
+
+						<replaceregexp file="../src/${metadata.folder}/${metadata.file}.${metadata.type}"
+					match="((?&lt;=${metadata.element}\&gt;).*?(?=\&lt;\/${metadata.element}))"
+					replace="${metadata.propertyValue}"
+					byline="true" />
+
+					</sequential>
+				</for>
+			</then>
+			<else>
+				<echo>No MetaData to update from properties</echo>
+			</else>
+		</if>
+	</target>
+
+	<target name="DeleteMetaData">
+
+		<propertyselector property="del.configs"
+						delimiter=","
+						match="(del\..*)"
+						select="\1"
+						casesensitive="false" />
+
+		<if>
+			<not>
+				<equals arg1="${del.configs}" arg2="$${del.configs}" />
+			</not>
+			<then>
+				<echo>Deleting MetaData: ${del.configs}</echo>
+
+				<for list="${del.configs}" param="config.path" delimiter=",">
+					<sequential>
+
+						<propertyregex property="metadata.folder"
+						  input="@{config.path}"
+						  regexp="del\.([^\.]+)\..+"
+						  select="\1"
+						  casesensitive="false"
+						  override="true" />
+						<echo>metadata.folder == ${metadata.folder}</echo>
+
+						<propertyregex property="metadata.file"
+						  input="@{config.path}"
+						  regexp="del\.${metadata.folder}\.([^\.]+)\..+"
+						  select="\1"
+						  casesensitive="false"
+						  override="true" />
+						<echo>metadata.file == ${metadata.file}</echo>
+
+						<propertyregex property="metadata.type"
+						  input="@{config.path}"
+						  regexp="del\.${metadata.folder}\.${metadata.file}\.([^\.]+)"
+						  select="\1"
+						  casesensitive="false"
+						  override="true" />
+						<echo>metadata.type == ${metadata.type}</echo>
+
+						<delete file="../src/${metadata.folder}/${metadata.file}.${metadata.type}" verbose="true" quiet="false" />
+					</sequential>
+				</for>
+			</then>
+			<else>
+				<echo message="Delete Configs not Set, skipping." />
+			</else>
+		</if>
+
+
+	</target>
+
+	<target name="cleanProfilesPermSets">
+		<echo>Cleaning Profiles &amp; Permission Sets</echo>
+
+		<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask"/>
+
+		<for param="file">
+			<path>
+				<fileset dir="../src/profiles" includes="*.profile" erroronmissingdir="false"/>
+				<fileset dir="../src/permissionsets" includes="*.permissionset" erroronmissingdir="false"/>
+			</path>
+			<sequential>
+				<echo>Cleaning file @{file}</echo>
+				<xmltask source="@{file}" dest="@{file}">
+					<remove path="//:applicationVisibilities[:enabled = 'false']"/>
+					<remove path="//:classAccesses[:enabled = 'false']"/>
+					<remove path="//:fieldPermissions[:editable = 'false' and :readable = 'false']"/>
+					<remove path="//:objectPermissions[:allowCreate = 'false' and :allowDelete = 'false' and :allowEdit = 'false' and :allowRead = 'false' and :modifyAllRecords = 'false' and :viewAllRecords = 'false']"/>
+					<remove path="//:pageAccesses[:enabled = 'false']"/>
+					<remove path="//:userPermissions[:enabled = 'false']"/>
+					<remove path="//:recordTypeVisibilities[:visible = 'false']"/>
+					<remove path="//:tabSettings[:visibility = 'None']"/>
+				</xmltask>
+			</sequential>
+		</for>
+	</target>
+
+	<!--
+		Tests that the deployment of meta-data to the target org will succeed
+		but does not *save* the meta-data. This is just for validating that the
+		deployment would succeed.
+	-->
+	<target name="DeployAndCheckOnly">
+		<property environment="env" />
+		<property file="build.properties" />
+		<echo>Deploy Code CheckOnly in Org with username: ${sf.username}</echo>
+		<sf:deploy
+			username="${sf.username}"
+			password="${sf.password}"
+			serverurl="${sf.serverurl}"
+			maxPoll="${sf.maxPoll}"
+			deployRoot="${user.dir}/src"
+			logType="${env.SF_LOGDETAIL}"
+			checkOnly="${sf.checkOnly}" />
+	</target>
+
+	<!--
+		Deploys the meta-data to the target org and then runs all unit tests. If
+		any unit tests fail, a roll-back will occurr and nothing will have changed.
+	-->
+	<target name="DeployAndRunAllTests">
+		<property environment="env" />
+		<property file="build.properties" />
+        <echo>Deploy with test level ${sf.testLevel} in Org with username: ${sf.username}</echo>
+		<echo>Logging Level:  ${env.SF_LOGDETAIL}</echo>
+		<echo>Test Level:  ${sf.testLevel}</echo>
+		<sf:deploy
+			username="${sf.username}"
+			password="${sf.password}"
+			serverurl="${sf.serverurl}"
+			maxPoll="${sf.maxPoll}"
+			deployRoot="${user.dir}/src"
+			logType="${env.SF_LOGDETAIL}"
+			testLevel="${sf.testLevel}" />
+    </target>
+    
+    <target name="DeployTestAndRunAllTests">
+        <property environment="env" />
+        <property file="build.properties" />
+        <echo>Deploy with test level ${sf.testLevel} in Org with username: ${sf.tstusername}</echo>
+        <echo>Logging Level:  ${env.SF_LOGDETAIL}</echo>
+        <echo>Test Level:  ${sf.testLevel}</echo>
+        <sf:deploy
+            username="${sf.tstusername}"
+            password="${sf.tstpassword}"
+            serverurl="${sf.tstserverurl}"
+            maxPoll="${sf.maxPoll}"
+            deployRoot="${user.dir}/src"
+            logType="${env.SF_LOGDETAIL}"
+            testLevel="${sf.testLevel}" />
+    </target>
+    
+    <!--
+     Deploys the meta-data to the target org and then runs specified unit tests. If
+     any unit tests fail, a roll-back will occurr and nothing will have changed.
+     NOTE: Failing tests commented out
+	-->
+    <target name="DeployAndRunSomeTests">
+        <echo>Deploy and RunAllTests in Org with username: ${sf.username}</echo>
+        <echo>Logging Level:  ${env.SF_LOGDETAIL}</echo>
+        <echo>Test Level:  ${sf.testLevel}</echo>
+        <sf:deploy
+            username="${sf.username}"
+            password="${sf.password}"
+            serverurl="${sf.serverurl}"
+            maxPoll="${sf.maxPoll}"
+            deployRoot="${user.dir}/src"
+            logType="${env.SF_LOGDETAIL}"
+            testLevel="${sf.testLevel}" >
+            <runTest>AddEditLocationExtTest</runTest>
+            <runTest>AddEditRetailerExtTest</runTest>
+            <runTest>AppUtilTest</runTest>
+            <runTest>AttachmentUrlGeneratorTest</runTest>
+            <runTest>BatchReserveHandlerTest</runTest>
+            <runTest>BatchUpdateJobsTest</runTest>
+            <runTest>CCTest</runTest>
+            <runTest>CancelJobTest</runTest>
+            <runTest>CancelLocationExtTest</runTest>
+            <runTest>CancelProjectExtTest</runTest>
+            <runTest>CancelProjectServiceExtTest</runTest>
+            <runTest>ChangePasswordControllerTest</runTest>
+            <runTest>CommonObjectModelTest</runTest>
+            <runTest>CommonObjectRemoterTest</runTest>
+            <runTest>CommunitiesLandingControllerTest</runTest>
+            <runTest>CommunitiesLoginControllerTest</runTest>
+            <runTest>CommunitiesSelfRegConfirmControllerTest</runTest>
+            <runTest>CommunitiesSelfRegControllerTest</runTest>
+            <runTest>ContactCertificationTriggerHandlerTest</runTest>
+            <runTest>ContactTriggerHandlerTest</runTest>
+            <runTest>CreateEditProjectExtTest</runTest>
+            <runTest>CreateJobsExtTest</runTest>
+            <runTest>DependencyPicklistPairTest</runTest>
+            <runTest>DependentPicklistGetterTest</runTest>
+            <runTest>DevUtilTest</runTest>
+            <runTest>ExternalProjectRequestTriggerHandlerTest</runTest>
+            <runTest>FieldHistoryExtTest</runTest>
+            <runTest>ForgotPasswordControllerTest</runTest>
+            <runTest>GenerateURLTest</runTest>
+            <runTest>GenericCalloutMock</runTest>
+            <runTest>GetJobUpdatesMock</runTest>
+            <runTest>GetJobUpdatesTest</runTest>
+            <runTest>GigwalkAPITest</runTest>
+            <runTest>InstoreDemoSchedulingHelperTest</runTest>
+            <runTest>InstoreDemoSchedulingStrategyTest</runTest>
+            <runTest>JobResponseTriggerHandlerTest</runTest>
+            <runTest>JobShareTest</runTest>
+            <runTest>JobTriggerHandlerTest</runTest>
+            <runTest>JobUpdateBatchHandlerTest</runTest>
+            <runTest>LocationAssignmentsControllerTest</runTest>
+            <runTest>LocationEquipmentCapacityTriggerTest</runTest>
+            <runTest>LocationQueryTest</runTest>
+            <runTest>LocationReportCSVControllerTest</runTest>
+            <runTest>LocationReportRemoterTest</runTest>
+            <runTest>LocationReportTester</runTest>
+            <runTest>MarketingApprovalTriggerHandlerTest</runTest>
+            <runTest>MentorJobExtTest</runTest>
+            <runTest>MultiselectControllerTest</runTest>
+            <runTest>MyProfilePageControllerTest</runTest>
+            <runTest>OpportunityThemeModelTest</runTest>
+            <runTest>OpportunityTriggerHandlerTest</runTest>
+            <runTest>PDFTemplateControllerExtTest</runTest>
+            <runTest>ProjectApprovalEmailTemplateControllTest</runTest>
+            <runTest>ProjectDashboardControllerTest</runTest>
+            <runTest>ProjectDetailsViewControllerExtTest</runTest>
+            <runTest>ProjectLocationTriggerHandlerTest</runTest>
+            <runTest>ProjectSchedulerTest</runTest>
+            <runTest>ProjectServiceAddEditViewExtTest</runTest>
+            <runTest>ProjectServiceAttTriggerHandlerTest</runTest>
+            <runTest>ProjectServiceCertificationsEditExtTest</runTest>
+            <runTest>ProjectServiceDetailsExtTest</runTest>
+            <runTest>ProjectServiceEquipmentEditExtTest</runTest>
+            <runTest>ProjectServiceMaterialsAddExtTest</runTest>
+            <runTest>ProjectServiceShareTest</runTest>
+            <runTest>ProjectServiceTargetTriggerTest</runTest>
+            <runTest>ProjectServiceTargetsAddExtTest</runTest>
+            <runTest>ProjectServiceTriggerHandlerTest</runTest>
+            <runTest>ProjectTest</runTest>
+            <runTest>ProjectTriggerHandlerTest</runTest>
+            <runTest>ReportWorkExtTest</runTest>
+            <runTest>ScheduleLocationsModalControllerTest</runTest>
+            <runTest>SiteLoginControllerTest</runTest>
+            <runTest>SiteRegisterControllerTest</runTest>
+            <runTest>SubmitProjectExtTest</runTest>
+            <runTest>SupervisorTest</runTest>
+            <runTest>SurveyQuestionProjectServiceTest</runTest>
+            <!-- <runTest>TargetAddViewExtTest</runTest> -->
+            <runTest>TestFactory</runTest>
+            <runTest>TestUtil</runTest>
+            <runTest>ThemedOpportunityQueryTest</runTest>
+            <runTest>ThemedOpportunityTest</runTest>
+            <runTest>ThemedOpportunityTestUtility</runTest>
+            <runTest>TriggerHandlerTest</runTest>
+            <runTest>TriggerUtilTest</runTest>
+            <runTest>UnreserveHandlerTest</runTest>
+            <runTest>UnreserveLocationsModalControllerTest</runTest>
+            <runTest>UploadLocationsExtTest</runTest>
+            <!-- <runTest>UserAccessDetailsControllerTest</runTest> -->
+            <runTest>factcardExtTest</runTest>
+            <runTest>manageJobsLocationsExtTest</runTest>
+        </sf:deploy>
+    </target>
+
+	<!--
+		Deploys the meta-data to the target org and then runs all unit tests. If
+		any unit tests fail, a roll-back will occurr and nothing will have changed.
+	-->
+	<target name="DeployWithoutTests">
+		<property environment="env" />
+		<property file="build.properties" />
+		<echo>Deploy without running tests in Org with username: ${sf.username}</echo>
+		<sf:deploy
+			username="${sf.username}"
+			password="${sf.password}"
+			serverurl="${sf.serverurl}"
+			maxPoll="${sf.maxPoll}"
+			deployRoot="${user.dir}/src"
+			logType="${env.SF_LOGDETAIL}"
+            ignoreWarnings="true"
+			runallTests="false" />
+	</target>
+    <target name="DeployTestWithoutTests">
+        <property environment="env" />
+        <property file="build.properties" />
+        <echo>Deploy without running tests in Org with username: ${sf.tstusername}</echo>
+        <sf:deploy
+        username="${sf.tstusername}"
+        password="${sf.tstpassword}"
+        serverurl="${sf.tstserverurl}"
+        maxPoll="${sf.maxPoll}"
+        deployRoot="${user.dir}/src"
+        logType="${env.SF_LOGDETAIL}"
+        ignoreWarnings="true"
+        runallTests="false" />
+    </target>
+	<!--
+		Performs a full deploy to the target org and destroys any stale meta-data in the
+		target org that's not in the Git Repo, and then runs tests.
+	-->
+	<target name="DeployAndDestroyStale">
+		<echo>Deploy and Destroy Stale in Org with username: ${sf.username}</echo>
+
+		<!-- Attempt to destroy any stale metadata but continue even if this fails -->
+		<trycatch>
+			<try>
+				<antcall target="destroyStaleMetadata" />
+			</try>
+			<catch>
+				<echo>First run of destroyStaleMetadata failed.  Ignoring for now but it may cause build failures in other targets.</echo>
+			</catch>
+		</trycatch>
+
+		<!-- Deploy src directory -->
+		<antcall target="DeployWithoutTests" />
+
+		<!-- Delete any metadata from the org which is not in the repo -->
+		<antcall target="destroyStaleMetadata" />
+
+		<!-- Run all Tests -->
+		<antcall target="DeployAndRunAllTests" />
+	</target>
+    <target name="DeployTestAndDestroyStale">
+        <echo>Deploy and Destroy Stale in Org with username: ${sf.tstusername}</echo>
+        
+        <!-- Attempt to destroy any stale metadata but continue even if this fails -->
+        <trycatch>
+            <try>
+                <antcall target="destroyTestStaleMetadata" />
+            </try>
+            <catch>
+                <echo>First run of destroyStaleMetadata failed.  Ignoring for now but it may cause build failures in other targets.</echo>
+            </catch>
+        </trycatch>
+        
+        <!-- Deploy src directory -->
+        <antcall target="DeployTestWithoutTests" />
+        
+        <!-- Delete any metadata from the org which is not in the repo -->
+        <antcall target="destroyStaleMetadata" />
+        
+        <!-- Run all Tests -->
+        <antcall target="DeployTestAndRunAllTests" />
+    </target>
+	<!--
+		Retrieves meta-data for the named packaged from the target org.
+	-->
+	<target name="RetrievePackagedToSrc">
+		<property environment="env" />
+		<property file="build.properties" />
+		<echo>Retrieve a package from salesforce to your local src folder. An alternate to Mavens/Eclipse "Refresh from server..."</echo>
+		<echo>User: ${sf.username}</echo>
+		<echo>Package: ${sf.package.name}</echo>
+		<sf:retrieve
+			username="${sf.username}"
+			password="${sf.password}"
+			serverurl="${sf.serverurl}"
+			retrieveTarget="src"
+			packageNames="${sf.package.name}"/>
+	</target>
+
+	<!--
+		There's really no point in running this in CircleCI unless we can do something with the output
+	-->
+	<target name="SfApexDoc">
+		<java fork="true" jar="${user.dir}/lib/SfApexDoc.jar" failonerror="true">
+			<arg line="-d -s ${user.dir}/src/classes -t ${user.dir}/docs -a ${user.dir}/SfApexDocAuthor.txt -h ${user.dir}/SfApexDocHome.txt" />
+		</java>
+	</target>
+
+	<target name="buildPackageXmlAndDeployWithTests">
+		<antcall target="updatePackageXml" />
+
+		<copy file="../src/package.xml" todir="${env.CIRCLE_ARTIFACTS}"/>
+
+		<antcall target="DeployAndDestroyStale" />
+
+	</target>
+
+    <target name="buildTestPackageXmlAndDeployWithTests">
+		<antcall target="DeployTestAndDestroyStale" />
+    </target>
+
+<target name="buildPackageXmlAndDeployWithSomeTests">
+    <antcall target="updatePackageXml" />
+
+    <copy file="../src/package.xml" todir="${env.CIRCLE_ARTIFACTS}"/>
+
+    <antcall target="DeployAndRunSomeTests" />
+
+    <if>
+        <equals arg1="${sf.runDeleteScript}" arg2="false" />
+        <then>
+            <echo>Delete Script Suppressed via sf.runDeleteScript</echo>
+        </then>
+        <else>
+            <echo>Running Delete Script, sf.runDeleteScript value:  ${sf.runDeleteScript}</echo>
+            <antcall target="destroyStaleMetadata" />
+        </else>
+    </if>
+</target>
+
+
+	<!--
+		U T I L I T Y   T A R G E T S   &   M A C R O S
+		Borrowed from CumulusCI
+	-->
+
+	<!-- updatePackageXml: Builds a new package.xml based upon the metadata in the src directory -->
+	<target name="updatePackageXml">
+    	<if>
+    		<and>
+    			<isset property="sf.package.installClass" />
+    			<isset property="sf.package.uninstallClass" />
+    		</and>
+    		<then>
+        		<buildPackageXml package="${sf.package.name}" version="${sf.apiVersion}" srcDir="../src" installClass="${sf.package.installClass}" uninstallClass="${sf.package.uninstallClass}" />
+        	</then>
+        	<else>
+        		<if>
+    				<isset property="sf.package.installClass" />
+    				<then>
+        				<buildPackageXml package="${sf.package.name}" version="${sf.apiVersion}" srcDir="../src" installClass="${sf.package.installClass}" />
+        			</then>
+        			<else>
+        				<if>
+    						<isset property="sf.package.uninstallClass" />
+        					<then>
+        						<buildPackageXml package="${sf.package.name}" version="${sf.apiVersion}" srcDir="../src" uninstallClass="${sf.package.uninstallClass}" />
+        					</then>
+        					<else>
+        						<buildPackageXml package="${sf.package.name}" version="${sf.apiVersion}" srcDir="../src" />
+        					</else>
+        				</if>
+        			</else>
+        		</if>
+        	</else>
+        </if>
+	</target>
+
+	<!--
+		Destroys all meta-data in the target org that is not in the git repo.
+	-->
+	<target name="destroyStaleMetadata">
+		<echo>----------------------------------------------------------------------------</echo>
+		<delete dir="uninstallsrc" />
+		<delete dir="uninstall" />
+
+		<!-- Fetch all metadata in the  package from target org -->
+		<mkdir dir="uninstallsrc"/>
+		<sf:retrieve
+			username="${sf.username}"
+			password="${sf.password}"
+			serverurl="${sf.serverurl}"
+			retrieveTarget="uninstallsrc"
+			packageNames="${sf.package.name}"/>
+
+		<!-- Build a destructiveChanges.xml pacckage to delete metadata in org but not in repo -->
+		<buildDestroyStaleMetadata srcdir="uninstallsrc" commdir="../src" dir="uninstall" />
+
+		<copy file="${user.dir}/build/uninstall/destructiveChanges.xml" todir="${env.CIRCLE_ARTIFACTS}"/>
+
+		<!-- deploy the destructiveChanges.xml package -->
+		<sf:deploy
+			username="${sf.username}"
+			password="${sf.password}"
+			serverurl="${sf.serverurl}"
+			deployRoot="uninstall"
+			runAllTests="false"
+			logType="None"
+            ignoreWarnings="true"
+			purgeOnDelete="true" />
+
+		<delete dir="uninstallsrc" />
+		<delete dir="uninstall" />
+	</target>
+
+    <target name="destroyTestStaleMetadata">
+        <echo>----------------------------------------------------------------------------</echo>
+        <delete dir="uninstallsrc" />
+        <delete dir="uninstall" />
+    
+        <!-- Fetch all metadata in the  package from target org -->
+        <mkdir dir="uninstallsrc"/>
+        <sf:retrieve
+        username="${sf.tstusername}"
+        password="${sf.tstpassword}"
+        serverurl="${sf.tstserverurl}"
+        retrieveTarget="uninstallsrc"
+        packageNames="${sf.package.name}"/>
+    
+        <!-- Build a destructiveChanges.xml pacckage to delete metadata in org but not in repo -->
+        <buildDestroyStaleMetadata srcdir="uninstallsrc" commdir="../src" dir="uninstall" />
+    
+        <copy file="${user.dir}/build/uninstall/destructiveChanges.xml" todir="${env.CIRCLE_ARTIFACTS}"/>
+    
+        <!-- deploy the destructiveChanges.xml package -->
+        <sf:deploy
+        username="${sf.tstusername}"
+        password="${sf.tstpassword}"
+        serverurl="${sf.tstserverurl}"
+        deployRoot="uninstall"
+        runAllTests="false"
+        logType="None"
+        ignoreWarnings="true"
+        purgeOnDelete="true" />
+    
+        <delete dir="uninstallsrc" />
+        <delete dir="uninstall" />
+    </target>
+
+<!-- deployUnpackagedPre: Deploy the unpackaged/pre subdirectories containing metadata used in builds but not included in the managed package -->
+<target name="deployUnpackagedPre">
+    <echo>----------------------------------------------------------------------------</echo>
+    <deployMetadataBundles dir="${basedir}/unpackaged/pre" stagedir="${basedir}/unpackaged_stage" />
+</target>
+
+<!-- deployUnpackagedPost: Deploy the unpackaged/post subdirectories containing metadata used in builds but not included in the managed package -->
+<target name="deployUnpackagedPost">
+    <echo>----------------------------------------------------------------------------</echo>
+    <deployMetadataBundles dir="${basedir}/unpackaged/post" stagedir="${basedir}/unpackaged_stage" />
+</target>
+
+<!-- deployManagedUnpackagedPre: Deploy the unpackaged/pre subdirectories containing metadata used in builds but not included in the managed package.  Use the managed namespace prefix -->
+<target name="deployManagedUnpackagedPre">
+    <echo>----------------------------------------------------------------------------</echo>
+    <deployMetadataBundles dir="${basedir}/unpackaged/pre" stagedir="${basedir}/unpackaged_stage" nsprefix="${cumulusci.package.namespace}__" />
+</target>
+
+<!-- deployManagedUnpackagedPost: Deploy the unpackaged/post subdirectories containing metadata used in builds but not included in the managed package.  Use the managed namespace prefix -->
+<target name="deployManagedUnpackagedPost">
+    <echo>----------------------------------------------------------------------------</echo>
+    <deployMetadataBundles dir="${basedir}/unpackaged/post" stagedir="${basedir}/unpackaged_stage" nsprefix="${cumulusci.package.namespace}__" />
+</target>
+
+<!-- zipUnpackagedBundles: Populates unpackaged/zipped with non-namespaced versions of all pre and post deployment bundles -->
+<target name="zipUnpackagedBundles">
+    <echo>----------------------------------------------------------------------------</echo>
+    <zipMetadataBundles dir="${basedir}/unpackaged/pre" stagedir="${basedir}/unpackaged_stage" zipdir="unpackaged/zipped" />
+    <zipMetadataBundles dir="${basedir}/unpackaged/post" stagedir="${basedir}/unpackaged_stage" zipdir="unpackaged/zipped" />
+</target>
+
+<!-- zipUnpackagedBundles: Populates unpackaged/zipped with namespaced versions of all pre and post deployment bundles -->
+<target name="zipManagedUnpackagedBundles">
+    <echo>----------------------------------------------------------------------------</echo>
+    <zipMetadataBundles dir="${basedir}/unpackaged/pre" stagedir="${basedir}/unpackaged_stage" zipdir="unpackaged/namespaced_zipped" nsprefix="${cumulusci.package.namespace}__" />
+    <zipMetadataBundles dir="${basedir}/unpackaged/post" stagedir="${basedir}/unpackaged_stage" zipdir="unpackaged/namespaced_zipped" nsprefix="${cumulusci.package.namespace}__" />
+</target>
+
+
+<!-- uninstallUnpackagedPre: Uninstall the unpackaged/pre subdirectories containing metadata used in builds but not included in the managed package -->
+<target name="uninstallUnpackagedPre">
+    <if>
+        <available file="${basedir}/unpackaged/pre/" type="dir" />
+        <then>
+            <for param="dir">
+                <path>
+                    <dirset dir="${basedir}/unpackaged/pre/" includes="*" />
+                </path>
+                <sequential>
+                    <echo>Uninstalling unpackaged bundle @{dir}</echo>
+                    <delete dir="uninstall" />
+                    <buildPackagedDestructiveChanges srcdir="@{dir}" dir="uninstall" package="${sf.package.name}" />
+                    <echo>Uninstalling with purgeOnDelete=${cumulusci.destroy.purgeondelete}</echo>
+                    <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall" purgeOnDelete="true" ignoreWarnings="true" maxPoll="${sf.maxPoll}" />
+                    <delete dir="uninstall" />
+                </sequential>
+            </for>
+        </then>
+        <else>
+            <echo>No bundles found in unpackaged/pre</echo>
+        </else>
+    </if>
+</target>
+
+<!-- uninstallUnpackagedPost: Uninstall the unpackaged/post subdirectories containing metadata used in builds but not included in the managed package -->
+<target name="uninstallUnpackagedPost">
+    <if>
+        <available file="${basedir}/unpackaged/post/" type="dir" />
+        <then>
+            <for param="dir">
+                <path>
+                    <dirset dir="${basedir}/unpackaged/post/" includes="*" />
+                </path>
+                <sequential>
+                    <echo>Deploying unpackaged bundle @{dir}</echo>
+                    <echo>Uninstalling unpackaged bundle @{dir}</echo>
+                    <delete dir="uninstall" />
+                    <buildPackagedDestructiveChanges srcdir="@{dir}" dir="uninstall" package="${sf.package.name}" />
+                    <echo>Uninstalling with purgeOnDelete=${cumulusci.destroy.purgeondelete}</echo>
+                    <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall" purgeOnDelete="true" ignoreWarnings="true" maxPoll="${sf.maxPoll}" />
+                    <delete dir="uninstall" />
+                </sequential>
+            </for>
+        </then>
+        <else>
+            <echo>No bundles found in unpackaged/post</echo>
+        </else>
+    </if>
+</target>
+
+<!-- deployCI: Does a full build including uninstalling previously deployed unpackaged code, updating managed package versions, and then deploying with all tests -->
+<!-- WARNING DO NOT run this against a real production org as it will delete everything.  It is designed to clear the target org to ensure a clean build test. -->
+ <target name="deployCI">
+ <echo>============================================================================</echo>
+ 
+ <!-- Create the unmanaged package if it doesn't already exist -->
+<antcall target="createUnmanagedPackage" />
+
+<!-- Uninstall all unpackaged code from the target org.  We have to do this first so we can uninstall and reinstall any managed packages not at the right version -->
+<antcall target="uninstall" />
+<!-- Deploy any unpackaged metadata bundles needed before the deployment -->
+<antcall target="deployUnpackagedPre" />
+<antcall target="updatePackageXml" />
+<!-- Deploy the src directory -->
+<antcall target="DeployWithoutTests" />
+
+<if>
+    <not><equals arg1="${cumulusci.unmanaged.destroy.mode}" arg2="full" /></not>
+    <then>
+        <!-- Finally, delete any metadata from the org which is not in the repo -->
+        <antcall target="destroyStaleMetadata" />
+    </then>
+</if>
+
+<!-- Deploy any unpackaged metadata bundles needed after the deployment -->
+<antcall target="deployUnpackagedPost" />
+
+<!-- Run all tests -->
+<antcall target="runAllTests" />
+
+<!-- Uninstall unpackaged post bundles since they may reference code in the package -->
+<antcall target="uninstallUnpackagedPost" />
+
+</target>
+
+<!-- deployCIPackageOrg: Does a full build against the package org.  This differs from deployCI in that it uses destroyStaleMetadata instead of uninstall.
+ There are a few assumptions.  We never downgrade a dependent managed package in the packaging org.  This removes the need to completely remove
+ all metadata to allow a package downgrade.  In the package org, we can't delete all metadata once a production managed release is cut so this approach is required -->
+<target name="deployCIPackageOrg">
+    <echo>============================================================================</echo>
+    
+    <!-- Update any managed packages which are not at the right version -->
+    <antcall target="updateRequiredPackages" />
+    
+    <!-- Deploy any unpackaged metadata bundles needed before the deployment -->
+    <antcall target="deployUnpackagedPre" />
+    
+    <!-- Update the package.xml to managed package mode, adding install and uninstall script classes -->
+    <antcall target="updatePackageXmlManaged" />
+    
+    <!-- Attempt to destroy any stale metadata but continue even if this fails -->
+    <trycatch>
+        <try>
+            <antcall target="destroyStaleMetadataManaged" />
+        </try>
+        <catch>
+            <echo>First run of destroyStaleMetadataManaged failed.  Ignoring for now but it may cause build failures in other targets.</echo>
+        </catch>
+    </trycatch>
+    
+    <!-- Prepare the managed version of the src directory -->
+    <antcall target="createManagedSrc" />
+    
+    <!-- Deploy src directory -->
+    <antcall target="DeployWithoutTests" />
+    
+    <!-- Revert the src directory -->
+    <antcall target="revertManagedSrc" />
+    
+    <!-- Finally, delete any metadata from the org which is not in the repo -->
+    <antcall target="destroyStaleMetadataManaged" />
+    
+    <!-- Deploy any unpackaged metadata bundles needed after the deployment -->
+    <antcall target="deployUnpackagedPost" />
+    
+    <!-- Run all tests -->
+    <antcall target="runAllTestsManaged" />
+    
+</target>
+
+<!-- Deploys the latest managed beta release to an org -->
+<!-- WARNING!!! DO NOT run this against a real production org as it will delete everything.  It is designed to clear the target org to ensure a clean build test. -->
+ <target name="deployManagedBeta">
+ <echo>============================================================================</echo>
+ 
+ <echo>BUILD_COMMIT = ${env.BUILD_COMMIT}</echo>
+ <if>
+ <and>
+ <isset property="env.BUILD_COMMIT" />
+ <not>
+ <equals arg1="env.BUILD_COMMIT" arg2="" />
+ </not>
+ <isset property="env.PACKAGE_VERSION" />
+ <not>
+ <equals arg1="env.PACKAGE_VERSION" arg2="" />
+ </not>
+ </and>
+ <then>
+ <!-- If a BUILD_COMMIT and PACKAGE_VERSION are provided in the environment, use them -->
+<property name="managed_beta_tag" value="${env.BUILD_COMMIT}" />
+<property name="version.managed.beta" value="${env.PACKAGE_VERSION}" />
+<echo>Building with environment variables: BUILD_COMMIT=${managed_beta_tag}, PACKAGE_VERSION=${version.managed.beta}</echo>
+</then>
+<else>
+    <!-- If no BUILD_COMMIT or PACKAGE_VERSION was provided in environment, call mrbelvedere to fetch latest released version -->
+    <!-- Get the latest beta release tag name -->
+    <get src="${cumulusci.mrbelvedere.url}/mrbelvedere/repo/${cumulusci.mrbelvedere.repo.owner}/${cumulusci.mrbelvedere.repo.name}/version/beta/tag" dest="${basedir}/managed_beta_tag" />
+    <loadfile property="managed_beta_tag" srcfile="${basedir}/managed_beta_tag" />
+    <delete file="${basedir}/managed_beta_tag" />
+    
+    <!-- Get the latest beta release version number -->
+    <get src="${cumulusci.mrbelvedere.url}/mrbelvedere/repo/${cumulusci.mrbelvedere.repo.owner}/${cumulusci.mrbelvedere.repo.name}/version/beta" dest="${basedir}/version_beta" />
+    <loadfile property="version.managed.beta" srcfile="${basedir}/version_beta" />
+    <delete file="${basedir}/version_beta" />
+</else>
+</if>
+
+<!-- Fetch the version.properties file for the release from GitHub -->
+<if>
+    <and>
+        <isset property="env.GITHUB_USERNAME" />
+        <not>
+            <equals arg1="env.GITHUB_USERNAME" arg2="" />
+        </not>
+    </and>
+    <then>
+        <!-- Fetch the version.properties file for the release from GitHub -->
+        <exec executable="curl">
+            <arg line="-u '${env.GITHUB_USERNAME}:${env.GITHUB_PASSWORD}' --header 'Accept: application/vnd.github.v3.raw' https://api.github.com/repos/${env.GITHUB_ORG_NAME}/${env.GITHUB_REPO_NAME}/contents/version.properties?ref=${managed_beta_tag} -o ${basedir}/version.properties.beta"/>
+        </exec>
+    </then>
+    <else>
+        <!-- Fetch the version.properties file for the release from GitHub -->
+        <get src="${cumulusci.github.url.raw}/${managed_beta_tag}/version.properties" dest="${basedir}/version.properties.beta" />
+    </else>
+</if>
+
+<!-- Since we want to use the versions required by the tag rather than the currently checked out code, unset all version properties and load the version.properties.beta file -->
+<var file="${basedir}/version.properties.beta" />
+<delete file="${basedir}/version.properties.beta" />
+
+<!-- Update all required packages and uninstall current beta -->
+<antcall target="updateRequiredPackages" />
+
+<!-- Deploy any unpackaged metadata bundles needed before the deployment -->
+<antcall target="deployManagedUnpackagedPre" />
+
+<!-- Install the beta packages -->
+<var name="version.managed" value="${version.managed.beta}" />
+<antcall target="updateRequiredPackages" />
+
+<!-- Deploy any unpackaged metadata bundles needed after the deployment -->
+<antcall target="deployManagedUnpackagedPost" />
+
+<antcall target="uninstallUnpackagedPost" />
+
+</target>
+
+<!-- Deploys the latest production managed release to an org -->
+<!-- !!!WARNING!!! DO NOT run this against a real production org as it will delete everything.  It is designed to clear the target org to ensure a clean build test. -->
+ <target name="deployManaged">
+ <echo>============================================================================</echo>
+ 
+ <echo>BUILD_COMMIT = ${env.BUILD_COMMIT}</echo>
+ <if>
+ <and>
+ <isset property="env.BUILD_COMMIT" />
+ <not>
+ <equals arg1="env.BUILD_COMMIT" arg2="" />
+ </not>
+ <isset property="env.PACKAGE_VERSION" />
+ <not>
+ <equals arg1="env.PACKAGE_VERSION" arg2="" />
+ </not>
+ </and>
+ <then>
+ <!-- If a BUILD_COMMIT and PACKAGE_VERSION are provided in the environment, use them -->
+<property name="managed_prod_tag" value="${env.BUILD_COMMIT}" />
+<property name="version.managed.prod" value="${env.PACKAGE_VERSION}" />
+<echo>Building with environment variables: BUILD_COMMIT=${managed_prod_tag}, PACKAGE_VERSION=${version.npsp.managed}</echo>
+</then>
+<else>
+    <!-- If no BUILD_COMMIT or PACKAGE_VERSION was provided in environment, call mrbelvedere to fetch latest released version -->
+    <!-- Get the latest production release tag name -->
+    <get src="${cumulusci.mrbelvedere.url}/mrbelvedere/repo/${cumulusci.mrbelvedere.repo.owner}/${cumulusci.mrbelvedere.repo.name}/version/tag" dest="${basedir}/managed_prod_tag" />
+    <loadfile property="managed_prod_tag" srcfile="${basedir}/managed_prod_tag" />
+    <delete file="${basedir}/managed_prod_tag" />
+    
+    <!-- Get the latest production release version number -->
+    <get src="${cumulusci.mrbelvedere.url}/mrbelvedere/repo/${cumulusci.mrbelvedere.repo.owner}/${cumulusci.mrbelvedere.repo.name}/version" dest="${basedir}/version_prod" />
+    <loadfile property="version.managed.prod" srcfile="${basedir}/version_prod" />
+    <delete file="${basedir}/version_prod" />
+</else>
+</if>
+
+<!-- Fetch the version.properties file for the release from GitHub -->
+<get src="${cumulusci.github.url.raw}/${managed_prod_tag}/version.properties" dest="${basedir}/version.properties.prod" />
+
+<!-- Since we want to use the versions required by the tag rather than the currently checked out code, unset all version properties and load the version.properties.prod file -->
+<var file="${basedir}/version.properties.prod" />
+<delete file="${basedir}/version.properties.prod" />
+<var name="version.managed" value="${version.managed.prod}" />
+
+<!-- Deploy any unpackaged metadata bundles needed before the deployment -->
+<antcall target="deployManagedUnpackagedPre" />
+
+<!-- Run updateRequiredPackages to install the correct versions of required packages and the main package -->
+<antcall target="updateRequiredPackages" />
+
+<!-- Deploy any unpackaged metadata bundles needed for builds -->
+<antcall target="deployManagedUnpackagedPost" />
+
+<!-- Uninstall the unpackaged post bundles so they don't cause dependency issues in the next build -->
+<antcall target="uninstallUnpackagedPost" />
+
+</target>
+ <!-- Override hook targets: These targets are empty in the core file but exist for allowing projects to hook in their own custom logic without overriding the core targets -->
+ 
+ <target name="destroyStaleMetadataManaged">
+     <echo>----------------------------------------------------------------------------</echo>
+     <delete dir="uninstallsrc" />
+     <delete dir="uninstall" />
+     
+     <!-- Fetch all metadata in the  package from target org -->
+     <retrievePackaged dir="uninstallsrc" package="${cumulusci.package.name.managed}" />
+     
+     <!-- Build a destructiveChanges.xml pacckage to delete metadata in org but not in repo -->
+     <buildDestroyStaleMetadata srcdir="uninstallsrc" commdir="src" dir="uninstall" />
+     
+     <!-- deploy the destructiveChanges.xml package -->
+     <echo>Deleting metdata with purgeOnDelete=${cumulusci.destroy.purgeondelete}</echo>
+     <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall" purgeOnDelete="true" maxPoll="${sf.maxPoll}" />
+     
+     <delete dir="uninstallsrc" />
+     <delete dir="uninstall" />
+ </target>
+ 
+ <!-- uninstall: Removes all metadata from the package -->
+ <target name="uninstall">
+     <echo>----------------------------------------------------------------------------</echo>
+     <antcall target="uninstallUnpackagedPost" />
+     <delete dir="uninstallsrc" />
+     <delete dir="uninstall" />
+     <retrievePackaged dir="uninstallsrc" package="${sf.package.name}" />
+     <buildPackagedDestructiveChanges srcdir="uninstallsrc" dir="uninstall" package="${sf.package.name}" />
+     <echo>Uninstalling with purgeOnDelete=${cumulusci.destroy.purgeondelete}</echo>
+     <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall" purgeOnDelete="true" maxPoll="1200" />
+     <delete dir="uninstallsrc" />
+     <delete dir="uninstall" />
+     <antcall target="uninstallUnpackagedPre" />
+ </target>
+ 
+ <!-- uninstall: Removes all non-standard unpackaged metadata from the org -->
+ <target name="uninstallUnpackaged">
+     <delete dir="uninstallsrc" />
+     <delete dir="uninstall" />
+     <retrieveUnpackaged dir="uninstallsrc" />
+     <deleteWhitelistedMetadata dir="uninstallsrc/unpackaged" />
+     <buildUnpackagedDestructiveChanges srcdir="uninstallsrc" dir="uninstall" />
+     <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall/standard" maxPoll="${sf.maxPoll}" />
+     <echo>Uninstalling with purgeOnDelete=${cumulusci.destroy.purgeondelete}</echo>
+     <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="uninstall/unpackaged" purgeOnDelete="true" maxPoll="${sf.maxPoll}" />
+     <delete dir="uninstallsrc" />
+     <delete dir="uninstall" />
+ </target>
+ 
+ <!-- Get and echo currently installed vs required versions of all required packages -->
+ <macrodef name="getPackageVersions" description="Gets the version for all installed packages">
+     <sequential>
+         <delete dir="${basedir}/installedPackages"/>
+         <mkdir dir="${basedir}/installedPackages"/>
+         
+         <sf:bulkRetrieve
+         username="${sf.username}"
+         password="${sf.password}"
+         metadataType="InstalledPackage"
+         retrieveTarget="${basedir}/installedPackages"/>
+         
+         <echo>Required Package Versions:</echo>
+         <echo>-------------------------------</echo>
+         
+         <for list="${required.packages}" delimiter="," param="packageNamespace">
+             <sequential>
+                 <if>
+                     <equals arg1="@{packageNamespace}" arg2="managed" />
+                     <then>
+                         <getPackageVersion namespace="${cumulusci.package.namespace}" refresh="false" />
+                         <propertycopy property="packageVersionInstalled" from="InstalledPackage.${cumulusci.package.namespace}.versionNumber" />
+                         <echo>${cumulusci.package.namespace}: ${packageVersionInstalled} (${version.@{packageNamespace}} required)</echo>
+                     </then>
+                     <else>
+                         <getPackageVersion namespace="@{packageNamespace}" refresh="false" />
+                         <echo>@{packageNamespace}: ${InstalledPackage.@{packageNamespace}.versionNumber} (${version.@{packageNamespace}} required)</echo>
+                     </else>
+                 </if>
+             </sequential>
+         </for>
+         
+         <delete dir="${basedir}/installedPackages"/>
+     </sequential>
+ </macrodef>
+ 
+ <!-- updateDependendentPackages: Ensures all dependent packages are the correct version -->
+ <target name="updateRequiredPackages">
+     <echo>----------------------------------------------------------------------------</echo>
+     <getPackageVersions />
+     <for list="${required.packages}" delimiter="," param="packageNamespace">
+         <sequential>
+             <if>
+                 <equals arg1="@{packageNamespace}" arg2="managed" />
+                 <then>
+                     <updatePackageVersion namespace="${cumulusci.package.namespace}" version="${version.@{packageNamespace}}" />
+                 </then>
+                 <else>
+                     <echo>Deploying pre bundles for @{packageNamespace}</echo>
+                     <if>
+                         <available file="${basedir}/unpackaged/@{packageNamespace}/pre" type="dir" />
+                         <then>
+                             <deployMetadataBundles dir="${basedir}/unpackaged/@{packageNamespace}/pre" stagedir="${basedir}/unpackaged_stage" />
+                         </then>
+                         <else>
+                             <echo>No pre bundles found for @{packageNamespace} at ${basedir}/unpackaged/@{packageNamespace}/pre</echo>
+                         </else>
+                     </if>
+                     <updatePackageVersion namespace="@{packageNamespace}" version="${version.@{packageNamespace}}" />
+                     <echo>Deploying post bundles for @{packageNamespace}</echo>
+                     <if>
+                         <available file="${basedir}/unpackaged/@{packageNamespace}/post" type="dir" />
+                         <then>
+                             <deployMetadataBundles dir="${basedir}/unpackaged/@{packageNamespace}/post" stagedir="${basedir}/unpackaged_stage" />
+                         </then>
+                         <else>
+                             <echo>No post bundles found for @{packageNamespace} at ${basedir}/unpackaged/@{packageNamespace}/post</echo>
+                         </else>
+                     </if>
+                 </else>
+             </if>
+         </sequential>
+     </for>
+ </target>
+ 
+ <!-- Developer focused build targets -->
+ 
+ <!-- deployDevOrg: Does a full build including uninstalling previously deployed packaged code, updating managed package versions, and then deploying without running tests.  Use this target to quickly refresh a dev org. -->
+ <!-- !!!WARNING!!! DO NOT run this against a real production org as it will delete everything.  It is designed to clear the target org to ensure a clean development environment. -->
+  <target name="deployDevOrg">
+  <echo>============================================================================</echo>
+  
+  <!-- Create the unmanaged package if it doesn't already exist -->
+ <antcall target="createUnmanagedPackage" />
+ 
+ <!-- Uninstall all unpackaged code from the target org.  We have to do this first so we can uninstall and reinstall any managed packages not at the right version -->
+ <if>
+     <equals arg1="${cumulusci.unmanaged.destroy.mode}" arg2="full" />
+     <then>
+         <antcall target="uninstall" />
+     </then>
+     <else>
+         <!-- Attempt to destroy any stale metadata but continue even if this fails -->
+         <trycatch>
+             <try>
+                 <antcall target="destroyStaleMetadata" />
+             </try>
+             <catch>
+                 <echo>First run of destroyStaleMetadata failed.  Ignoring for now but it may cause build failures in other targets.</echo>
+             </catch>
+         </trycatch>
+     </else>
+ </if>
+ 
+ <!-- Update any managed packages which are not at the right version -->
+ <antcall target="updateRequiredPackages" />
+ 
+ <!-- Deploy any unpackaged metadata bundles needed before the deployment -->
+ <antcall target="deployUnpackagedPre" />
+ 
+ <!-- Deploy the src directory -->
+ <antcall target="DeployWithoutTests" />
+ 
+ <if>
+     <not><equals arg1="${cumulusci.unmanaged.destroy.mode}" arg2="full" /></not>
+     <then>
+         <!-- Finally, delete any metadata from the org which is not in the repo -->
+         <antcall target="destroyStaleMetadata" />
+     </then>
+ </if>
+ 
+ <!-- Deploy any unpackaged metadata bundles needed after the deployment -->
+ <antcall target="deployUnpackagedPost" />
+ 
+</target>
+
+<!-- deployUnmanagedEE: Does a full build including uninstalling previously deployed packaged code, updating managed package versions, and then deploying without running tests.  Use this target to quickly deploy the unmanaged code into a fresh DE org. -->
+<!-- !!!WARNING!!! DO NOT run this against a real production org as it will delete everything.  It is designed to clear the target org to ensure a clean development environment. -->
+ <target name="deployUnmanagedEE">
+ <echo>============================================================================</echo>
+ 
+ <!-- Override the purgeOnDelete=true default since we can't do that in EE orgs -->
+<var name="cumulus.destroy.purgeondelete" value="false" />
+
+<!-- Create the unmanaged package if it doesn't already exist -->
+<antcall target="createUnmanagedPackage" />
+
+<!-- Uninstall all unpackaged code from the target org.  We have to do this first so we can uninstall and reinstall any managed packages not at the right version -->
+<if>
+    <equals arg1="${cumulusci.unmanaged.destroy.mode}" arg2="full" />
+    <then>
+        <antcall target="uninstall" />
+    </then>
+    <else>
+        <!-- Attempt to destroy any stale metadata but continue even if this fails -->
+        <trycatch>
+            <try>
+                <antcall target="destroyStaleMetadata" />
+            </try>
+            <catch>
+                <echo>First run of destroyStaleMetadata failed.  Ignoring for now but it may cause build failures in other targets.</echo>
+            </catch>
+        </trycatch>
+    </else>
+</if>
+
+<!-- Update any managed packages which are not at the right version -->
+<antcall target="updateRequiredPackages" />
+
+<!-- Deploy any unpackaged metadata bundles needed before the deployment -->
+<antcall target="deployUnpackagedPre" />
+
+<!-- Prepare the unmanaged EE version of the src directory -->
+<antcall target="createUnmanagedEESrc" />
+
+<!-- Deploy src directory -->
+<antcall target="DeployWithoutTests" />
+
+<!-- Revert the src directory -->
+<antcall target="revertUnmanagedEESrc" />
+
+<if>
+    <not><equals arg1="${cumulusci.unmanaged.destroy.mode}" arg2="full" /></not>
+    <then>
+        <!-- Finally, delete any metadata from the org which is not in the repo -->
+        <antcall target="destroyStaleMetadata" />
+    </then>
+</if>
+
+<!-- Deploy any unpackaged metadata bundles needed after the deployment -->
+<antcall target="deployUnpackagedPost" />
+
+</target>
+<!-- createUnmanagedPackage: Does an empty deployment into an unmanaged package to create it if it does not exist -->
+<target name="createUnmanagedPackage">
+    <if>
+        <isset property="cumulusci.package.name" />
+        <then>
+            <delete dir="${basedir}/create_package" />
+            <mkdir dir="${basedir}/create_package" />
+            <buildPackageXml package="${sf.package.name}" version="${cumulusci.package.apiVersion}" srcDir="create_package" />
+            <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="create_package" maxPoll="${sf.maxPoll}" />
+            <delete dir="${basedir}/create_package" />
+        </then>
+    </if>
+</target>
+
+<!-- runAllTests: Runs all unmanaged tests -->
+<target name="runAllTests">
+    <echo>----------------------------------------------------------------------------</echo>
+    <if>
+        <equals arg1="${env.TEST_MODE}" arg2="parallel" />
+        <then>
+            <exec executable="python" failonerror="true">
+                <env key="SF_USERNAME" value="${sf.username}" />
+                <env key="SF_PASSWORD" value="${sf.password}" />
+                <env key="SF_SERVERURL" value="${sf.serverurl}" />
+                <env key="TEST_JSON_OUTPUT" value="${cumulusci.test.jsonoutput}" />
+                <env key="APEX_TEST_NAME_MATCH" value="${cumulusci.test.namematch}" />
+                <env key="APEX_TEST_NAME_EXCLUDE" value="${cumulusci.test.nameexclude}" />
+                <arg value="${cumulus_ci.basedir}/../ci/run_apex_tests.py" />
+            </exec>
+        </then>
+        <else>
+            <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="${cumulus_ci.basedir}/empty" testLevel="RunLocalTests" maxPoll="${cumulusci.maxPoll.test}" />
+        </else>
+    </if>
+</target>
+
+<!-- runAllTestsManaged: Runs all managed tests from package's namespace -->
+<target name="runAllTestsManaged">
+    <echo>----------------------------------------------------------------------------</echo>
+    <if>
+        <equals arg1="${env.TEST_MODE}" arg2="parallel" />
+        <then>
+            <exec executable="python" failonerror="true">
+                <env key="SF_USERNAME" value="${sf.username}" />
+                <env key="SF_PASSWORD" value="${sf.password}" />
+                <env key="SF_SERVERURL" value="${sf.serverurl}" />
+                <env key="TEST_JSON_OUTPUT" value="${cumulusci.test.jsonoutput}" />
+                <env key="APEX_TEST_NAME_MATCH" value="${cumulusci.test.namematch}" />
+                <env key="APEX_TEST_NAME_EXCLUDE" value="${cumulusci.test.nameexclude}" />
+                <env key="NAMESPACE" value="${cumulusci.package.namespace}" />
+                <arg value="${cumulus_ci.basedir}/../ci/run_apex_tests.py" />
+            </exec>
+        </then>
+        <else>
+            <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="${cumulus_ci.basedir}/empty" testLevel="RunAllTestsInOrg" maxPoll="${cumulusci.maxPoll.test}" />
+        </else>
+    </if>
+</target>
+
+<target name="updatePackageXmlManaged">
+    <buildPackageXml package="${cumulusci.package.name.managed}" version="${cumulusci.package.apiVersion}" installClass="${cumulusci.package.installClass}" uninstallClass="${cumulusci.package.uninstallClass}" type="managed" />
+</target>
+
+<target name="updateMetaXml">
+    <for list="${required.packages}" delimiter="," param="packageNamespace">
+        <sequential>
+            <if>
+                <not><equals arg1="@{packageNamespace}" arg2="managed" /></not>
+                <then>
+                    <updateMetaXml dir="${basedir}/src" namespace="@{packageNamespace}" version="${version.@{packageNamespace}}" />
+                </then>
+            </if>
+        </sequential>
+    </for>
+    <updateMetaXmlApi dir="${basedir}/src" apiVersion="${cumulusci.package.apiVersion}" />
+</target>
+
+<!-- Update the Admin.profile to grant all FLS permissions -->
+<target name="deployUpdatedAdminProfile">
+    <echo>Retrieving Admin.profile</echo>
+    <retrieveAdminProfile dir="admin_profile" />
+    
+    <echo>Granting read/edit FLS on all fields in Admin.profile</echo>
+    <updateAdminProfileGrantFLS dir="admin_profile" />
+    
+    <echo>Deploying updated Admin.profile</echo>
+    <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="admin_profile" maxPoll="${sf.maxPoll}" />
+    
+    <delete dir="admin_profile" />
+</target>
+
+<!-- Run stripManagedToken against src for managed deployment -->
+<target name="createManagedSrc">
+    <delete dir="src.orig" />
+    <copy todir="src.orig" preservelastmodified="true">
+        <fileset dir="src" />
+    </copy>
+    <stripManagedToken dir="src" />
+</target>
+
+<!-- Revert the src directory from createManagedSrc -->
+<target name="revertManagedSrc">
+    <copy todir="src" preservelastmodified="true" overwrite="true">
+        <fileset dir="src.orig" />
+    </copy>
+    <delete dir="src.orig" />
+</target>
+
+<!-- Run prepareSrcForUnmanagedEE against src for unmanaged deployment to EE orgs -->
+<target name="createUnmanagedEESrc">
+    <delete dir="src.orig" />
+    <copy todir="src.orig" preservelastmodified="true">
+        <fileset dir="src" />
+    </copy>
+    <prepareSrcForUnmanagedEE dir="src" />
+</target>
+
+<!-- Revert the src directory from createUnmanagedEESrc -->
+<target name="revertUnmanagedEESrc">
+    <copy todir="src" preservelastmodified="true" overwrite="true">
+        <fileset dir="src.orig" />
+    </copy>
+    <delete dir="src.orig" />
+</target>
+</project>

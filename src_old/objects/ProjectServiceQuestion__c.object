@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Relates a Question to a Project Service. Questions from Service Question are added by default when a Service is added to a Project Service. Additional Questions can be added. Project Service Question is related to Project Service Question, Question, and Question Variant.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>AILabel__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>AI Label</label>
+        <referenceTo>AILabel__c</referenceTo>
+        <relationshipLabel>Project Service Questions</relationshipLabel>
+        <relationshipName>Project_Service_Questions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CanRemove__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Can Remove</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DefinedResponseCount__c</fullName>
+        <externalId>false</externalId>
+        <label>DefinedResponseCount</label>
+        <summaryFilterItems>
+            <field>ProjectServiceQuestionDefinedResponse__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>ProjectServiceQuestionDefinedResponse__c.ProjectServiceQuestion__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>DefinedResponseLastModifiedDateForHT__c</fullName>
+        <externalId>false</externalId>
+        <label>DefinedResponse LastModifiedDate For HT</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DefinedResponseLastModifiedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>DefinedResponse Last Modified Date</label>
+        <summarizedField>ProjectServiceQuestionDefinedResponse__c.LastModifiedDate</summarizedField>
+        <summaryForeignKey>ProjectServiceQuestionDefinedResponse__c.ProjectServiceQuestion__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>HintLock__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>HintLock</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsItemQuestion__c</fullName>
+        <externalId>false</externalId>
+        <formula>Question__r.ItemQuestion__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Item Quesiton</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsTargetQuestion__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Target Question</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsVisibleToClient__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>To hide a question from Supplier</description>
+        <externalId>false</externalId>
+        <inlineHelpText>To hide a question from Supplier</inlineHelpText>
+        <label>Is Visible to Client?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>JumpDefinedResponseCount__c</fullName>
+        <externalId>false</externalId>
+        <label>Jump Defined Response Count</label>
+        <summaryFilterItems>
+            <field>ProjectServiceQuestionDefinedResponse__c.JumpToAction__c</field>
+            <operation>equals</operation>
+            <value>QUESTION</value>
+        </summaryFilterItems>
+        <summaryForeignKey>ProjectServiceQuestionDefinedResponse__c.ProjectServiceQuestion__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>JumpToAction__c</fullName>
+        <externalId>false</externalId>
+        <label>JumpTo Action</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>QUESTION</fullName>
+                    <default>false</default>
+                    <label>QUESTION</label>
+                </value>
+                <value>
+                    <fullName>CONTINUE</fullName>
+                    <default>false</default>
+                    <label>CONTINUE</label>
+                </value>
+                <value>
+                    <fullName>RETURN</fullName>
+                    <default>false</default>
+                    <label>RETURN</label>
+                </value>
+                <value>
+                    <fullName>BRANCH</fullName>
+                    <default>false</default>
+                    <label>BRANCH</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>MaxValue__c</fullName>
+        <externalId>false</externalId>
+        <label>Max  Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MinValue__c</fullName>
+        <externalId>false</externalId>
+        <label>Min Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OHId__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(UPPER(ProjectService__r.ServiceTemplateVersion__c) == &apos;V2&apos;, Name,  Question__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>OH Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Optional__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Optional</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ParentProjectServiceQuestion__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Parent Project Service Question</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Parent Project Service Question</inlineHelpText>
+        <label>Parent Project Service Question</label>
+        <referenceTo>ProjectServiceQuestion__c</referenceTo>
+        <relationshipLabel>Project Service Questions</relationshipLabel>
+        <relationshipName>ParentProjectServiceQuestion</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProjectId__c</fullName>
+        <externalId>false</externalId>
+        <formula>ProjectService__r.Project__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectServiceName__c</fullName>
+        <externalId>false</externalId>
+        <formula>ProjectService__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>ProjectServiceName</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectService__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Service</label>
+        <referenceTo>ProjectService__c</referenceTo>
+        <relationshipLabel>ProjectServiceQuestions</relationshipLabel>
+        <relationshipName>ProjectServiceQuestions</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>QuestionHint__c</fullName>
+        <externalId>false</externalId>
+        <label>Question Hint</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuestionIndentationLevel__c</fullName>
+        <externalId>false</externalId>
+        <formula>LEN( QuestionIndentation__c )-LEN(SUBSTITUTE(QuestionIndentation__c 
+, &apos;.&apos;, &apos;&apos;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Question Indentation Level</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuestionIndentation__c</fullName>
+        <externalId>false</externalId>
+        <label>Question Indentation</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuestionNumberCalculated__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(UPPER(ProjectService__r.ServiceTemplateVersion__c) == &apos;V2&apos;, QuestionIndentation__c , TEXT( QuestionNumber__c ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Question Number Calculated</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuestionNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Question Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuestionText__c</fullName>
+        <externalId>false</externalId>
+        <formula>Question__r.QuestionText__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Question Text</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuestionType__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Question__r.QuestionType__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Question Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuestionVariantText__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(ISNULL(QuestionVariant__c),QuestionVariant__c = &apos;&apos;), Question__r.QuestionText__c,  QuestionVariant__r.QuestionText__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Question Variant Text</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>QuestionVariant__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Question Variant</label>
+        <referenceTo>QuestionVariant__c</referenceTo>
+        <relationshipLabel>Project Service Questions</relationshipLabel>
+        <relationshipName>Project_Service_Questions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Question__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Question</label>
+        <lookupFilter>
+            <active>false</active>
+            <filterItems>
+                <field>Question__c.Active__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>true</isOptional>
+        </lookupFilter>
+        <referenceTo>Question__c</referenceTo>
+        <relationshipLabel>ProjectServiceQuestions</relationshipLabel>
+        <relationshipName>ProjectServiceQuestions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ResponseAverage__c</fullName>
+        <externalId>false</externalId>
+        <label>Response Average</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ResponseCount__c</fullName>
+        <externalId>false</externalId>
+        <label>Response Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ResponseSum__c</fullName>
+        <externalId>false</externalId>
+        <label>Response Sum</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ServiceId__c</fullName>
+        <externalId>false</externalId>
+        <formula>ProjectService__r.Service__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Service ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ServiceQuestion__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Service Question</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>UniqueKey__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <label>Unique Key</label>
+        <length>250</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>Project Service Question</label>
+    <nameField>
+        <displayFormat>PSQ-{00000000}</displayFormat>
+        <label>Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Project Service Questions</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>BranchingQuestionCannotBeOptional</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(OR(QuestionType__c == &apos;Single-Select List&apos;,QuestionType__c == &apos;Yes/No&apos; ), ISPICKVAL(JumpToAction__c, &apos;BRANCH&apos;), Optional__c )</errorConditionFormula>
+        <errorMessage>Branching question cannot be optional.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MinMaxValue_BothOrNeither</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(AND(ISBLANK(MinValue__c),NOT(ISBLANK(MaxValue__c))),AND(NOT(ISBLANK(MinValue__c)),ISBLANK(MaxValue__c)))</errorConditionFormula>
+        <errorMessage>Both min / max value should be added or neither of them should have a value.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>validateOneActiveResponse</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND ( NOT(ISNEW()), 
+					DefinedResponseCount__c &lt; 2,  
+					NOT(ISPICKVAL(ProjectService__r.Project__r.CloneStatus__c,&apos;Started&apos;)),
+					OR(QuestionType__c == &apos;Single-Select List&apos;,QuestionType__c ==&apos;Multi-Select List&apos; ))</errorConditionFormula>
+        <errorMessage>There should be at least two active Defined Responses for this question.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

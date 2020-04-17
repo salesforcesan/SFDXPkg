@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <label>OneHub New UI</label>
+    <logo>Retail_Solution/OneHubLogo_png.png</logo>
+    <tabs>Get_the_Picture</tabs>
+    <tabs>FulfillmentCenter__c</tabs>
+    <tabs>Cycle__c</tabs>
+    <tabs>ScheduleOption__c</tabs>
+</CustomApplication>
